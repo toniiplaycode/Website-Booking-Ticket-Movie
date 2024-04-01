@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  background-color: #1A1D2C;
+  color: #cccdd0;
+}
+
+//=====NAVBAR=====//
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 50px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #171a28, transparent 70%);
+
+    // active cho react-router-dom
+    .active{
+      background-color: #eb3656;
+    }
+
+    .nav-logo {
+      height: 100%;
+      display: flex;
+    }
+
+    .logo{
+      height: 100%;
+    }  
+
+    .text-logo{
+      font-size: 1.6rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+  
+    .nav-items {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+    }
+
+    .nav-item:link,
+    .nav-item:visited {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 400;
+      transition: all 0.3s ease-in;
+      display: inline-block;
+      padding: 12px;
+      border-radius: 20px;
+    }
+
+    .nav-item:hover,
+    .nav-item:active {
+      background-color: #eb3656;
+    }
+}
+
+.switch-modal-icon{
+  margin-left: 6px;
+  font-size: 1.2rem;
+  
+  :hover{
+    cursor: pointer;
+  }
+}
+
+
+
