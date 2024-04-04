@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+$primary-color: #eb3656;
+$primary-text-color: #cccdd0;
+
 html {
   scroll-behavior: smooth;
   font-size: 100%;
@@ -17,13 +20,17 @@ body {
   color: #cccdd0;
 }
 
-//=====NAVBAR=====//
+.name-cinema {
+  color: $primary-color;
+}
 
+//=====NAVBAR=====//
 .nav-container {
+  max-width: 100%;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   height: 80px;
-  padding: 0 50px;
   align-items: center;
   position: sticky;
   top: 0;
@@ -39,6 +46,7 @@ body {
     .nav-logo {
       height: 100%;
       display: flex;
+      cursor: pointer;
     }
 
     .logo{
@@ -50,6 +58,7 @@ body {
       font-weight: bold;
       display: flex;
       align-items: center;
+      cursor: pointer;
     }
   
     .nav-items {
@@ -81,16 +90,77 @@ body {
     .nav-item:active {
       background-color: #eb3656;
     }
+    
+    .switch-modal-icon{
+      margin-left: 6px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .nav-icon-menu {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
 }
 
-.switch-modal-icon{
-  margin-left: 6px;
-  font-size: 1.2rem;
+//======NAVBAR MOBILE=======//
+
+//======HOMEPAGE BANNER=====//
+.banner-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+
+  .banner-text {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    
+    @media (max-width: 992px ) { 
+      margin-top: 0;
+    }
+    
+    .banner-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+
+    > p {
+      line-height: 24px;
+    }
+    
+    .banner-btn-order{
+      background-color: $primary-color;
+      color: $primary-text-color;
+      transition: all .3s;
+      border: none;
+      padding: 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .banner-btn-order:hover {
+      background-color: $primary-color;
+      transform: translateY(-0.4rem);
+      box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.16);
+    }
+  }
   
-  :hover{
-    cursor: pointer;
+  .banner-img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .banner-img img {
+    width: 80%;
   }
 }
 
-
-
+//=====HOMEPAGE NEW MOVIE=====//
+.newmovie-container {
+  display: flex;
+  background-color: #313441;
+  margin-top: 50px;
+}

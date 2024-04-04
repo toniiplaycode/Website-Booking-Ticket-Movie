@@ -1,9 +1,13 @@
+import Banner from "./components/Banner";
+import NewMovies from "./components/NewMovies";
+
 const HomePage = () => {
     return(
-        <div>
-            <div>trang chu</div>
-        </div>
-    )
+        <>
+            <Banner />
+            <NewMovies />
+        </>
+    )   
 }
 
 export default HomePage;

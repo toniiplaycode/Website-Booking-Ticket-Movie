@@ -1,7 +1,7 @@
 const NewsPage =() => {
     return(
         <div>
-            News
+            tin tuc 
         </div>
     )
 }
