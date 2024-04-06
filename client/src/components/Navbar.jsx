@@ -2,15 +2,21 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
-
+import { useDispatch } from "react-redux";
+import { showDrawer } from "../reducers/mobileNavSlice";
 
 const Navbar = () => {
     const navigate = useNavigate();
 
+    const dispath = useDispatch();
+
     return(
         <div className="nav-container">
             <div className="nav-icon-menu-contaienr d-lg-none">
-                <FontAwesomeIcon icon={faBars} className="nav-icon-menu" />
+                <FontAwesomeIcon icon={faBars} 
+                    className="nav-icon-menu"
+                    onClick={() => {dispath(showDrawer())}}
+                />
             </div>
             <div className="nav-logo">
                 <img 
