@@ -67,13 +67,16 @@ body {
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-    
       display: flex;
       list-style: none;
       gap: 1.8rem;
       align-items: center;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
+    }
+
+    ol, ul {
+      padding: 0;
     }
 
     .nav-item:link,
@@ -91,7 +94,11 @@ body {
     .nav-item:active {
       background-color: #eb3656;
     }
-    
+
+    .nav-signup-signin{
+      padding: 30px;
+    }
+
     .switch-modal-icon{
       margin-left: 6px;
       font-size: 1.2rem;
@@ -101,6 +108,37 @@ body {
     .nav-icon-menu {
       font-size: 1.2rem;
       cursor: pointer;
+    }
+
+    .nav-signup-signin:hover .signup-signin-container {
+      display: flex;
+    }
+    
+    .signup-signin-container{
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      background-color: white;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 500;
+      right: 20px;
+      top: 56px;
+
+      @media (max-width: 992px ) { 
+        display: none !important;
+      }
+
+      div{
+        padding: 6px 0;
+      }
+
+      div:hover{
+        color: $primary-color;
+        cursor: pointer;
+        transition: 0.3s all;
+      }
     }
 }
 
@@ -176,6 +214,154 @@ body {
   }
 }
 
+//=====MODAL SIGNUP SIGNIN======//
+.signup-form,
+.login-form {
+  position: fixed;
+  width: 600px;
+  background-color: #fff;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2.5rem;
+  border-radius: 11px;
+  z-index: 2;
+
+  @media (max-width: 992px ) { 
+    width: 80%;
+  }
+
+  .signup-form-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.8rem;
+  }
+  
+  .signup-form-heading-text {
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #313441;
+    margin: auto 0;
+  
+    @media (max-width: 992px ) { 
+      font-size: 1.4rem;
+    }
+  }
+  
+  .btn-form-exit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .signup-form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    font-size: 1rem;
+    color: #1a1d2c;
+    font-weight: 600;
+  }
+  
+  .signup-form-category-sp {
+    display: flex;
+    gap: 1.2rem;
+  }
+  
+  .signup-form-category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .signup-form-category span {
+    color: #eb3656;
+    font-weight: 700;
+  }
+  
+  .signup-form-category input {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    outline: 1px solid transparent;
+    border: 1px solid #babbc0;
+    border-radius: 9px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .signup-form *:focus,
+  .login-form *:focus {
+    outline: 2px solid #f59eae;
+  }
+  
+  .signup-form-category input:hover {
+    border: 1px solid #8d8e96;
+  }
+  
+  .signup-form-category input::-webkit-outer-spin-button,
+  .signup-form-category input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .input-password {
+    position: relative;
+  }
+  
+  .pass-icon-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5%;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .form-icon {
+    height: 2.4rem;
+    width: 2.4rem;
+    color: #eb3656;
+  }
+  
+  .pass-icon {
+    height: 2rem;
+    width: 2rem;
+    color: #1a1d2c;
+  }
+  
+  .btn-reg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.6rem;
+    margin-top: 0.6rem;
+    border: none;
+    font-family: inherit;
+    font-family: 1.4rem;
+    font-weight: 600;
+    background-color: #eb3656;
+    border-radius: 10px;
+    color: #e6e6e6;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+  
+  .btn-reg:hover {
+    background-color: #ef5e78;
+    transform: translateY(-0.05rem);
+    box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.3);
+  }
+
+}
+
+
+
 //=====FOOTER=====//
 .footer-container{
   border-top: 1px solid grey;
@@ -205,7 +391,7 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    @media (max-width: 1200px ) { 
+    @media (max-width: 992px ) { 
       text-align: center;
       margin-bottom: 50px;      
     }

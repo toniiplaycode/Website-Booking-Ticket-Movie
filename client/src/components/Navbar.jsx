@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from "react-redux";
 import { showDrawer } from "../reducers/mobileNavSlice";
+import { showSignin, showSignup } from "../reducers/modalSigninSignup";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -59,8 +60,19 @@ const Navbar = () => {
             </nav>
             <div className="nav-signup-signin">
                 <FontAwesomeIcon icon={faUser} className="switch-modal-icon" />
-                {false ?? (<FontAwesomeIcon icon={faChevronUp} className="switch-modal-icon" />) } 
                 <FontAwesomeIcon icon={faChevronDown} className="switch-modal-icon d-none d-lg-inline" />
+                <div className="signup-signin-container">
+                    <div
+                        onClick={()=> dispath(showSignin())}
+                    >
+                        Đăng nhập
+                    </div>
+                    <div
+                        onClick={()=> dispath(showSignup())}
+                    >
+                        Đăng ký
+                    </div>
+                </div>
             </div>
         </div>
     )

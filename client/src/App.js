@@ -9,16 +9,27 @@ import BackDropMobileNav from './components/BackDropMobileNav.jsx';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer.jsx';
+import LoginModal from './components/LoginModal.jsx';
+import SignupModal from './components/SignupModal.jsx';
 
 function App() {
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
+  const showSignin = useSelector((state) => state.modalSigninSignup.showSignin);
+  const showSignup = useSelector((state) => state.modalSigninSignup.showSignup);
 
-  const blurBackdrop = showDrawer ? "blurBackdrop" : "";
+  let blurBackdrop = showDrawer ? "blurBackdrop" : "";
+
+  if(showSignin || showSignup) {
+    blurBackdrop = "blurBackdrop";
+  }
 
   return (
     <div className="App">
         <MobileNav />
         {showDrawer && <BackDropMobileNav />}
+
+        {showSignin && <LoginModal />}
+        {showSignup && <SignupModal />}
 
         <div className={blurBackdrop}>
           <Navbar />

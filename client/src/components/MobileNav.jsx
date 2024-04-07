@@ -3,6 +3,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { hiddenDrawer } from "../reducers/mobileNavSlice";
 import { useNavigate } from "react-router-dom";
+import { showSignin, showSignup } from "../reducers/modalSigninSignup";
 
 const MobileNav = () => {
     const dispath = useDispatch();
@@ -45,8 +46,14 @@ const MobileNav = () => {
                     Tin tức
                 </p>
                 <div className="drawer-signup-signin">
-                    <p>Đăng ký</p>
-                    <p>Đăng nhập</p>
+                    <p onClick={()=> {
+                        dispath(showSignin());
+                        dispath(hiddenDrawer());
+                    }}>Đăng Nhập</p>
+                    <p onClick={()=> {
+                        dispath(showSignup());
+                        dispath(hiddenDrawer());
+                    }}>Đăng ký</p>
                 </div>
             </div>
         </div>
