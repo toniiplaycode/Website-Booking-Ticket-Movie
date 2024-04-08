@@ -1,8 +1,12 @@
+import MoviesCollection from "./components/MoviesCollection";
+import MoviesHeader from "./components/MoviesHeader";
+
 const MoviePage = () => {
     return(
-        <div>
-            phim chieu
-        </div>
+        <>
+            <MoviesHeader />   
+            <MoviesCollection />
+        </>
     )
 }
 
