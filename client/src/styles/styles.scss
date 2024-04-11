@@ -21,8 +21,124 @@ body {
   color: #cccdd0;
 }
 
+//======COMPONENT COMMON======//
 .name-cinema {
   color: $primary-color;
+}
+  
+.card-icon {
+  size: 3rem;
+  color: $primary-color;
+  margin-right: 4px;
+}
+
+.location-select-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  color: $primary-color;
+
+  select {
+    width: fit-content;
+    padding: 10px;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.75px;
+    color: $primary-text-color;
+    border: none;
+    background-color: #313441;
+    border-radius: 9px;
+    margin-bottom: 0.4rem;
+
+    @media (max-width: 992px ) { 
+      font-size: 1rem;
+    }
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem $primary-color;
+  }
+
+  .selected-location {
+    margin-top: 1.6rem;
+  }
+  
+  .selected-location,
+  .selected-theatre {
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.75px;
+
+    @media (max-width: 992px ) { 
+      font-size: 1rem;
+    }
+  }
+  
+  .selected-location span,
+  .selected-theatre span {
+    color: $primary-text-color;
+    font-weight: 400;
+  }
+}
+
+.collection-item-time{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  
+  .title-time-movies{
+    text-align: center;
+    font-size: 1.4rem; 
+    font-weight: 600;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 1.2rem 1.4rem #10111a66;
+  }
+
+  .time-date-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    @media (max-width: 992px ) { 
+      flex-wrap: wrap;
+    }
+    
+    .time-movie-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (max-width: 992px ) { 
+        width: 50%;
+      }
+
+      .each-time-btn{        
+        border: 2px solid $primary-color;
+        padding: 10px;
+        width: 100px;
+        margin-bottom: 20px;
+        text-align: center;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: $primary-bg-color;
+        color: $primary-text-color;
+      }
+
+      .each-time-btn:hover{ 
+        background-color: $primary-color;
+        color: $primary-text-color;
+        transition: 0.3s linear;
+      }
+    }
+  }
 }
 
 //=====NAVBAR=====//
@@ -547,13 +663,47 @@ body {
       justify-content: space-between;
       padding: 0 10px;
     }
-    
-    .card-icon {
-      size: 3rem;
-      color: $primary-color;
-      margin-right: 4px;
-    }
   }
+
+  .book-btn {
+    position: absolute;
+    text-wrap: nowrap;
+    transition: all 0.3s ease-out;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eb3656;
+    padding: 20px 40px;
+    border: none;
+    color: #e6e6e8;
+    font-size: 1rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .book-btn-traler{
+    top: 60px;
+  }
+  
+  .item-container:hover .item-img {
+    filter: blur(3px);
+  }
+  
+  .item-container:hover .book-btn {
+    transform: translate(-50%, 240%);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+  
+  .book-btn:hover {
+    background-color: #ef5e78;
+  }
+
 }
 
 
@@ -634,59 +784,6 @@ body {
 //=====MOVIES SELECTED LOCATION, TYPEPOF=====//
 .movies-header-container{
   margin-top: 80px;
-
-  .location-select-container {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.6;
-    color: $primary-color;
-
-    select {
-      width: fit-content;
-      padding: 10px;
-      text-decoration: none;
-      font-family: inherit;
-      font-size: 1.2rem;
-      font-weight: 400;
-      letter-spacing: 0.75px;
-      color: $primary-text-color;
-      border: none;
-      background-color: #313441;
-      border-radius: 9px;
-      margin-bottom: 0.4rem;
-
-      @media (max-width: 992px ) { 
-        font-size: 1rem;
-      }
-    }
-
-    select:focus {
-      outline: none;
-      box-shadow: 0 0 0 0.4rem $primary-color;
-    }
-
-    .selected-location {
-      margin-top: 1.6rem;
-    }
-    
-    .selected-location,
-    .selected-theatre {
-      margin-bottom: 0.6rem;
-      font-size: 1.2rem;
-      font-weight: 500;
-      letter-spacing: 0.75px;
-
-      @media (max-width: 992px ) { 
-        font-size: 1rem;
-      }
-    }
-    
-    .selected-location span,
-    .selected-theatre span {
-      color: $primary-text-color;
-      font-weight: 400;
-    }
-  }
 
   .movies-header-search-container{
     display: flex;
@@ -801,13 +898,15 @@ body {
 
       .collection-item-btn-container{
         height: 10%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 20px;      
       }
       
       .collection-item-btn{
         border: 2px solid $primary-color;
         padding: 15px 10px;
-        min-width: 140px;
+        min-width: 100px;
         text-align: center;
         border-radius: 20px;
         font-weight: 600;
@@ -824,61 +923,69 @@ body {
         box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.16);
       }
     }
+  } 
+}
 
-    .collection-item-time{
+//=====MOVIES DETAIL INFOR=====//
+.infor-img-general{
+  display: flex;
+  gap: 50px; 
+  justify-content: center;
+  align-items: center;
+  
+  @media (max-width: 992px ) { 
+    gap: 20px; 
+  }
+
+  @media (max-width: 576px ) { 
+    flex-direction: column;
+  }
+
+  .infor-img{
+    width: 20%;
+    border-radius: 20px;
+    object-fit: cover;
+    
+    @media (max-width: 992px ) { 
+      width: 50%;
+    }
+  }
+
+  .infor-general{
+    .general-title-rating{
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      margin-bottom: 60px;
-      
-      .title-type-movies{
-        text-align: center;
-        font-size: 1.4rem; 
+      align-items: center;
+      margin-bottom: 20px;
+  
+      .general-title{
+        font-size: 2.2rem;
         font-weight: 600;
-        padding: 10px;
-        margin-top: 20px;
-        box-shadow: 0 1.2rem 1.4rem #10111a66;
-      }
-
-      .time-date-container{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 20px;
-
-        @media (max-width: 992px ) { 
-          flex-wrap: wrap;
-        }
-        
-        .time-movie-container{
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          @media (max-width: 992px ) { 
-            width: 50%;
-          }
-
-          .each-time-btn{        
-            border: 2px solid $primary-color;
-            padding: 10px;
-            width: 100px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            background-color: $primary-bg-color;
-            color: $primary-text-color;
-          }
-
-          .each-time-btn:hover{ 
-            background-color: $primary-color;
-            color: $primary-text-color;
-            transition: 0.3s linear;
-          }
-        }
       }
     }
-  } 
+  }
+
+  .general-showtime-time{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .general-content{
+    span{
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+}
+
+.infor-descri-title{
+  margin-top: 60px;
+  font-size: 1.4rem;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.infor-descri{
+  line-height: 1.4rem;
+  margin-bottom: 40px;
 }

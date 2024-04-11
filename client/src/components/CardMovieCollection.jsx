@@ -1,15 +1,15 @@
 import Container from "react-bootstrap/esm/Container";
-import CardMovie from "../../../components/CardMovie";
+import CardMovie from "./CardMovie";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
-const NewMovies = () => {
+const CardMovieCollection = ({ titleCardCollection }) => {
     const img="./images/imgCard.jpg";
     const img2="./images/imgCard2.jpg";
 
     return(
         <section className="newmovie-container">
-            <p className="newmovie-title">Phim mới nhất</p>
+            <p className="newmovie-title">{titleCardCollection}</p>
 
             <Container className="newmovie-container-mobile-pc">
                 <Row>
@@ -47,5 +47,5 @@ const NewMovies = () => {
         </section>
     )
 }
-export default NewMovies;
+export default CardMovieCollection;
 

@@ -1,12 +1,14 @@
 import Banner from "./components/Banner";
 import Introduce from "./components/Introduce";
-import NewMovies from "./components/NewMovies";
+import CardMovieCollection from "../../components/CardMovieCollection";
 
 const HomePage = () => {
+    const titleCardCollection = "Phim mới nhất";
+
     return(
         <>
             <Banner />
-            <NewMovies />
+            <CardMovieCollection titleCardCollection={titleCardCollection} />
             <Introduce />
         </>
     )   

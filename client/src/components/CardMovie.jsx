@@ -1,7 +1,11 @@
 import { faCalendarDays, faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 const CardMovie = ({ img }) => {
+
+    const navigate = useNavigate();
+
     return(
         <div className="item-container"> 
             <div className="item-img">
@@ -32,6 +36,14 @@ const CardMovie = ({ img }) => {
                     2h 45m
                 </p>
             </div>
+            <button className="book-btn"
+                onClick={() => navigate('/moviesDetail')}
+            >
+                Chi tiết
+            </button>
+            <button className="book-btn book-btn-traler">
+                Trailer
+            </button>
         </div>
     )
 }

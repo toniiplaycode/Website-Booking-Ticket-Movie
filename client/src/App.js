@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/Footer.jsx';
 import LoginModal from './components/LoginModal.jsx';
 import SignupModal from './components/SignupModal.jsx';
+import MoviesDetailPage from './pages/moviesDetail/MoviesDetailPage.jsx';
 
 function App() {
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
@@ -37,9 +38,11 @@ function App() {
             <Route path='/' element={<HomePage/>}/>
             <Route path='/movies' element={<MoviePage/>}/>
             <Route path='/news' element={<NewsPage/>}/>
+            <Route path='/moviesDetail' element={<MoviesDetailPage/>}/>
           </Routes>
           <Footer />
         </div>
+
     </div>
   );
 }
