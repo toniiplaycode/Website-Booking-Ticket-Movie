@@ -1,9 +1,11 @@
 import { faCalendarDays, faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleTrailer } from "../reducers/modalTrailer";
 
 const CardMovie = ({ img }) => {
-
+    const dispath = useDispatch();
     const navigate = useNavigate();
 
     return(
@@ -41,7 +43,11 @@ const CardMovie = ({ img }) => {
             >
                 Chi tiết
             </button>
-            <button className="book-btn book-btn-traler">
+            <button className="book-btn book-btn-traler"
+                onClick={() => {
+                    dispath(toggleTrailer());
+                }}
+            >
                 Trailer
             </button>
         </div>

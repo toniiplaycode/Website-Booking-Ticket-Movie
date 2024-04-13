@@ -2,8 +2,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom";
 import CollectionTime from './CollectionTime';
+import { useDispatch } from "react-redux";
+import { toggleTrailer } from "../reducers/modalTrailer";
 
 const SectionMovieCollection = ({ img, name }) => {
+    const dispath = useDispatch();
     const navigate = useNavigate();
 
     return(
@@ -22,7 +25,11 @@ const SectionMovieCollection = ({ img, name }) => {
                         >
                             Chi tiết
                         </button>
-                        <button className='collection-item-btn'>
+                        <button className='collection-item-btn'
+                            onClick={() => {
+                                dispath(toggleTrailer());
+                            }}
+                        >
                             Trailer
                         </button>
                     </div>

@@ -12,17 +12,20 @@ import Footer from './components/Footer.jsx';
 import LoginModal from './components/LoginModal.jsx';
 import SignupModal from './components/SignupModal.jsx';
 import MoviesDetailPage from './pages/moviesDetail/MoviesDetailPage.jsx';
+import TrailerModal from './components/TrailerModal.jsx';
 
 function App() {
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
   const showSignin = useSelector((state) => state.modalSigninSignup.showSignin);
   const showSignup = useSelector((state) => state.modalSigninSignup.showSignup);
+  const showTrailer = useSelector((state) => state.modalTrailer.showTrailer);
 
   let blurBackdrop = showDrawer ? "blurBackdrop" : "";
 
-  if(showSignin || showSignup) {
+  if(showSignin || showSignup || showTrailer) {
     blurBackdrop = "blurBackdrop";
   }
+
 
   return (
     <div className="App">
@@ -32,6 +35,8 @@ function App() {
         {showSignin && <LoginModal />}
         {showSignup && <SignupModal />}
 
+        {showTrailer && <TrailerModal />}
+        
         <div className={blurBackdrop}>
           <Navbar />
           <Routes>
