@@ -41,6 +41,8 @@ const SeatSelect = () => {
                 hardCodeSeat.map((item, index) => {
                     if (item == "A2") 
                     return <Seat numberSeat={item} status={"selected"} />
+                    if (item == "A1") 
+                    return <Seat numberSeat={item} status={"selected"} />
                     else if (item == "A3")
                     return <Seat numberSeat={item} status={"booked"} />
                     else
