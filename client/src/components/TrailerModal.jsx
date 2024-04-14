@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toggleTrailer } from "../reducers/modalTrailer";
 
 const TrailerModal = () => {
   const dispath = useDispatch();
+  const navigate = useNavigate();
 
     return(
         <div className="trailer-container">
@@ -21,7 +23,12 @@ const TrailerModal = () => {
                         Khiêm tốn và từng là giang hồ, người đàn ông nọ đối mặt với quá khứ rắc rối của mình và trở lại thế giới ngầm sau khi một băng tội phạm bắt cóc con gái riêng của vợ anh. 
                     </p>
                     <div className="trailer-infor-btn">
-                        <button>
+                        <button
+                            onClick={() => {
+                                navigate('/purchase')
+                                dispath(toggleTrailer());
+                            }}
+                        >
                             Đặt vé
                         </button>
                         <button

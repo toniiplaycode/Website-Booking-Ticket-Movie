@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/home/HomePage.jsx';
 import MoviePage from './pages/movies/MoviesPage.jsx';
-import NewsPage from './pages/news/NewsPage.jsx';
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import MobileNav from './components/MobileNav.jsx';
 import BackDropMobileNav from './components/BackDropMobileNav.jsx';
@@ -13,6 +12,7 @@ import LoginModal from './components/LoginModal.jsx';
 import SignupModal from './components/SignupModal.jsx';
 import MoviesDetailPage from './pages/moviesDetail/MoviesDetailPage.jsx';
 import TrailerModal from './components/TrailerModal.jsx';
+import PurchasePage from './pages/purchase/PurchasePage.jsx';
 
 function App() {
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
@@ -42,8 +42,8 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/movies' element={<MoviePage/>}/>
-            <Route path='/news' element={<NewsPage/>}/>
             <Route path='/moviesDetail' element={<MoviesDetailPage/>}/>
+            <Route path='/purchase' element={<PurchasePage/>}/>
           </Routes>
           <Footer />
         </div>

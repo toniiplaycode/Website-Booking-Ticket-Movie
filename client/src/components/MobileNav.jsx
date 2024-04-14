@@ -39,11 +39,11 @@ const MobileNav = () => {
                 </p>
                 <p 
                     onClick={() => {
-                        navigate("/news");
+                        navigate("/purchase");
                         dispath(hiddenDrawer());
                     }}
                 >
-                    Tin tức
+                    Đặt vé
                 </p>
                 <div className="drawer-signup-signin">
                     <p onClick={()=> {

@@ -2,8 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { HashLink } from "react-router-hash-link";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+    const navigate = useNavigate();
+
     return(
         <Container>
             <Row className="banner-container">
@@ -23,7 +26,9 @@ const Banner = () => {
                     <p> 
                         Lịch sử đặt vé được lưu lại ngay
                     </p>
-                    <button className="banner-btn-order">
+                    <button className="banner-btn-order"
+                        onClick={() => navigate('/purchase')}
+                    >
                         Đặt vé ngay
                     </button>
                 </Col>

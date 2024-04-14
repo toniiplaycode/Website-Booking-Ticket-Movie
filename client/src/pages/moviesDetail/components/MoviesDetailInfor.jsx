@@ -6,8 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LocationSelect from '../../../components/LocationSelect';
 import MoviesCollection from '../../movies/components/MoviesCollection';
 import CollectionTime from '../../../components/CollectionTime';
+import { useDispatch } from 'react-redux';
+import { toggleTrailer } from '../../../reducers/modalTrailer';
 
 const MoviesDetailInfor = () => {
+    const dispath = useDispatch();
+
     return(
         <Container>
             <Row>
@@ -52,6 +56,13 @@ const MoviesDetailInfor = () => {
                             </span>
                             Kiều Minh Tuấn, Hiếu Thứ Hai
                         </p>
+                        <button className='general-trailer-btn'
+                            onClick={() => {
+                                dispath(toggleTrailer());
+                            }}
+                        >
+                            Trailer
+                        </button>
                     </div>
                 </Col>
             </Row>

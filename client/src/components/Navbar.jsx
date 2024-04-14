@@ -50,10 +50,10 @@ const Navbar = () => {
                     </li>
                     <li>
                         <NavLink
-                        to="/news"
+                        to="/purchase"
                         className="nav-item"
                         >
-                        Tin tức
+                        Đặt vé
                         </NavLink>
                     </li>
                 </ul>
