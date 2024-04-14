@@ -32,7 +32,6 @@ const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const all = await dbTemp.findAll();
-      console.log(all);
       resolve({
         status: "OK",
         messge: "get all successful",

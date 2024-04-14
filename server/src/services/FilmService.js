@@ -67,7 +67,7 @@ let updateFilm = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const film = await db.Film.findOne({
-        where: { id: data.query.id },
+        where: { id: data.body.id },
         raw: false,
       });
       film.nameFilm = data.body.nameFilm;

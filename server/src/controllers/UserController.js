@@ -32,11 +32,26 @@ const getAllUser = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   try {
-    await UserService.createNewUser(req.body);
-    return res.status(200).json("Create a successful new user");
+    const { email, password, firstName, lastName } = req.body;
+    const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    const isCheckEmail = reg.test(email);
+    if (!isCheckEmail) {
+      return res.status(200).json({
+        status: "ERR",
+        messge: "The input is email",
+      });
+    }
+    if (!email || !password || !firstName || !lastName) {
+      return res.status(200).json({
+        status: "ERR",
+        message: "The input is required",
+      });
+    }
+    const response = await UserService.createNewUser(req.body);
+    return res.status(200).json("Create user successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -44,7 +59,7 @@ const createNewUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     await UserService.updateUser(req);
-    return res.status(200).json("Update a successful user");
+    return res.status(200).json("Update user successful ");
   } catch (e) {
     return res.status(404).json({
       messge: e,
@@ -55,7 +70,7 @@ const updateUser = async (req, res) => {
 const updateRole = async (req, res) => {
   try {
     await UserService.updateRole(req);
-    return res.status(200).json("Update Role successful ");
+    return res.status(200).json("Update Role successful");
   } catch (e) {
     return res.status(404).json({
       messge: e,
@@ -66,7 +81,7 @@ const updateRole = async (req, res) => {
 let deleteUser = async (req, res) => {
   try {
     await UserService.deleteUser(req.body.id);
-    return res.status(200).json("Delete a successful user");
+    return res.status(200).json("Delete user successful ");
   } catch (e) {
     return res.status(404).json({
       messge: e,

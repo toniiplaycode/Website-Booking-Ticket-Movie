@@ -32,7 +32,6 @@ const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const all = await dbTemp.findAll();
-      console.log(all);
       resolve({
         status: "OK",
         messge: "get all successful",
@@ -71,7 +70,6 @@ let update = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
-      temp.userId = data.body.userId;
       temp.filmId = data.body.filmId;
       temp.cinemaId = data.body.cinemaId;
       temp.calendarReleaseId = data.body.calendarReleaseId;

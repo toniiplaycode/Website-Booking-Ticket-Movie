@@ -32,7 +32,6 @@ const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const all = await dbTemp.findAll();
-      console.log(all);
       resolve({
         status: "OK",
         messge: "get all successful",
@@ -50,6 +49,7 @@ let addNew = async (data) => {
     try {
       await dbTemp.create({
         id: data.id,
+        CinemaId: data.CinemaId,
         nameCinemaRoom: data.nameCinemaRoom,
       });
       resolve();
@@ -67,7 +67,8 @@ let update = async (data) => {
         raw: false,
       });
       temp.id = data.body.id;
-      temp.nameCinemaRoom = data.body.nameCinemaRoom;
+      (temp.CinemaId = data.body.CinemaId),
+        (temp.nameCinemaRoom = data.body.nameCinemaRoom);
       await temp.save();
       resolve();
     } catch (e) {

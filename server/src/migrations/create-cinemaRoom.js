@@ -7,6 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING,
       },
+      CinemaId: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       nameCinemaRoom: {
         allowNull: false,
         type: Sequelize.STRING,

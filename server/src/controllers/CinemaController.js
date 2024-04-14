@@ -2,7 +2,7 @@ const Service = require("../services/CinemaService");
 
 const getDetailCinema = async (req, res) => {
   try {
-    const Id = req.body.id;
+    const Id = req.params.id;
     if (!Id) {
       return res.status(200).json({
         status: "ERR",

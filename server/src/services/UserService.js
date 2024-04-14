@@ -55,8 +55,18 @@ let hashUserPassWord = (password) => {
 let createNewUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const checkEmail = await db.User.findOne({
+        where: { email: data.email },
+        raw: false,
+      });
+      if (checkEmail) {
+        resolve({
+          status: "ERR",
+          messge: "Email already exists",
+        });
+      }
       let hashPassword = await hashUserPassWord(data.password);
-      await db.User.create({
+      const createNewUser = await db.User.create({
         email: data.email,
         password: hashPassword,
         firstName: data.firstName,
@@ -66,7 +76,13 @@ let createNewUser = async (data) => {
         image: data.image,
         phoneNumber: data.phoneNumber,
       });
-      resolve();
+      if (createNewUser) {
+        resolve({
+          status: "OK",
+          messge: "Create User",
+          data: createNewUser,
+        });
+      }
     } catch (e) {
       reject(e);
     }

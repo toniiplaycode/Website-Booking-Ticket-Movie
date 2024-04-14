@@ -7,6 +7,7 @@ const ShowTimeRouter = require("./STRouter");
 const ConmentRouter = require("./ConmentRouter");
 const TicketRouter = require("./TicketRouter");
 const TypeFilmRouter = require("./TypeFilmRouter");
+const CalendarReleaseRouter = require("./CalendarReleaseRouter");
 
 const routes = (app) => {
   app.use("/api/user", userRouter);
@@ -15,8 +16,10 @@ const routes = (app) => {
   app.use("/api/cinemaRoom", cinemaRoomRouter);
   app.use("/api/role", roleRouter);
   app.use("/api/showtime", ShowTimeRouter);
-  app.use("/api/Conment", ConmentRouter);
-  app.use("/api/TypeFilm", TypeFilmRouter);
+  app.use("/api/conment", ConmentRouter);
+  app.use("/api/typeFilm", TypeFilmRouter);
+  app.use("/api/ticket", TicketRouter);
+  app.use("/api/calendarRelease", CalendarReleaseRouter);
 };
 
 module.exports = routes;

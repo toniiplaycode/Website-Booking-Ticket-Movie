@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   CinemaRoom.init(
     {
+      CinemaId: DataTypes.STRING,
       nameCinemaRoom: DataTypes.STRING,
     },
     {

@@ -5,7 +5,7 @@ const sequelize = new Sequelize("sqlite::memory:");
 
 var salt = bcrypt.genSaltSync(10);
 
-const dbTemp = db.Ticket;
+const dbTemp = db.TypeFilm;
 
 const getDetail = (Id) => {
   return new Promise(async (resolve, reject) => {
@@ -32,7 +32,6 @@ const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const all = await dbTemp.findAll();
-      console.log(all);
       resolve({
         status: "OK",
         messge: "get all successful",

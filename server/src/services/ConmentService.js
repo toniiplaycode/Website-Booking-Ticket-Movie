@@ -5,13 +5,12 @@ const sequelize = new Sequelize("sqlite::memory:");
 
 var salt = bcrypt.genSaltSync(10);
 
-const dbTemp = db.Conment;
+const dbTemp = db.Coment;
 
 const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const all = await dbTemp.findAll();
-      console.log(all);
       resolve({
         status: "OK",
         messge: "get all successful",
@@ -27,10 +26,11 @@ const getAll = () => {
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const user = JSON.parse(atob(data.headers.token.split(".")[1]));
       await dbTemp.create({
-        userId: data.userId,
-        filmId: data.filmId,
-        content: data.content,
+        userId: user.id,
+        filmId: data.body.filmId, //đúng thì sẽ lấy trên đường link pargam của detail film
+        content: data.body.content,
       });
       resolve();
     } catch (e) {
@@ -68,6 +68,25 @@ let deleteOBJ = async (data) => {
     }
   });
 };
+
+// let deleteOBJ = async (data) => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const user = JSON.parse(atob(data.headers.token.split(".")[1]));
+//       let temp = await dbTemp.findOne({
+//         where: {
+//           filmId: data.body.filmId,
+//           userId: user.id,
+//           content: data.body.content,
+//         },
+//       });
+//       await temp.destroy();
+//       resolve();
+//     } catch (e) {
+//       reject(e);
+//     }
+//   });
+// };
 
 module.exports = {
   getAll,
