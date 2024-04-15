@@ -5,7 +5,6 @@ dotenv.config();
 const authUserMiddleWare = (req, res, next) => {
   const token = req.headers.token;
   const userID = req.params.id;
-  console.log(userID);
   jwt.verify(token, process.env.ACCESS_TOKEN, function (err, users) {
     if (err) {
       return res.status(404).json({

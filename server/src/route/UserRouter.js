@@ -11,6 +11,7 @@ router.get(
 );
 
 //Chỉ có role R1 R2 và User login
+//http://localhost:3000/api/user/getAllUser?pageSize=10&page=1&nameSearch=@&field=createdAt&direction=DESC&typeSearch=email
 router.get(
   "/getAllUser",
   MiddleWare.authUserMiddleWare,

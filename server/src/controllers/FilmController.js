@@ -20,7 +20,7 @@ const getDetailFilm = async (req, res) => {
 
 const getAllFilm = async (req, res) => {
   try {
-    const response = await FilmService.getAllFilm();
+    const response = await FilmService.getAllFilm(req.query);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({

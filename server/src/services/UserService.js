@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const db = require("../models/index");
 const { ganneralAccessToken, ganneralRefreshToken } = require("./jwtService");
+const { Op } = require("@sequelize/core");
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -25,18 +26,58 @@ const getDetailUser = (userId) => {
   });
 };
 
-const getAllUser = () => {
+const getAllUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const allUser = await db.User.findAll();
+      let pageSize = data.pageSize || 10;
+      let page = data.page || 1;
+      let field = data.field || "createdAt";
+      let direction = data.direction || "DESC";
+      let typeSearch = data.typeSearch || "ALL";
+      let nameSearch = data.nameSearch || "";
+      const offset = (page - 1) * pageSize;
+      let allUser = [];
+      let countUser;
+      if (typeSearch == "ALL") {
+        countUser = await db.User.count();
+        allUser = await db.User.findAll({
+          where: {
+            [Op.or]: [
+              { firstName: { [Op.like]: `%${nameSearch}%` } },
+              { lastName: { [Op.like]: `%${nameSearch}%` } },
+              { email: { [Op.like]: `%${nameSearch}%` } },
+            ],
+          },
+          limit: parseInt(pageSize),
+          offset: offset,
+          order: [[field, direction]],
+        });
+      } else {
+        allUser = await db.User.findAll({
+          where: {
+            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
+          },
+        });
+        countUser = allUser.length;
+        allUser = await db.User.findAll({
+          where: {
+            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
+          },
+          limit: parseInt(pageSize),
+          offset: offset,
+          order: [[field, direction]],
+        });
+      }
       resolve({
         status: "OK",
         messge: "get all User",
         raw: false,
+        pageCurrent: page,
+        totalPage: Math.round(parseInt(countUser) / parseInt(pageSize)),
         allUser: allUser,
       });
     } catch (e) {
-      reject(e);
+      reject("check", e);
     }
   });
 };

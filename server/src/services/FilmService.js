@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../models/index");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
+const { Op } = require("@sequelize/core");
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -26,15 +27,55 @@ const getDetailFilm = (Id) => {
   });
 };
 
-const getAllFilm = () => {
+const getAllFilm = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const allFilm = await db.Film.findAll();
+      let pageSize = data.pageSize || 10;
+      let page = data.page || 1;
+      let field = data.field || "createdAt";
+      let direction = data.direction || "DESC";
+      let typeSearch = data.typeSearch || "ALL";
+      let nameSearch = data.nameSearch || "";
+      const offset = (page - 1) * pageSize;
+      let all = [];
+      let count;
+      if (typeSearch == "ALL") {
+        count = await db.Film.count();
+        all = await db.Film.findAll({
+          where: {
+            [Op.or]: [
+              { nameFilm: { [Op.like]: `%${nameSearch}%` } },
+              { author: { [Op.like]: `%${nameSearch}%` } },
+              { actor: { [Op.like]: `%${nameSearch}%` } },
+            ],
+          },
+          limit: parseInt(pageSize),
+          offset: offset,
+          order: [[field, direction]],
+        });
+      } else {
+        all = await db.Film.findAll({
+          where: {
+            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
+          },
+        });
+        count = all.length;
+        all = await db.Film.findAll({
+          where: {
+            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
+          },
+          limit: parseInt(pageSize),
+          offset: offset,
+          order: [[field, direction]],
+        });
+      }
       resolve({
         status: "OK",
         messge: "get all Film",
         raw: false,
-        allFilm: allFilm,
+        pageCurrent: page,
+        totalPage: Math.round(parseInt(count) / parseInt(pageSize)),
+        all: all,
       });
     } catch (e) {
       reject(e);
