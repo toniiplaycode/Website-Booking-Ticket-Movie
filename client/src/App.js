@@ -13,6 +13,7 @@ import SignupModal from './components/SignupModal.jsx';
 import MoviesDetailPage from './pages/moviesDetail/MoviesDetailPage.jsx';
 import TrailerModal from './components/TrailerModal.jsx';
 import PurchasePage from './pages/purchase/PurchasePage.jsx';
+import UserPage from './pages/user/UserPage.jsx';
 
 function App() {
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
@@ -44,6 +45,7 @@ function App() {
             <Route path='/movies' element={<MoviePage/>}/>
             <Route path='/moviesDetail' element={<MoviesDetailPage/>}/>
             <Route path='/purchase' element={<PurchasePage/>}/>
+            <Route path='/user' element={<UserPage/>}/>
           </Routes>
           <Footer />
         </div>

@@ -38,6 +38,10 @@ body {
   line-height: 1.6;
   color: $primary-color;
 
+  :first-child{
+    margin-top: 60px;
+  }
+
   select {
     width: fit-content;
     padding: 10px;
@@ -238,10 +242,22 @@ body {
       padding: 30px 0;
     }
 
+    .name-user-navbar{
+      cursor: pointer;
+    }
+
     .switch-modal-icon{
-      margin-left: 6px;
+      margin: 0 6px;
       font-size: 1.2rem;
       cursor: pointer;
+
+      :hover{
+        color: $primary-color;
+      }
+    }
+
+    .icon-signout{
+      color: $primary-color;
     }
 
     .nav-icon-menu {
@@ -806,8 +822,6 @@ body {
 
 //=====MOVIES SELECTED LOCATION, TYPEPOF=====//
 .movies-header-container{
-  margin-top: 80px;
-
   .movies-header-search-container{
     display: flex;
     justify-content: center;
@@ -1132,6 +1146,7 @@ body {
   color: $primary-color;
   text-align: center;
   margin: 30px 0;
+  line-height: 32px;
 }
 
 .purchase-select-film{
@@ -1405,5 +1420,73 @@ body {
     transition: 0.3s linear;
     transform: translateY(-0.4rem);
     box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.16);
+  }
+}
+
+//=====USER PAGE======//
+.userpage-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
+  .infor-container{
+    margin-top: 30px;
+    font-size: 1.2rem;
+
+    .userpage-info{
+      span{
+        color: grey;
+      }
+    }
+
+    .userpage-info-title{
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: $primary-color;
+      margin-bottom: 30px;
+    }
+
+    .purchased-ticket-container{
+      display: flex;
+      justify-content: space-between;
+      background-color: #151723;
+      border-radius: 20px;
+      padding: 20px;
+
+      @media (max-width: 768px ) { 
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        gap: 40px;
+      }
+
+      .ticket-infor-item{
+        font-size: 1.2rem;
+        @media (max-width: 768px ) { 
+          font-size: 1rem;
+        }
+
+        span{
+          color: grey;
+        } 
+      }
+      
+      .ticket-infor-item-img-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .ticket-infor-item-img{
+          width: 200px;
+          height: 300px;
+          border-radius: 20px;
+          object-fit: cover;
+
+          @media (max-width: 768px ) { 
+            width: 150px;
+            height: 250px;
+          }
+        }
+      }
+    }
   }
 }

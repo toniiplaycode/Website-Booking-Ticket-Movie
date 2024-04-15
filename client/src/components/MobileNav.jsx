@@ -13,6 +13,8 @@ const MobileNav = () => {
 
     const navigate = useNavigate();
 
+    const logged = true;
+
     return (
     <div className={drawerClasses}>
         <div className="drawer-container">
@@ -46,14 +48,31 @@ const MobileNav = () => {
                     Đặt vé
                 </p>
                 <div className="drawer-signup-signin">
-                    <p onClick={()=> {
-                        dispath(showSignin());
-                        dispath(hiddenDrawer());
-                    }}>Đăng Nhập</p>
-                    <p onClick={()=> {
-                        dispath(showSignup());
-                        dispath(hiddenDrawer());
-                    }}>Đăng ký</p>
+                    {logged ? (
+                        <>
+                            <p
+                                onClick={() => {
+                                    navigate("/user");
+                                    dispath(hiddenDrawer());
+                                    }
+                                }
+                            >
+                                Toàn
+                            </p>
+                            <p>Đăng xuất</p>
+                        </>
+                    ) : (
+                        <>
+                            <p onClick={()=> {
+                                dispath(showSignin());
+                                dispath(hiddenDrawer());
+                            }}>Đăng Nhập</p>
+                            <p onClick={()=> {
+                                dispath(showSignup());
+                                dispath(hiddenDrawer());
+                            }}>Đăng ký</p>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

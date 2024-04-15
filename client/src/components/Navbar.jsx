@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp, faUser, faBars, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from "react-redux";
 import { showDrawer } from "../reducers/mobileNavSlice";
 import { showSignin, showSignup } from "../reducers/modalSigninSignup";
 
 const Navbar = () => {
     const navigate = useNavigate();
-
     const dispath = useDispatch();
+
+    const logged = true;
 
     return(
         <div className="nav-container">
@@ -59,20 +60,37 @@ const Navbar = () => {
                 </ul>
             </nav>
             <div className="nav-signup-signin">
-                <FontAwesomeIcon icon={faUser} className="switch-modal-icon" />
-                <FontAwesomeIcon icon={faChevronDown} className="switch-modal-icon d-none d-lg-inline" />
-                <div className="signup-signin-container">
-                    <div
-                        onClick={()=> dispath(showSignin())}
-                    >
-                        Đăng nhập
-                    </div>
-                    <div
-                        onClick={()=> dispath(showSignup())}
-                    >
-                        Đăng ký
-                    </div>
-                </div>
+                {logged ? (
+                    <>
+                        <span className="name-user-navbar d-none d-lg-inline"
+                            onClick={() => navigate("/user")}
+                        >
+                            Toàn
+                        </span>
+                        <FontAwesomeIcon icon={faUser} className="switch-modal-icon" onClick={() => navigate("/user")}/>
+                        <FontAwesomeIcon icon={faSignOut} className="switch-modal-icon icon-signout d-none d-lg-inline" />
+                    </>
+                ) : (
+                    <>
+                         <FontAwesomeIcon icon={faUser} className="switch-modal-icon"
+                             onClick={()=> dispath(showSignin())}                
+                         />
+                         <FontAwesomeIcon icon={faChevronDown} className="switch-modal-icon d-none d-lg-inline" />
+                         <div className="signup-signin-container">
+                             <div
+                                 onClick={()=> dispath(showSignin())}
+                             >
+                                 Đăng nhập
+                             </div>
+                             <div
+                                 onClick={()=> dispath(showSignup())}
+                             >
+                                 Đăng ký
+                             </div>
+                         </div>
+                    </> 
+                )}
+                
             </div>
         </div>
     )

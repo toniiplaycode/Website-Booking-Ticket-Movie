@@ -16,7 +16,6 @@ const PurchasePage = () => {
             <Row>
                 <Col lg={8}>
                     <LocationSelect/>
-                    <CollectionTime/>
                     <p className="purchase-select-film-title">Chọn phim</p>
                     <div className="purchase-select-film">
                         <PurchaseFilmCard selected={selected}/>
@@ -25,6 +24,7 @@ const PurchasePage = () => {
                         <PurchaseFilmCard />
                         <PurchaseFilmCard />
                     </div>
+                    <CollectionTime/>
                     <p className="purchase-select-film-title">Chọn ghế</p>
                     <SeatSelect/>
                     <p className="purchase-select-film-title">Chọn phương thức thanh toán</p>
