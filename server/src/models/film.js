@@ -7,14 +7,15 @@ module.exports = (sequelize, DataTypes) => {
   Film.init(
     {
       nameFilm: DataTypes.STRING,
-      describe: DataTypes.STRING,
-      typeFilmId: DataTypes.STRING,
-      time: DataTypes.STRING,
+      description: DataTypes.STRING,
+      nameTypeFilm: DataTypes.STRING,
+      time: DataTypes.INTEGER,
       author: DataTypes.STRING,
       actor: DataTypes.STRING,
       image: DataTypes.STRING,
       trailer: DataTypes.STRING,
       price: DataTypes.FLOAT,
+      language: DataTypes.STRING,
     },
     {
       sequelize,

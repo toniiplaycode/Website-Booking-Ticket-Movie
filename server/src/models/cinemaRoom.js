@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       CinemaId: DataTypes.STRING,
       nameCinemaRoom: DataTypes.STRING,
+      numberOfSeats: DataTypes.INTEGER,
     },
     {
       sequelize,

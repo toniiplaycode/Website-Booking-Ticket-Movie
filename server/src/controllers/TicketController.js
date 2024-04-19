@@ -1,5 +1,16 @@
 const Service = require("../services/TicketService");
 
+const notEmptySeat = async (req, res) => {
+  try {
+    const response = await Service.notEmptySeat(req.body);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      messge: e,
+    });
+  }
+};
+
 const getDetail = async (req, res) => {
   try {
     const Id = req.params.id;
@@ -31,8 +42,8 @@ const getAll = async (req, res) => {
 
 const addNew = async (req, res) => {
   try {
-    await Service.addNew(req.body);
-    return res.status(200).json("Add successful");
+    const response = await Service.addNew(req.body);
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       messge: e,
@@ -68,4 +79,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  notEmptySeat,
 };

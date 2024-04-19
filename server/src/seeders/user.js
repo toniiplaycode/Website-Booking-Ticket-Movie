@@ -9,7 +9,6 @@ module.exports = {
         firstName: "Huynh",
         lastName: "KhanhTran",
         address: "Kien Giang",
-        gender: "1",
         roleId: "R1",
         createdAt: new Date(),
         updatedAt: new Date(),

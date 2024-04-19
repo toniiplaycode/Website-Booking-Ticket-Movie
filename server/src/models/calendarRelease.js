@@ -7,10 +7,11 @@ module.exports = (sequelize, DataTypes) => {
   CalendarRelease.init(
     {
       nameCalendarRelease: DataTypes.STRING,
-      cinemaId: DataTypes.STRING,
       cinemaRoomId: DataTypes.STRING,
       filmId: DataTypes.INTEGER,
-      showTimeId: DataTypes.STRING,
+      showTimeStart: DataTypes.STRING,
+      showTimeEnd: DataTypes.STRING,
+      dateWatch: DataTypes.STRING,
     },
     {
       sequelize,

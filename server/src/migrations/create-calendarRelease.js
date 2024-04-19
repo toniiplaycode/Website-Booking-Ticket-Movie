@@ -12,10 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      cinemaId: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       cinemaRoomId: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -24,7 +20,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      showTimeId: {
+      showTimeStart: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      showTimeEnd: {
+        type: Sequelize.STRING,
+      },
+      dateWatch: {
         allowNull: false,
         type: Sequelize.STRING,
       },

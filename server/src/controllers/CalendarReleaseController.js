@@ -31,8 +31,8 @@ const getAll = async (req, res) => {
 
 const addNew = async (req, res) => {
   try {
-    await Service.addNew(req.body);
-    return res.status(200).json("Add successful");
+    const response = await Service.addNew(req.body);
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       messge: e,

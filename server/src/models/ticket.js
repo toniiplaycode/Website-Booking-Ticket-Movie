@@ -7,12 +7,11 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init(
     {
       userId: DataTypes.INTEGER,
-      filmId: DataTypes.INTEGER,
-      cinemaId: DataTypes.STRING,
       calendarReleaseId: DataTypes.INTEGER,
-      seat: DataTypes.STRING,
+      seat: DataTypes.INTEGER,
       total: DataTypes.FLOAT,
-      dateWatch: DataTypes.STRING,
+      namePaymentMethod: DataTypes.STRING,
+      nameStatus: DataTypes.STRING,
     },
     {
       sequelize,

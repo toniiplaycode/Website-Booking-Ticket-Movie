@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const db = require("../models/index");
 const { ganneralAccessToken, ganneralRefreshToken } = require("./jwtService");
+const pool = require("../config/commectDBWithQuery");
 const { Op } = require("@sequelize/core");
 
 var salt = bcrypt.genSaltSync(10);
@@ -26,54 +27,15 @@ const getDetailUser = (userId) => {
   });
 };
 
-const getAllUser = (data) => {
+const getAllUser = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      let pageSize = data.pageSize || 10;
-      let page = data.page || 1;
-      let field = data.field || "createdAt";
-      let direction = data.direction || "DESC";
-      let typeSearch = data.typeSearch || "ALL";
-      let nameSearch = data.nameSearch || "";
-      const offset = (page - 1) * pageSize;
-      let allUser = [];
-      let countUser;
-      if (typeSearch == "ALL") {
-        countUser = await db.User.count();
-        allUser = await db.User.findAll({
-          where: {
-            [Op.or]: [
-              { firstName: { [Op.like]: `%${nameSearch}%` } },
-              { lastName: { [Op.like]: `%${nameSearch}%` } },
-              { email: { [Op.like]: `%${nameSearch}%` } },
-            ],
-          },
-          limit: parseInt(pageSize),
-          offset: offset,
-          order: [[field, direction]],
-        });
-      } else {
-        allUser = await db.User.findAll({
-          where: {
-            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
-          },
-        });
-        countUser = allUser.length;
-        allUser = await db.User.findAll({
-          where: {
-            [typeSearch]: { [Op.like]: `%${nameSearch}%` },
-          },
-          limit: parseInt(pageSize),
-          offset: offset,
-          order: [[field, direction]],
-        });
-      }
+      const allUser = await db.User.findAll();
+      console.log(allUser);
       resolve({
         status: "OK",
         messge: "get all User",
         raw: false,
-        pageCurrent: page,
-        totalPage: Math.round(parseInt(countUser) / parseInt(pageSize)),
         allUser: allUser,
       });
     } catch (e) {
@@ -98,9 +60,8 @@ let createNewUser = async (data) => {
     try {
       const checkEmail = await db.User.findOne({
         where: { email: data.email },
-        raw: false,
       });
-      if (checkEmail) {
+      if (!checkEmail) {
         resolve({
           status: "ERR",
           messge: "Email already exists",
@@ -113,7 +74,6 @@ let createNewUser = async (data) => {
         firstName: data.firstName,
         lastName: data.lastName,
         address: data.address,
-        gender: data.gender === "1" ? true : false,
         image: data.image,
         phoneNumber: data.phoneNumber,
       });
@@ -140,11 +100,10 @@ let updateUser = async (data) => {
       user.firstName = data.body.firstName;
       user.lastName = data.body.lastName;
       user.address = data.body.address;
-      user.gender = data.body.gender === "1" ? true : false;
       user.phoneNumber = data.body.phoneNumber;
       user.image = data.body.image;
       let hashPassword = await hashUserPassWord(data.body.password);
-      user.password = data.body.hashPassword;
+      user.password = hashPassword;
       await user.save();
       resolve();
     } catch (e) {

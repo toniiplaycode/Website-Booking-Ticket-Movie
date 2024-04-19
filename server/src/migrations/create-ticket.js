@@ -12,27 +12,23 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      filmId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      cinemaId: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       calendarReleaseId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
       seat: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       total: {
         allowNull: false,
         type: Sequelize.FLOAT,
       },
-      dateWatch: {
+      namePaymentMethod: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      nameStatus: {
         allowNull: false,
         type: Sequelize.STRING,
       },

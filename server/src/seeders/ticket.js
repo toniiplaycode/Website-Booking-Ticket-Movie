@@ -2,15 +2,17 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("Roles", [
+    return queryInterface.bulkInsert("Tickets", [
       {
-        userId: "1",
-        filmId: "1",
-        cinemaId: "CT",
-        cinemaRoomId: "VIP1",
-        seat: "B-8",
-        total: "60000",
-        dateWatch: "8h",
+        userId: DataTypes.INTEGER,
+        filmId: DataTypes.INTEGER,
+        cinemaId: DataTypes.STRING,
+        calendarReleaseId: DataTypes.INTEGER,
+        seat: DataTypes.STRING,
+        total: DataTypes.FLOAT,
+        dateWatch: DataTypes.STRING,
+        namePaymentMethod: DataTypes.STRING,
+        nameStatus: DataTypes.STRING,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

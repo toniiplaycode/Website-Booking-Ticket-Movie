@@ -48,9 +48,8 @@ let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await dbTemp.create({
-        id: data.id,
         nameType: data.nameType,
-        describeType: data.describeType,
+        description: data.description,
       });
       resolve();
     } catch (e) {

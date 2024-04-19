@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../models/index");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
+const pool = require("../config/commectDBWithQuery");
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -44,17 +45,87 @@ const getAll = () => {
   });
 };
 
+const timeStringToInt = (timeString) => {
+  return (
+    parseInt(timeString.slice(0, 2), 10) * 60 +
+    parseInt(timeString.slice(3), 10)
+  );
+};
+
+const timeIntToString = (timeInt) => {
+  let hour = Math.floor(timeInt / 60);
+  let minute = "" + (timeInt - hour * 60);
+  if (hour > 23) {
+    hour -= 24;
+  }
+  hour = "" + hour;
+  return hour.padStart(2, "0") + ":" + minute.padStart(2, "0");
+};
+
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      await dbTemp.create({
+      const [timeFilm] = await pool.execute(
+        "SELECT time FROM films where films.id= ?",
+        [data.filmId]
+      );
+      let showTimeEnd = timeIntToString(
+        timeStringToInt(data.showTimeStart) + timeFilm[0].time
+      );
+
+      const [cinemaRoomId] = await pool.execute(
+        "SELECT * FROM calendarReleases where cinemaRoomId= ? and dateWatch=?",
+        [data.cinemaRoomId, data.dateWatch]
+      );
+      let allCinemaRoom = [];
+      cinemaRoomId.forEach((element) => {
+        let obj = {
+          id: element.id,
+          showTimeStart: timeStringToInt(element.showTimeStart),
+          showTimeEnd: timeStringToInt(element.showTimeEnd),
+        };
+        allCinemaRoom.push(obj);
+      });
+      let objnew = {
+        id: "objnew_Id",
+        showTimeStart: timeStringToInt(data.showTimeStart),
+        showTimeEnd: timeStringToInt(showTimeEnd),
+      };
+      allCinemaRoom.push(objnew);
+
+      console.log(allCinemaRoom);
+
+      allCinemaRoom.sort((a, b) => {
+        return a.showTimeStart - b.showTimeStart;
+      });
+
+      for (let i = 0; i < allCinemaRoom.length - 1; i++) {
+        if (
+          allCinemaRoom[i].showTimeEnd + 30 >
+          allCinemaRoom[i + 1].showTimeStart
+        ) {
+          resolve({
+            status: "ERR",
+            messge: "Time selection error",
+          });
+          return;
+        }
+      }
+
+      const createCalendar = await dbTemp.create({
         nameCalendarRelease: data.nameCalendarRelease,
-        cinemaId: data.cinemaId,
         cinemaRoomId: data.cinemaRoomId,
         filmId: data.filmId,
-        showTimeId: data.showTimeId,
+        showTimeStart: data.showTimeStart,
+        showTimeEnd: showTimeEnd,
+        dateWatch: data.dateWatch,
       });
-      resolve();
+      if (createCalendar) {
+        resolve({
+          status: "OK",
+          messge: "Create successful",
+        });
+      }
     } catch (e) {
       reject(e);
     }

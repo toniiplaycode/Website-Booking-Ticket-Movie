@@ -1,18 +1,13 @@
 "use strict";
+
+const { Unique } = require("@sequelize/core/decorators-legacy");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("ShowTimes", {
-      id: {
+    await queryInterface.createTable("PaymentMethods", {
+      namePaymentMethod: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING,
-      },
-      showTimeStart: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      showTimeEnd: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -26,6 +21,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("ShowTimes");
+    await queryInterface.dropTable("PaymentMethods");
   },
 };

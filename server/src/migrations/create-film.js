@@ -1,4 +1,7 @@
 "use strict";
+
+const { Unique } = require("@sequelize/core/decorators-legacy");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Films", {
@@ -12,17 +15,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      describe: {
+      description: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      typeFilmId: {
+      nameTypeFilm: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       time: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       author: {
         type: Sequelize.STRING,
@@ -39,6 +42,9 @@ module.exports = {
       price: {
         allowNull: false,
         type: Sequelize.FLOAT,
+      },
+      language: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
