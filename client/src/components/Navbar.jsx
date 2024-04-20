@@ -11,6 +11,7 @@ const Navbar = () => {
     const dispath = useDispatch();
 
     const logged = true;
+    const loggedAdmin = true;
 
     return(
         <div className="nav-container">
@@ -57,6 +58,16 @@ const Navbar = () => {
                         Đặt vé
                         </NavLink>
                     </li>
+                    {loggedAdmin && 
+                        <li>
+                            <NavLink
+                            to="/admin"
+                            className="nav-item"
+                            >
+                            Quản lý
+                            </NavLink>
+                        </li>
+                    }                    
                 </ul>
             </nav>
             <div className="nav-signup-signin">

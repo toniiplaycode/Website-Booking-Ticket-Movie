@@ -17,6 +17,8 @@ const UserPage = () => {
                 <Col className='infor-container'>
                     <p className="userpage-info-title">Vé đã mua</p>
                     <PurchasedTicket/>
+                    <PurchasedTicket/>
+                    <PurchasedTicket/>
                 </Col>
             </Row>
         </Container>

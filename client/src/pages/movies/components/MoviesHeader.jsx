@@ -2,13 +2,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import LocationSelect from '../../../components/LocationSelect';
+import TypeofMovie from '../../../components/TypeofMovie';
 
 const MoviesHeader = () => {
     return(
         <Container className='movies-header-container'>
             <LocationSelect />
             <Row>
-                <Col className='movies-header-search-container'>
+                <Col className='search-movies-container'>
                     <input
                         placeholder='Phim bạn muốn tìm...' 
                     />
@@ -32,38 +33,7 @@ const MoviesHeader = () => {
                         />
                         </svg>
                     </div>
-                    <div className='typof-movies-container'>
-                        <button className='typof-movies-item active'>
-                            Tất cả
-                        </button>
-                        <button className='typof-movies-item'>
-                            Hành Động
-                        </button>
-                        <button className='typof-movies-item'>
-                            Phiêu lưu
-                        </button>
-                        <button className='typof-movies-item'>
-                            Hoạt hình
-                        </button>
-                        <button className='typof-movies-item'>
-                            Gây cấn
-                        </button>
-                        <button className='typof-movies-item'>
-                            Hài hước
-                        </button>
-                        <button className='typof-movies-item'>
-                            Tình cảm
-                        </button>
-                        <button className='typof-movies-item'>
-                            Drama
-                        </button>
-                        <button className='typof-movies-item'>
-                            Kinh dị
-                        </button>
-                        <button className='typof-movies-item'>
-                            Giả tưởng
-                        </button>
-                    </div>
+                    <TypeofMovie/>
                </Col>
             </Row>
         </Container>

@@ -34,16 +34,29 @@ const SignupModal = () => {
             </div>
     
             <div className="signup-form-body">
-            <div className="signup-form-category">
-                <label>
-                Họ và Tên: <span>*</span>
-                </label>
-                <input
-                name="lastName"
-                type="text"
-                placeholder="Nhập họ và tên"
-                required
-                />
+            <div className="signup-form-category first-last-name">
+                <div>
+                  <label>
+                    Họ: <span>*</span>
+                  </label>
+                  <input
+                    name="lastName"
+                    type="text"
+                    placeholder="Nhập họ"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>
+                    Tên: <span>*</span>
+                  </label>
+                  <input
+                    name="lastName"
+                    type="text"
+                    placeholder="Nhập tên"
+                    required
+                  />
+                </div>
             </div>
     
               <div className="signup-form-category">
@@ -54,6 +67,18 @@ const SignupModal = () => {
                   name="phoneNumber"
                   type="number"
                   placeholder="Nhập số"
+                  required
+                />
+              </div>
+
+              <div className="signup-form-category">
+                <label>
+                  Địa chỉ: <span>*</span>
+                </label>
+                <input
+                  name="address"
+                  type="text"
+                  placeholder="Nhập địa chỉ"
                   required
                 />
               </div>

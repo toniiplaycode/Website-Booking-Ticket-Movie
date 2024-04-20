@@ -17,6 +17,11 @@ const PurchasePage = () => {
                 <Col lg={8}>
                     <LocationSelect/>
                     <p className="purchase-select-film-title">Chọn phim</p>
+                    <div className='search-movies-container'>
+                        <input
+                            placeholder='Phim bạn muốn tìm...' 
+                        />
+                    </div>
                     <div className="purchase-select-film">
                         <PurchaseFilmCard selected={selected}/>
                         <PurchaseFilmCard />

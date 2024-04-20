@@ -36,7 +36,7 @@ const PurchasedTicket = () => {
             <div className="ticket-infor-item-img-container">
                 <img 
                     className="ticket-infor-item-img"
-                    src="./images/imgCard.jpg"
+                    src="../images/imgCard.jpg"
                 />
             </div>
         </div>
