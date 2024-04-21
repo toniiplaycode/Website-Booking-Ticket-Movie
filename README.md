@@ -1,0 +1,1 @@
+- trong folder client đã .gitignore folder node_modules, muốn chạy folder client thì phải "npm install (để nó install folder node_modules về)" trước khi "npm start"
