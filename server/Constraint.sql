@@ -18,8 +18,8 @@ ALTER TABLE calendarreleases ADD CONSTRAINT fk_calendarreleases_films FOREIGN KE
 
 ALTER TABLE cinemarooms ADD CONSTRAINT fk_cinemarooms_cinemas FOREIGN KEY(CinemaId) REFERENCES cinemas(id) ON DELETE CASCADE ON update CASCADE ;
 
+ALTER TABLE films add CONSTRAINT fk_films_typefilms FOREIGN KEY(nameTypeFilm) REFERENCES typefilms(nameTypeFilm) ON DELETE CASCADE ON update CASCADE ;
+
 ALTER TABLE users ALTER roleId SET DEFAULT 'R3';
-
-
 
 

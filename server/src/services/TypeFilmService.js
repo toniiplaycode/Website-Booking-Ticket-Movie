@@ -48,8 +48,8 @@ let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await dbTemp.create({
-        nameType: data.nameType,
-        description: data.description,
+        nameTypeFilm: data.body.nameTypeFilm,
+        descriptionType: data.body.descriptionType,
       });
       resolve();
     } catch (e) {
@@ -62,12 +62,10 @@ let update = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const temp = await dbTemp.findOne({
-        where: { id: data.body.id },
+        where: { nameTypeFilm: data.body.nameTypeFilm },
         raw: false,
       });
-      temp.id = data.body.id;
-      temp.nameType = data.body.nameType;
-      temp.describeType = data.body.describeType;
+      temp.descriptionType = data.body.descriptionType;
       await temp.save();
       resolve();
     } catch (e) {
@@ -80,7 +78,7 @@ let deleteOBJ = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let temp = await dbTemp.findOne({
-        where: { id: data },
+        where: { nameTypeFilm: data.body.nameTypeFilm },
       });
       await temp.destroy();
       resolve();

@@ -51,6 +51,7 @@ let addNew = async (data) => {
         id: data.id,
         CinemaId: data.CinemaId,
         nameCinemaRoom: data.nameCinemaRoom,
+        numberOfSeats: data.numberOfSeats,
       });
       resolve();
     } catch (e) {
@@ -66,9 +67,9 @@ let update = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
-      temp.id = data.body.id;
-      (temp.CinemaId = data.body.CinemaId),
-        (temp.nameCinemaRoom = data.body.nameCinemaRoom);
+      temp.CinemaId = data.body.CinemaId;
+      temp.nameCinemaRoom = data.body.nameCinemaRoom;
+      temp.numberOfSeats = data.body.numberOfSeats;
       await temp.save();
       resolve();
     } catch (e) {

@@ -64,7 +64,6 @@ let updateCinema = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
-      cinema.id = data.body.id;
       cinema.nameCinema = data.body.nameCinema;
       cinema.address = data.body.address;
       await cinema.save();

@@ -31,7 +31,7 @@ const getAll = async (req, res) => {
 
 const addNew = async (req, res) => {
   try {
-    await Service.addNew(req.body);
+    await Service.addNew(req);
     return res.status(200).json("Add successful");
   } catch (e) {
     return res.status(404).json({
@@ -53,7 +53,7 @@ const update = async (req, res) => {
 
 let deleteOBJ = async (req, res) => {
   try {
-    await Service.deleteOBJ(req.body.id);
+    await Service.deleteOBJ(req);
     return res.status(200).json("Delete successful");
   } catch (e) {
     return res.status(404).json({
