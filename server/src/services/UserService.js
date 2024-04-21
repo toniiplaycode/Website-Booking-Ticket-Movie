@@ -31,7 +31,6 @@ const getAllUser = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const allUser = await db.User.findAll();
-      console.log(allUser);
       resolve({
         status: "OK",
         messge: "get all User",
@@ -61,7 +60,7 @@ let createNewUser = async (data) => {
       const checkEmail = await db.User.findOne({
         where: { email: data.email },
       });
-      if (!checkEmail) {
+      if (checkEmail) {
         resolve({
           status: "ERR",
           messge: "Email already exists",
@@ -80,8 +79,7 @@ let createNewUser = async (data) => {
       if (createNewUser) {
         resolve({
           status: "OK",
-          messge: "Create User",
-          data: createNewUser,
+          messge: "Create user successful",
         });
       }
     } catch (e) {
@@ -94,7 +92,7 @@ let updateUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await db.User.findOne({
-        where: { id: data.query.id },
+        where: { id: data.params.id },
         raw: false,
       });
       user.firstName = data.body.firstName;

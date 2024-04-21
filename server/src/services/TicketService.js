@@ -94,7 +94,7 @@ let addNew = async (data) => {
         if (item == data.seat) {
           resolve({
             status: "ERR",
-            messge: "Seat selection error 1",
+            messge: "Seat selection error",
           });
           check = 1;
           return;
@@ -111,9 +111,9 @@ let addNew = async (data) => {
       if (check) {
         return;
       }
-
+      const user = JSON.parse(atob(data.headers.token.split(".")[1]));
       await dbTemp.create({
-        userId: data.userId,
+        userId: user.id,
         calendarReleaseId: data.calendarReleaseId,
         seat: data.seat,
         total: total[0].price,
@@ -133,13 +133,12 @@ let addNew = async (data) => {
 let update = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const user = JSON.parse(atob(data.headers.token.split(".")[1]));
       const temp = await dbTemp.findOne({
-        where: { id: data.body.id },
+        where: { id: user.id },
         raw: false,
       });
-      temp.filmId = data.body.filmId;
       temp.seat = data.body.seat;
-      temp.total = data.body.total;
       temp.namePaymentMethod = data.body.namePaymentMethod;
       await temp.save();
       resolve();

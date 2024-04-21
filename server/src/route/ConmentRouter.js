@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Controller = require("../controllers/ConmentController");
-const MiddleWare = require("../middleware/ConmentAuthMiddleWare");
+const MiddleWare = require("../middleware/AuthMiddleware");
 
 router.get("/getAll", Controller.getAll);
 
-router.post("/addNew", Controller.addNew);
+//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+router.post("/addNew", MiddleWare.AuthMiddleWareBody, Controller.addNew);
 
-//Lấy id, userId của conment vào body để xóa
-router.put("/update", MiddleWare.AuthMiddleWare, Controller.update);
+//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+router.put("/update", MiddleWare.AuthMiddleWareBody, Controller.update);
 
-//Lấy id, userId của conment vào body để xóa
-router.delete("/deleteOBJ", MiddleWare.AuthMiddleWare, Controller.deleteOBJ);
+//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+router.delete(
+  "/deleteOBJ",
+  MiddleWare.AuthMiddleWareBody,
+  Controller.deleteOBJ
+);
 
 module.exports = router;

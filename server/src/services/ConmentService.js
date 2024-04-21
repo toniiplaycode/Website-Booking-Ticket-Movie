@@ -59,7 +59,7 @@ let deleteOBJ = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let temp = await dbTemp.findOne({
-        where: { id: data },
+        where: { id: data.body.id },
       });
       await temp.destroy();
       resolve();
@@ -68,25 +68,6 @@ let deleteOBJ = async (data) => {
     }
   });
 };
-
-// let deleteOBJ = async (data) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       const user = JSON.parse(atob(data.headers.token.split(".")[1]));
-//       let temp = await dbTemp.findOne({
-//         where: {
-//           filmId: data.body.filmId,
-//           userId: user.id,
-//           content: data.body.content,
-//         },
-//       });
-//       await temp.destroy();
-//       resolve();
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
 
 module.exports = {
   getAll,

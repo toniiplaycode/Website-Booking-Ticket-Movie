@@ -111,7 +111,6 @@ let addNew = async (data) => {
           return;
         }
       }
-
       const createCalendar = await dbTemp.create({
         nameCalendarRelease: data.nameCalendarRelease,
         cinemaRoomId: data.cinemaRoomId,
@@ -140,10 +139,6 @@ let update = async (data) => {
         raw: false,
       });
       temp.nameCalendarRelease = data.body.nameCalendarRelease;
-      temp.cinemaId = data.body.cinemaId;
-      temp.cinemaRoomId = data.body.cinemaRoomId;
-      temp.filmId = data.body.filmId;
-      temp.showTimeId = data.body.showTimeId;
       await temp.save();
       resolve();
     } catch (e) {

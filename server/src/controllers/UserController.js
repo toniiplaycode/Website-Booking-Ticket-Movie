@@ -48,7 +48,7 @@ const createNewUser = async (req, res) => {
       });
     }
     const response = await UserService.createNewUser(req.body);
-    return res.status(200).json("Create user successful");
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       message: e,
@@ -80,7 +80,7 @@ const updateRole = async (req, res) => {
 
 let deleteUser = async (req, res) => {
   try {
-    await UserService.deleteUser(req.body.id);
+    await UserService.deleteUser(req.params.id);
     return res.status(200).json("Delete user successful ");
   } catch (e) {
     return res.status(404).json({

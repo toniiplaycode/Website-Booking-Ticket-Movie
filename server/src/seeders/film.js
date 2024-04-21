@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert("Films", [
       {
         nameFilm: "ONE PIECE",
-        description: "P - PHIM ĐƯỢC PHÉP PHỔ BIẾN ĐẾN NGƯỜI XEM Ở MỌI ĐỘ TUỔI.",
+        description: "Mô tả film",
         nameTypeFilm: "Hoạt Hình",
         time: 120,
         author: "Oda Eiichiro",
@@ -19,8 +19,7 @@ module.exports = {
       },
       {
         nameFilm: "CÁI GIÁ CỦA HẠNH PHÚC",
-        description:
-          "T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 18 TUỔI TRỞ LÊN (18+)",
+        description: "Mô tả film",
         nameTypeFilm: "Tâm Lý",
         time: 115,
         author: "Nguyễn Ngọc Lâm",
@@ -35,7 +34,7 @@ module.exports = {
       },
       {
         nameFilm: "B4S – TRƯỚC GIỜ “YÊU”",
-        description: "P - PHIM ĐƯỢC PHÉP PHỔ BIẾN ĐẾN NGƯỜI XEM Ở MỌI ĐỘ TUỔI.",
+        description: "Mô tả Film",
         nameTypeFilm: "Hài, Tình cảm",
         time: 98,
         author: "Tùng Leo, Michael Thái, Huỳnh Anh Duy",
@@ -50,7 +49,7 @@ module.exports = {
       },
       {
         nameFilm: "MÙA HÈ CỦA LUCA",
-        description: "P - PHIM ĐƯỢC PHÉP PHỔ BIẾN ĐẾN NGƯỜI XEM Ở MỌI ĐỘ TUỔI.",
+        description: "Mô tả Film",
         nameTypeFilm: "Hài, Hoạt Hình, Phiêu Lưu",
         time: 99,
         author: "Enrico Casarosa",
@@ -65,8 +64,7 @@ module.exports = {
       },
       {
         nameFilm: "TU VIỆN MÁU",
-        description:
-          "T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 18 TUỔI TRỞ LÊN (18+)",
+        description: "Mô tả Film",
         nameTypeFilm: "Kinh Dị",
         time: 85,
         author: "Michael Mohan",

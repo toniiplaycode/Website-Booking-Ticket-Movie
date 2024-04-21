@@ -1,37 +1,42 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/UserController");
-const MiddleWare = require("../middleware/UserAuthMiddleWare");
+const MiddleWare = require("../middleware/AuthMiddleware");
 
-//Chỉ có role R1 R2 và User login
+//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.get(
   "/getDetailUser/:id",
-  MiddleWare.authUserMiddleWare,
+  MiddleWare.AuthMiddleWareAdminStaffClientRole,
   userController.getDetailUser
 );
 
-//Chỉ có role R1 R2 và User login
+//Chỉ có role R1 R2 (lấy trong token)
 router.get(
   "/getAllUser",
-  MiddleWare.authUserMiddleWare,
+  MiddleWare.AuthMiddleWareAdminStaffRole,
   userController.getAllUser
 );
 
-//http://localhost:3000/api/user/createNewUser
 router.post("/createNewUser", userController.createNewUser);
-router.put("/updateUser", userController.updateUser);
 
-//Chi R1 R2 mới có thể đổi role của User, data chuyền từ body
+//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
+router.put(
+  "/updateUser/:id",
+  MiddleWare.AuthMiddleWareAdminStaffClientRole,
+  userController.updateUser
+);
+
+//Chỉ có role R1 R2 (lấy trong token)
 router.put(
   "/updateRole",
-  MiddleWare.authUserMiddleWareUseRole,
+  MiddleWare.AuthMiddleWareAdminRole,
   userController.updateRole
 );
 
-//Chỉ có role R1 R2 và User login, data chuyền từ body
+//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.delete(
-  "/deleteUser",
-  MiddleWare.authUserMiddleWareUseRole,
+  "/deleteUser/:id",
+  MiddleWare.AuthMiddleWareAdminStaffClientRole,
   userController.deleteUser
 );
 

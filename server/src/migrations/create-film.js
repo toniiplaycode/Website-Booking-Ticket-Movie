@@ -12,6 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       nameFilm: {
+        Unique: true,
         allowNull: false,
         type: Sequelize.STRING,
       },

@@ -1,19 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const Controller = require("../controllers/FilmController");
-const MiddleWare = require("../middleware/FilmAuthMiddleWare");
+const MiddleWare = require("../middleware/AuthMiddleware");
 
 router.get("/getDetail/:id", Controller.getDetailFilm);
 
 router.get("/getAll", Controller.getAllFilm);
 
 //Chỉ có role R1 R2, data được đưa từ body xuống
-router.post("/addNew", MiddleWare.AuthMiddleWare, Controller.addNewFilm);
+router.post(
+  "/addNew",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.addNewFilm
+);
 
 //Chỉ có role R1 R2, data được đưa từ body xuống
-router.put("/update", MiddleWare.AuthMiddleWare, Controller.updateFilm);
+router.put(
+  "/update",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.updateFilm
+);
 
 //Chỉ có role R1 R2, data được đưa từ body xuống
-router.delete("/deleteOBJ", MiddleWare.AuthMiddleWare, Controller.deleteFilm);
+router.delete(
+  "/deleteOBJ",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.deleteFilm
+);
 
 module.exports = router;
