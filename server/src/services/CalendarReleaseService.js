@@ -93,8 +93,6 @@ let addNew = async (data) => {
       };
       allCinemaRoom.push(objnew);
 
-      console.log(allCinemaRoom);
-
       allCinemaRoom.sort((a, b) => {
         return a.showTimeStart - b.showTimeStart;
       });

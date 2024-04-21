@@ -73,17 +73,17 @@ let addNew = async (data) => {
     try {
       const [total] = await pool.execute(
         "select price from films JOIN calendarreleases ON calendarreleases.filmId = films.id where calendarreleases.id = ?",
-        [data.calendarReleaseId]
+        [data.body.calendarReleaseId]
       );
 
       const [nuberSeat] = await pool.execute(
         "SELECT numberOfSeats FROM cinemarooms JOIN calendarreleases ON cinemarooms.id=calendarreleases.cinemaRoomId where calendarreleases.id=?",
-        [data.calendarReleaseId]
+        [data.body.calendarReleaseId]
       );
 
       const [notEmptySeat] = await pool.execute(
         "select seat from tickets where calendarReleaseId =?",
-        [data.calendarReleaseId]
+        [data.body.calendarReleaseId]
       );
       let all = [];
       notEmptySeat.forEach((element) => {
@@ -91,16 +91,16 @@ let addNew = async (data) => {
       });
       let check = 0;
       all.forEach((item) => {
-        if (item == data.seat) {
+        if (item == data.body.seat) {
           resolve({
             status: "ERR",
-            messge: "Seat selection error",
+            messge: "Seat selection error 1",
           });
           check = 1;
           return;
         }
       });
-      if (data.seat > nuberSeat[0].numberOfSeats || data.seat <= 0) {
+      if (data.body.seat > nuberSeat[0].numberOfSeats || data.body.seat <= 0) {
         resolve({
           status: "ERR",
           messge: "Seat selection error",
@@ -111,21 +111,21 @@ let addNew = async (data) => {
       if (check) {
         return;
       }
-      const user = JSON.parse(atob(data.headers.token.split(".")[1]));
+      const user = await JSON.parse(atob(data.headers.token.split(".")[1]));
       await dbTemp.create({
         userId: user.id,
-        calendarReleaseId: data.calendarReleaseId,
-        seat: data.seat,
+        calendarReleaseId: data.body.calendarReleaseId,
+        seat: data.body.seat,
         total: total[0].price,
-        nameStatus: data.nameStatus,
-        namePaymentMethod: data.namePaymentMethod,
+        nameStatus: data.body.nameStatus,
+        namePaymentMethod: data.body.namePaymentMethod,
       });
       resolve({
         status: "OK",
         messge: "create successful",
       });
     } catch (e) {
-      reject(e);
+      reject("check");
     }
   });
 };

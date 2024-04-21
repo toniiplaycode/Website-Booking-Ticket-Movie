@@ -79,8 +79,6 @@ const AuthMiddleWareBody = (req, res, next) => {
         message: "The authMiddleWare",
       });
     }
-    console.log(users);
-
     if (
       users?.roleId === "R1" ||
       users?.roleId === "R2" ||

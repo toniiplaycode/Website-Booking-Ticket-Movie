@@ -5,9 +5,16 @@ const { Unique } = require("@sequelize/core/decorators-legacy");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("PaymentMethods", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       namePaymentMethod: {
         allowNull: false,
         primaryKey: true,
+        unique: true,
         type: Sequelize.STRING,
       },
       createdAt: {
