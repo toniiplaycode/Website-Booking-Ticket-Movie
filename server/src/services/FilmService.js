@@ -63,6 +63,7 @@ let addNewFilm = async (data) => {
         trailer: data.trailer,
         price: data.price,
         language: data.language,
+        releaseDate: data.releaseDate,
       });
       resolve();
     } catch (e) {
@@ -88,6 +89,7 @@ let updateFilm = async (data) => {
       film.trailer = data.body.trailer;
       film.price = data.body.price;
       film.language = data.body.language;
+      film.releaseDate = data.body.releaseDate;
       await film.save();
       resolve();
     } catch (e) {

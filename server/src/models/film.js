@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       trailer: DataTypes.STRING,
       price: DataTypes.FLOAT,
       language: DataTypes.STRING,
+      releaseDate: DataTypes.STRING,
     },
     {
       sequelize,
