@@ -2,7 +2,7 @@ const FilmService = require("../services/FilmService");
 
 const getDetailFilm = async (req, res) => {
   try {
-    const FilmId = req.params.id;
+    const FilmId = req.query.id;
     if (!FilmId) {
       return res.status(200).json({
         status: "ERR",

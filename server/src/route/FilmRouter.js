@@ -3,7 +3,7 @@ const router = express.Router();
 const Controller = require("../controllers/FilmController");
 const MiddleWare = require("../middleware/AuthMiddleware");
 
-router.get("/getDetail/:id", Controller.getDetailFilm);
+router.get("/getDetail", Controller.getDetailFilm);
 
 router.get("/getAll", Controller.getAllFilm);
 
