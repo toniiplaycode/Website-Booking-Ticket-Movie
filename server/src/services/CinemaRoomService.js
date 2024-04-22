@@ -44,6 +44,24 @@ const getAll = () => {
   });
 };
 
+const getAllWithCanema = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const all = await dbTemp.findAll({
+        where: { CinemaId: data.query.CinemaId },
+      });
+      resolve({
+        status: "OK",
+        messge: "get all successful",
+        raw: false,
+        all: all,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -98,4 +116,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithCanema,
 };

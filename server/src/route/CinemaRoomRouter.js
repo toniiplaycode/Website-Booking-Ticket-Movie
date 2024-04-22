@@ -6,6 +6,8 @@ const MiddleWare = require("../middleware/AuthMiddleware");
 router.get("/getDetail/:id", Controller.getDetail);
 router.get("/getAll", Controller.getAll);
 
+router.get("/getAllWithCanema", Controller.getAllWithCanema);
+
 //Chỉ có id: R1 mới có quyền, input: id(String) nameCinemaRoom(String) từ body
 router.post("/addNew", MiddleWare.AuthMiddleWareAdminRole, Controller.addNew);
 

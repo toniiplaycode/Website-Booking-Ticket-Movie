@@ -29,6 +29,17 @@ const getAll = async (req, res) => {
   }
 };
 
+const getAllWithCanema = async (req, res) => {
+  try {
+    const response = await Service.getAllWithCanema(req);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      messge: e,
+    });
+  }
+};
+
 const addNew = async (req, res) => {
   try {
     await Service.addNew(req.body);
@@ -68,4 +79,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithCanema,
 };
