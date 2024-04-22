@@ -11,7 +11,7 @@ const getDetailFilm = (Id) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [check] = await pool.execute(
-        "SELECT *  FROM films JOIN typefilms ON films.nameTypeFilm=typefilms.nameTypeFilm where films.id=?",
+        "SELECT films.*, typefilms.descriptionType FROM films JOIN typefilms ON films.nameTypeFilm=typefilms.nameTypeFilm where films.id=?",
         [Id]
       );
       if (check === null) {
@@ -35,7 +35,7 @@ const getAllFilm = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [all] = await pool.execute(
-        "SELECT *  FROM films JOIN typefilms ON films.nameTypeFilm=typefilms.nameTypeFilm;"
+        "SELECT films.*, typefilms.descriptionType FROM films JOIN typefilms ON films.nameTypeFilm=typefilms.nameTypeFilm"
       );
       resolve({
         status: "OK",
