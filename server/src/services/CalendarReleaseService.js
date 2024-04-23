@@ -83,6 +83,28 @@ const timeIntToString = (timeInt) => {
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const [releaseDate] = await pool.execute(
+        "SELECT releaseDate FROM films where films.id= ?",
+        [data.filmId]
+      );
+      let ArrReleaseDate = releaseDate[0].releaseDate.split("/");
+
+      let ArrDateWatch = data.dateWatch.split("/");
+
+      if (
+        parseInt(ArrDateWatch[2]) < parseInt(ArrReleaseDate[2]) ||
+        parseInt(ArrDateWatch[1]) < parseInt(ArrReleaseDate[1]) ||
+        parseInt(ArrDateWatch[0]) < parseInt(ArrReleaseDate[0])
+      ) {
+        {
+          resolve({
+            status: "ERR",
+            messge: "DateWatch error",
+          });
+          return;
+        }
+      }
+
       const [timeFilm] = await pool.execute(
         "SELECT time FROM films where films.id= ?",
         [data.filmId]
@@ -127,6 +149,7 @@ let addNew = async (data) => {
           return;
         }
       }
+
       const createCalendar = await dbTemp.create({
         nameCalendarRelease: data.nameCalendarRelease,
         cinemaRoomId: data.cinemaRoomId,
