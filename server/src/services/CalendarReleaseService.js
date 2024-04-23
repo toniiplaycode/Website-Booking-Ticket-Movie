@@ -45,6 +45,24 @@ const getAll = () => {
   });
 };
 
+const getAllWithFilmId = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const all = await dbTemp.findAll({
+        where: { filmId: data.query.filmId },
+      });
+      resolve({
+        status: "OK",
+        messge: "get all successful",
+        raw: false,
+        all: all,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const timeStringToInt = (timeString) => {
   return (
     parseInt(timeString.slice(0, 2), 10) * 60 +
@@ -165,4 +183,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithFilmId,
 };

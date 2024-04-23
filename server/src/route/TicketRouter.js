@@ -4,11 +4,7 @@ const Controller = require("../controllers/TicketController");
 const MiddleWare = require("../middleware/AuthMiddleware");
 
 //Nếu role là R1 R2 hoặc có userId chuyền từ body lên chùng với tài khoản đang nhập mới xem được
-router.get(
-  "/getDetail/:id",
-  MiddleWare.AuthMiddleWareBody,
-  Controller.getDetail
-);
+router.get("/getDetail", MiddleWare.AuthMiddleWareBody, Controller.getDetail);
 router.get(
   "/getAll",
   MiddleWare.AuthMiddleWareAdminStaffRole,

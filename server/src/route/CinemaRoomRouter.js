@@ -3,7 +3,7 @@ const router = express.Router();
 const Controller = require("../controllers/CinemaRoomController");
 const MiddleWare = require("../middleware/AuthMiddleware");
 
-router.get("/getDetail/:id", Controller.getDetail);
+router.get("/getDetail", Controller.getDetail);
 router.get("/getAll", Controller.getAll);
 
 router.get("/getAllWithCanema", Controller.getAllWithCanema);

@@ -13,7 +13,7 @@ const notEmptySeat = async (req, res) => {
 
 const getDetail = async (req, res) => {
   try {
-    const Id = req.params.id;
+    const Id = req.query.id;
     if (!Id) {
       return res.status(200).json({
         status: "ERR",

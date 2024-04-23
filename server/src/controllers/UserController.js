@@ -3,7 +3,7 @@ const jwtService = require("../services/jwtService");
 
 const getDetailUser = async (req, res) => {
   try {
-    const UserId = req.params.id;
+    const UserId = req.query.id;
     if (!UserId) {
       return res.status(200).json({
         status: "ERR",

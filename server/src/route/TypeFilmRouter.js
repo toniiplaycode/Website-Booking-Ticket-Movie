@@ -3,7 +3,7 @@ const router = express.Router();
 const Controller = require("../controllers/TypeFilmController");
 const MiddleWare = require("../middleware/AuthMiddleware");
 
-router.get("/getDetail/:id", Controller.getDetail);
+router.get("/getDetail", Controller.getDetail);
 router.get("/getAll", Controller.getAll);
 
 //Chỉ có role R1 R2, Input: "id" "nameType" "describeType" lấy từ body

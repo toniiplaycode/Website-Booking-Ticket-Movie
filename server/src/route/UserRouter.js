@@ -5,7 +5,7 @@ const MiddleWare = require("../middleware/AuthMiddleware");
 
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.get(
-  "/getDetailUser/:id",
+  "/getDetailUser",
   MiddleWare.AuthMiddleWareAdminStaffClientRole,
   userController.getDetailUser
 );

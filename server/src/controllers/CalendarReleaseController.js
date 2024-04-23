@@ -2,7 +2,7 @@ const Service = require("../services/CalendarReleaseService");
 
 const getDetail = async (req, res) => {
   try {
-    const Id = req.params.id;
+    const Id = req.query.id;
     if (!Id) {
       return res.status(200).json({
         status: "ERR",
@@ -10,6 +10,17 @@ const getDetail = async (req, res) => {
       });
     }
     const response = await Service.getDetail(Id);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      messge: e,
+    });
+  }
+};
+
+const getAllWithFilmId = async (req, res) => {
+  try {
+    const response = await Service.getAllWithFilmId(req);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
@@ -68,4 +79,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithFilmId,
 };
