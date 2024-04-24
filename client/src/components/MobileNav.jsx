@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import { p } from "react-router-hash-link";
 
 const MobileNav = () => {
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
     const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
 
     let drawerClasses = showDrawer ? "side-drawer open" : "side-drawer";
@@ -24,7 +24,7 @@ const MobileNav = () => {
         <div className="drawer-container">
             <div className="drawer-icon-closed">
                 <FontAwesomeIcon icon={faX} style={{cursor: "pointer"}} 
-                    onClick={()=> dispath(hiddenDrawer())}
+                    onClick={()=> dispatch(hiddenDrawer())}
                 />
             </div>
             <div className="drawer-item">
@@ -32,7 +32,7 @@ const MobileNav = () => {
                     className={location.pathname == "/" ? "active-mobile" : ""}
                     onClick={() => {
                         navigate("/");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                 }}>
                     Trang chủ
                 </p>
@@ -40,7 +40,7 @@ const MobileNav = () => {
                     className={location.pathname == "/movies" ? "active-mobile" : ""}
                     onClick={() => {
                         navigate("/movies");
-                        dispath(hiddenDrawer())
+                        dispatch(hiddenDrawer())
                     }}
                 >
                     Phim chiếu
@@ -49,7 +49,7 @@ const MobileNav = () => {
                     className={location.pathname == "/purchase" ? "active-mobile" : ""}
                     onClick={() => {
                         navigate("/purchase");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                     }}
                 >
                     Đặt vé
@@ -58,7 +58,7 @@ const MobileNav = () => {
                     className={location.pathname == "/admin" ? "active-mobile" : ""}
                     onClick={() => {
                         navigate("/admin");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                     }}
                 >
                     Quản lý
@@ -69,7 +69,7 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminFilms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminFilms");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Phim
@@ -78,25 +78,16 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminTypeof" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminTypeof");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Thể loại phim
                     </p>
                     <p 
-                        className={location.pathname == "/admin/adminShowtimes" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminShowtimes");
-                        dispath(hiddenDrawer());
-                        }}
-                    >
-                        Lịch chiếu
-                    </p>
-                    <p 
                         className={location.pathname == "/admin/adminCalenderReleases" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminCalenderReleases");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Suất chiếu 
@@ -105,7 +96,7 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminCinemas" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminCinemas");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Rạp
@@ -114,7 +105,7 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminCinemaRooms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminCinemaRooms");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Phòng chiếu
@@ -123,7 +114,7 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminTickets" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminTickets");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Vé
@@ -132,7 +123,7 @@ const MobileNav = () => {
                         className={location.pathname == "/admin/adminUsers" ? "drawer-item-child active-mobile" : "drawer-item-child"}
                         onClick={() => {
                         navigate("/admin/adminUsers");
-                        dispath(hiddenDrawer());
+                        dispatch(hiddenDrawer());
                         }}
                     >
                         Khách hàng
@@ -145,7 +136,7 @@ const MobileNav = () => {
                             <p
                                 onClick={() => {
                                     navigate("/user");
-                                    dispath(hiddenDrawer());
+                                    dispatch(hiddenDrawer());
                                     }
                                 }
                             >
@@ -156,12 +147,12 @@ const MobileNav = () => {
                     ) : (
                         <>
                             <p onClick={()=> {
-                                dispath(showSignin());
-                                dispath(hiddenDrawer());
+                                dispatch(showSignin());
+                                dispatch(hiddenDrawer());
                             }}>Đăng Nhập</p>
                             <p onClick={()=> {
-                                dispath(showSignup());
-                                dispath(hiddenDrawer());
+                                dispatch(showSignup());
+                                dispatch(hiddenDrawer());
                             }}>Đăng ký</p>
                         </>
                     )}

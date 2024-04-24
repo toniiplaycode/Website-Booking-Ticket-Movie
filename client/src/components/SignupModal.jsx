@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { hiddenSignup } from "../reducers/modalSigninSignup";
 
 const SignupModal = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
     return(
         <div className="signup-form">
@@ -19,7 +19,7 @@ const SignupModal = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="form-icon"
                   viewBox="0 0 512 512"
-                  onClick={()=> dispath(hiddenSignup())}
+                  onClick={()=> dispatch(hiddenSignup())}
                 >
                   <path
                     fill="none"

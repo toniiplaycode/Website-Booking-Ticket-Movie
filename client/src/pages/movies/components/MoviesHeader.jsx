@@ -1,16 +1,26 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import LocationSelect from '../../../components/LocationSelect';
 import TypeofMovie from '../../../components/TypeofMovie';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchHandle } from '../../../reducers/searchFilm';
+import { selectedType } from '../../../reducers/selectedTypeFilm';
 
 const MoviesHeader = () => {
+    const dispath = useDispatch();
+
+    const search = useSelector((state)=>state.searchFilm.search);
+
     return(
         <Container className='movies-header-container'>
-            <LocationSelect />
             <Row>
                 <Col className='search-movies-container'>
                     <input
+                        value={search}
+                        onChange={(e)=>{
+                            dispath(searchHandle(e.target.value))
+                            dispath(selectedType(''))
+                        }}
                         placeholder='Phim bạn muốn tìm...' 
                     />
                 </Col>

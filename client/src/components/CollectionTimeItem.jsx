@@ -1,12 +1,14 @@
 import TimeItem from "./TimeItem";
 
-const CollectionTimeItem = () => {
+const CollectionTimeItem = ({ grouped }) => {
+    
     return(
         <div className='time-date-container'>
-           <TimeItem/>
-           <TimeItem/>
-           <TimeItem/>
-           <TimeItem/>
+            {grouped && 
+                 Object.entries(grouped).map(([key, value]) => {
+                    return <TimeItem name={key} item={value}/>
+                })
+            }
         </div>
     )
 }

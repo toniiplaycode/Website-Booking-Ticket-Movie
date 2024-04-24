@@ -1,4 +1,30 @@
+import { DatePicker } from "@mui/x-date-pickers/DatePicker"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { TimePicker } from "@mui/x-date-pickers/TimePicker"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useState } from "react";
+
 const AdminCalenderReleases = () => {
+    const [selectedDate, setSelectedDate] = useState(null);
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        const fullDate = (`${date.$D}/${date.$M + 1}/${date.$y}`);
+        console.log(fullDate);
+    };
+
+    const [selectedTime, setSelectedTime] = useState(null);
+    const handleTimeChange = (time) => {
+        setSelectedTime(time);
+        // Check if time is not null before logging
+        if (time) {
+          const hours = time.$H;
+          const minutes = time.$m;
+          const formattedHours = hours % 12 || 12;
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          console.log(`${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`);
+        }
+    };
+
     return(
         <>
             <p className='adminpage-title'>
@@ -78,18 +104,22 @@ const AdminCalenderReleases = () => {
                         </select>
                     </div>
                     <div>
-                        <p>Lịch chiếu:</p>
-                        <select className="admin-select-type">
-                            <option>
-                                10/4/2024
-                            </option>
-                            <option>
-                                11/4/2024
-                            </option>
-                            <option>
-                                12/4/2024
-                            </option>
-                        </select>
+                        <p>Ngày và giờ:</p>
+                        
+                        <div className='admin-picker-film'>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker label="Chọn ngày"
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    className='admin-picker-film-item'
+                                />
+                                <TimePicker label="Chọn giờ" 
+                                    value={selectedTime}
+                                    onChange={handleTimeChange}
+                                    className='admin-picker-film-item'
+                                />
+                            </LocalizationProvider>
+                        </div>
                     </div>
                     <div>
                         <p>Rạp:</p>

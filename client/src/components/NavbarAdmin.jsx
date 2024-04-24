@@ -11,9 +11,6 @@ const NavbarAdmin = () => {
                 <NavLink to="/admin/adminTypeof" className='adminpage-navbar-item'>
                     Thể loại phim
                 </NavLink>
-                <NavLink to="/admin/adminShowtimes" className='adminpage-navbar-item'>
-                    Lịch chiếu phim
-                </NavLink>
                 <NavLink to="/admin/adminCalenderReleases" className='adminpage-navbar-item'>
                     Suất chiếu phim
                 </NavLink>

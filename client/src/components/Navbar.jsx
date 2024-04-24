@@ -8,7 +8,7 @@ import { showSignin, showSignup } from "../reducers/modalSigninSignup";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
     const logged = true;
     const loggedAdmin = true;
@@ -18,7 +18,7 @@ const Navbar = () => {
             <div className="nav-icon-menu-contaienr d-lg-none">
                 <FontAwesomeIcon icon={faBars} 
                     className="nav-icon-menu"
-                    onClick={() => {dispath(showDrawer())}}
+                    onClick={() => {dispatch(showDrawer())}}
                 />
             </div>
             <div className="nav-logo">
@@ -84,17 +84,17 @@ const Navbar = () => {
                 ) : (
                     <>
                          <FontAwesomeIcon icon={faUser} className="switch-modal-icon"
-                             onClick={()=> dispath(showSignin())}                
+                             onClick={()=> dispatch(showSignin())}                
                          />
                          <FontAwesomeIcon icon={faChevronDown} className="switch-modal-icon d-none d-lg-inline" />
                          <div className="signup-signin-container">
                              <div
-                                 onClick={()=> dispath(showSignin())}
+                                 onClick={()=> dispatch(showSignin())}
                              >
                                  Đăng nhập
                              </div>
                              <div
-                                 onClick={()=> dispath(showSignup())}
+                                 onClick={()=> dispatch(showSignup())}
                              >
                                  Đăng ký
                              </div>

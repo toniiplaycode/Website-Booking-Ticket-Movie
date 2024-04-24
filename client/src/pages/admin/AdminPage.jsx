@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import CollectionTimeItem from '../../components/CollectionTimeItem';
 import NavbarAdmin from '../../components/NavbarAdmin';
 import AdminStatistical from './adminPage/AdminStatistical';
-import AdminShowtimes from './adminPage/AdminShowtimes';
 import AdminFilms from './adminPage/AdminFilms';
 import TypeofMovie from '../../components/TypeofMovie';
 import InputAddTypeof from './components/InputAddTypeof';
@@ -34,7 +33,6 @@ const AdminPage = () => {
                     <Route path="/" element={<AdminStatistical/>}/>
                     <Route path="/adminFilms" element={<AdminFilms/>}/>
                     <Route path="/adminTypeof" element={<AdminTypeof/>}/>
-                    <Route path="/adminShowtimes" element={<AdminShowtimes/>}/>
                     <Route path="/adminCalenderReleases" element={<AdminCalenderReleases/>}/>
                     <Route path="/adminCinemas" element={<AdminCenimas/>}/>
                     <Route path="/adminCinemaRooms" element={<AdminCenimaRooms/>}/>

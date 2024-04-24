@@ -6,34 +6,34 @@ const Footer = () => {
     return(
         <Container>
             <Row className='footer-container'>
-                <Col lg={4}  className='footer-logo'>
+                <Col lg={3}  className='footer-logo'>
                     <img 
-                        src="/images/logo.png"
+                        src="/images/DNC.png"
                         className="logo"
                     />
-                    <span className="text-logo">
-                            FANTASTIC
-                    </span>
                 </Col>
-                <Col lg={4} className='footer-conent'>
+                <Col lg={3} className='footer-conent'>
                     <p className='conent-title'>
-                        Các địa chỉ rạp phim
+                        Giảng viên hướng dẫn
                     </p>
                     <p>
-                        123/5 Nguyễn Văn Cừ, Ninh Kiều, Cần thơ
-                    </p>
-                    <p>
-                        345/6 Hoàng Sa, Quận 1, HCM
+                        Thầy Đoàn Hoà Minh
                     </p>
                 </Col>
-                <Col lg={4} className='footer-conent'>
+                <Col lg={3} className='footer-conent'>
+                    <p className='conent-title'>
+                        Giảng viên phản biện
+                    </p>
+                    <p>
+                        Thầy Trương Hùng Chen
+                    </p>
+                </Col>
+                <Col lg={3} className='footer-conent'>
                     <p className='conent-title'>
                         Sinh viên thực hiện đồ án
                     </p>
                     <p>
-                        Lê Thanh Toàn
-                    </p>
-                    <p>
+                        Lê Thanh Toàn 
                         Huỳnh Khánh Trân
                     </p>
                 </Col>

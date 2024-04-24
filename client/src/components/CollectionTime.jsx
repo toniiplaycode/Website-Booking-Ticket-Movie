@@ -1,15 +1,19 @@
 import CollectionTimeItem from "./CollectionTimeItem";
+import { formatMoney } from "../utils/functionCommon";
 
-const CollectionTime = () => {
-    
+const CollectionTime = ({ filmDetail, grouped, statusCrWithFilm }) => {  
+    const price = filmDetail && filmDetail.price && formatMoney(filmDetail.price) || '...';
+
     return(
         <div className="collection-item-time">  
             <div className='collection-item-title'>
                 <p className='title-time-movies'>Thời gian chiếu</p>
-                <CollectionTimeItem/>
+                {statusCrWithFilm == "succeeded" && (
+                    <CollectionTimeItem grouped={grouped}/>
+                )}
                 <div className="collection-item-price">
                     <p className="item-price-title">Giá vé</p>
-                    <p className="item-price">60.000đ</p>
+                    <p className="item-price">{price}</p>
                 </div>
             </div>
         </div>

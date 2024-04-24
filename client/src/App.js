@@ -16,8 +16,10 @@ import PurchasePage from './pages/purchase/PurchasePage.jsx';
 import UserPage from './pages/user/UserPage.jsx';
 import AdminPage from './pages/admin/AdminPage.jsx';
 import AdminFilms from './pages/admin/adminPage/AdminFilms.jsx';
+import { hiddenTrailer } from './reducers/modalTrailer.js';
 
 function App() {
+  const dispatch = useDispatch();
   const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
   const showSignin = useSelector((state) => state.modalSigninSignup.showSignin);
   const showSignup = useSelector((state) => state.modalSigninSignup.showSignup);
@@ -39,7 +41,7 @@ function App() {
         {showSignup && <SignupModal />}
 
         {showTrailer && <TrailerModal />}
-        
+    
         <div className={blurBackdrop}>
           <Navbar />
           <Routes>

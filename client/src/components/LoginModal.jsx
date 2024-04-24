@@ -4,7 +4,7 @@ import { hiddenSignin } from "../reducers/modalSigninSignup";
 
 
 const LoginModal = () => {
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
     return(
         <div className="login-form">
@@ -24,7 +24,7 @@ const LoginModal = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             className="form-icon"
                             viewBox="0 0 512 512"
-                            onClick={()=> dispath(hiddenSignin())}
+                            onClick={()=> dispatch(hiddenSignin())}
                         >
                             <path
                             fill="none"

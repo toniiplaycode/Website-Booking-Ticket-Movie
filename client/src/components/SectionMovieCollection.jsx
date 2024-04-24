@@ -3,31 +3,68 @@ import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom";
 import CollectionTime from './CollectionTime';
 import { useDispatch } from "react-redux";
-import { toggleTrailer } from "../reducers/modalTrailer";
+import { saveFilm, toggleTrailer } from "../reducers/modalTrailer";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const SectionMovieCollection = ({ img, name }) => {
-    const dispath = useDispatch();
-    const navigate = useNavigate();
+const SectionMovieCollection = ({ item }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    // cách xử lý giống hàm reducer apiCrWithFilm, vì đây fetch calendarRelease cho từng films nên không dùng reducer được , vì reducer là để dùng chung 
+    const [grouped, setGrouped] = useState({});
+    const [crWithFilm, setCrWithFilm] = useState({});
+    const [statusCrWithFilm, setStatusCrWithFilm] = useState("loading");
+
+    useEffect(() => {
+        const getEachCrWithFim = async () => {
+            const res = await axios.get(`http://localhost:8000/api/calendarRelease/getAllWithFilmId?filmId=${item.id}`);
+            setCrWithFilm(res.data.all);
+            setStatusCrWithFilm("succeeded");
+        }
+        getEachCrWithFim();
+    }, []);
+    //======================================
+
+    useEffect(() => {
+        if(crWithFilm.length > 0) {
+            const groupByCinemaRoomId = (array) => {
+                let grouped = {};
+                array.forEach(item => {
+                    let key = `Phòng ${item.cinemaRoomId} ${item.dateWatch}`;
+                    if (!grouped[key]) {
+                        grouped[key] = [];
+                    }
+                    grouped[key].push(item);
+                });
+                setGrouped(grouped);
+            }
+            groupByCinemaRoomId(crWithFilm);
+        } else {
+            setGrouped({});
+        }
+    }, [crWithFilm]);
 
     return(
         <Row className='movies-collection-item'>
             <Col sm={12} md={4} className='collection-item-card'>
                 <div className='collection-item-container'>
                     <img 
-                        src={img}
+                        src={item.image}
                     />
                     <p className='collection-item-title'>
-                        {name}
+                        {item.nameFilm}
                     </p>
                     <div className='collection-item-btn-container'>
                         <button className='collection-item-btn'
-                            onClick={() => navigate('/moviesDetail')}
+                            onClick={() => navigate(`/moviesDetail?id=${item.id}`)}
                         >
                             Chi tiết
                         </button>
                         <button className='collection-item-btn'
                             onClick={() => {
-                                dispath(toggleTrailer());
+                                dispatch(toggleTrailer());
+                                dispatch(saveFilm(item));
                             }}
                         >
                             Trailer
@@ -36,7 +73,7 @@ const SectionMovieCollection = ({ img, name }) => {
                 </div>
             </Col>
             <Col sm={12} md={8}>
-                <CollectionTime />
+                <CollectionTime filmDetail={item} grouped={grouped} statusCrWithFilm={statusCrWithFilm} />
             </Col>
         </Row>
     )

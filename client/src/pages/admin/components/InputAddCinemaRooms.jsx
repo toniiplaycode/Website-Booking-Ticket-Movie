@@ -4,6 +4,10 @@ const InputAddCinemaRooms = () => {
             <input 
                 placeholder="Tên Phòng chiếu"
             />
+            <input 
+                type="number"
+                placeholder="Số lượng ghế"
+            />
             <button className="btn-admin">
                 Thêm phòng chiếu 
             </button>

@@ -1,39 +1,50 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleTrailer } from "../reducers/modalTrailer";
 
 const TrailerModal = () => {
-  const dispath = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const film = useSelector((state) => state.modalTrailer.film);
+
+    const youtubeVideoID = (url) => {
+        const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?#]+)/);
+        if (match && match[1]) {
+        return match[1];
+        } else {
+        return null;
+        }
+    }
+
+    const src = `https://www.youtube.com/embed/${youtubeVideoID(film.trailer)}?autoplay=1`;
 
     return(
         <div className="trailer-container">
-            <iframe src="https://www.youtube.com/embed/9yVmRrrxoOc?autoplay=1" allow='autoplay' />
+            <iframe src={src} allow='autoplay' />
             <div className="trailer-infor">
                 <img 
                     className="trailer-img"
-                    src="./images/imgCard.jpg"
+                    src={film.image}
                 />
                 <div className="trailer-infor-content">
                     <p className="trailer-infor-title"> 
-                        Kẻ ẩn danh 
-                        <span className="trailer-infor-type"> - Hành động, tình cảm </span>
+                        {film.nameFilm} 
                     </p>
                     <p className="trailer-infor-descri"> 
-                        Khiêm tốn và từng là giang hồ, người đàn ông nọ đối mặt với quá khứ rắc rối của mình và trở lại thế giới ngầm sau khi một băng tội phạm bắt cóc con gái riêng của vợ anh. 
+                        {film.description}
                     </p>
                     <div className="trailer-infor-btn">
                         <button
                             onClick={() => {
                                 navigate('/purchase')
-                                dispath(toggleTrailer());
+                                dispatch(toggleTrailer());
                             }}
                         >
                             Đặt vé
                         </button>
                         <button
                             onClick={() => {
-                                dispath(toggleTrailer());
+                                dispatch(toggleTrailer());
                             }}
                         >
                             Đóng

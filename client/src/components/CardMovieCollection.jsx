@@ -2,46 +2,71 @@ import Container from "react-bootstrap/esm/Container";
 import CardMovie from "./CardMovie";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { fetchFilms } from "../reducers/apiFilms";
+import Loading from "./Loading";
 
 const CardMovieCollection = ({ titleCardCollection }) => {
-    const img="./images/imgCard.jpg";
-    const img2="./images/imgCard2.jpg";
+    const dispatch = useDispatch();
+    let films = useSelector((state) => state.films.films.all);
+    const status = useSelector((state) => state.films.status);
+    const error = useSelector((state) => state.films.error);
+    
+    useEffect(() => {
+        dispatch(fetchFilms());
+    }, [dispatch]);
+    
+    const isMoviesDetail = () => {
+        return window.location.pathname.endsWith("/moviesDetail");
+    }
+
+    // nếu ở trang moviesDetail thì mới dùng state của filmDetail
+    const selectFilmDetail = (state) => {
+        if (isMoviesDetail()) {
+            return state.filmDetail.films;
+        }
+        return null; 
+    };
+
+    const filmDetail = useSelector(selectFilmDetail);
+
+    //lọc phim đang xem chi tiết
+    if(filmDetail && Array.isArray(films)) {
+        films = films.filter((item) => item.id != filmDetail.id);
+    }
 
     return(
         <section className="newmovie-container">
             <p className="newmovie-title">{titleCardCollection}</p>
-
             <Container className="newmovie-container-mobile-pc">
                 <Row>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img}/>
-                    </Col>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img2}/>
-                    </Col>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img}/>
-                    </Col>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img2}/>
-                    </Col>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img}/>
-                    </Col>
-                    <Col xxl={2} xl={3} sm={4}>
-                        <CardMovie img={img2}/>
-                    </Col>
+                    {status == "loading" && 
+                        <Loading/>
+                    }
+                    {status == "succeeded" && (
+                            films.map((item, index) => 
+                                <Col xxl={2} xl={3} sm={4} key={index}>
+                                    <CardMovie item={item}/>
+                                </Col>
+                            )
+                        )
+                    }
                 </Row>
             </Container>
 
             <div className="newmovie-container-mobile">
-                <CardMovie img={img}/>  
-                <CardMovie img={img2}/>  
-                <CardMovie img={img}/>  
-                <CardMovie img={img2}/>  
-                <CardMovie img={img2}/>  
-                <CardMovie img={img}/>  
-                <CardMovie img={img2}/>  
+                {status == "loading" && 
+                    <Loading/>
+                }
+                {status == "succeeded" && (
+                        films.map((item, index) => 
+                            <Col xxl={2} xl={3} sm={4} key={index}>
+                                <CardMovie item={item}/>
+                            </Col>
+                        )
+                    )
+                }
             </div>
 
         </section>

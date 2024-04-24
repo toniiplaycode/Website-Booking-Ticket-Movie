@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { toggleTrailer } from "../../../reducers/modalTrailer";
 
 const AdminCardMovie = ({ img }) => {
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     return(

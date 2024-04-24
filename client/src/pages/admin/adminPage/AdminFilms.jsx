@@ -2,12 +2,22 @@ import { useState } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import AdminCardMovie from "../components/AdminCardMovie";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const AdminFilms = () => {
     const [file, setFile] = useState();
     const handlePreviewImg = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]));
     }
+
+    const [selectedDate, setSelectedDate] = useState(null);
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        const fullDate = (`${date.$D}/${date.$M + 1}/${date.$y}`);
+        console.log(fullDate);
+    };
 
     const img="../images/imgCard.jpg";
     const img2="../images/imgCard2.jpg";
@@ -99,6 +109,19 @@ const AdminFilms = () => {
                             type="number"
                             placeholder="Nhập thời lượng phim (phút)"
                         />
+                    </div>
+
+                    <div>
+                        <p>Ngày công chiếu:</p>
+                        <div className='admin-picker-film'>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker label="Chọn ngày"
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    className='admin-picker-film-item'
+                                />
+                            </LocalizationProvider>
+                        </div>
                     </div>
 
                     <div>

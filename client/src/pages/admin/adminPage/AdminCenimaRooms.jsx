@@ -11,6 +11,9 @@ const AdminCenimaRooms = () => {
                     <div className="admin-table-item">
                         Phòng CT1
                     </div>
+                    <div className="admin-table-item">
+                        60 ghế
+                    </div>
                     <div className="admin-table-handle">
                         <button>
                             Sửa
@@ -23,6 +26,9 @@ const AdminCenimaRooms = () => {
                 <div className="admin-table-parent">
                     <div className="admin-table-item">
                         Phòng CT2
+                    </div>
+                    <div className="admin-table-item">
+                        60 ghế
                     </div>
                     <div className="admin-table-handle">
                         <button>

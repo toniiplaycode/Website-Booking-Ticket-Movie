@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     showTrailer: false,
+    film: {}
 }
 
 const modalTrailer = createSlice({
@@ -10,9 +11,12 @@ const modalTrailer = createSlice({
         toggleTrailer(state) {
             state.showTrailer = !state.showTrailer;
         },
+        saveFilm(state, action) {
+            state.film = action.payload;
+        }
     }
 });
 
-export const { toggleTrailer } = modalTrailer.actions;
+export const { toggleTrailer, saveFilm } = modalTrailer.actions;
 
 export default modalTrailer.reducer;

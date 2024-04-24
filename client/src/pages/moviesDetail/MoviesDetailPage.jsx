@@ -4,6 +4,8 @@ import MoviesDetailInfor from "./components/MoviesDetailInfor";
 const MoviesDetailPage = () => {
     const titleCardCollection = "Phim khác";
     
+    window.scrollTo(0, 0);
+    
     return (
         <>
             <MoviesDetailInfor />

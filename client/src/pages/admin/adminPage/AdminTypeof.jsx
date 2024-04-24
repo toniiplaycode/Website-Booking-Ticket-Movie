@@ -12,6 +12,9 @@ const AdminTypeof = () => {
                     <div className="admin-table-item">
                         Hành động
                     </div>
+                    <div className="admin-table-item description-type">
+                        P - PHIM ĐƯỢC PHÉP PHỔ BIẾN ĐẾN NGƯỜI XEM Ở MỌI ĐỘ TUỔI
+                    </div>
                     <div className="admin-table-handle">
                         <button>
                             Sửa
@@ -24,6 +27,9 @@ const AdminTypeof = () => {
                 <div className="admin-table-parent">
                     <div className="admin-table-item">
                         Hành động
+                    </div>
+                    <div className="admin-table-item description-type">
+                        P - PHIM ĐƯỢC PHÉP PHỔ BIẾN ĐẾN NGƯỜI XEM Ở MỌI ĐỘ TUỔI
                     </div>
                     <div className="admin-table-handle">
                         <button>
