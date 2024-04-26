@@ -13,7 +13,7 @@ const notEmptySeat = (data) => {
     try {
       const [notEmptySeat] = await pool.execute(
         "select seat from tickets where calendarReleaseId =?",
-        [data.calendarReleaseId]
+        [data.query.calendarReleaseId]
       );
       let all = [];
       notEmptySeat.forEach((element) => {

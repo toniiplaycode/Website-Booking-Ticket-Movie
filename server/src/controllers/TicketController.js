@@ -2,7 +2,7 @@ const Service = require("../services/TicketService");
 
 const notEmptySeat = async (req, res) => {
   try {
-    const response = await Service.notEmptySeat(req.body);
+    const response = await Service.notEmptySeat(req);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
