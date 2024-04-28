@@ -81,17 +81,31 @@ let addNew = async (data) => {
         [data.body.calendarReleaseId]
       );
 
+      let arraySeat = data.body.arraySeat.split(" ");
+      arraySeat = arraySeat.map(Number);
+
       const [notEmptySeat] = await pool.execute(
         "select seat from tickets where calendarReleaseId =?",
         [data.body.calendarReleaseId]
       );
-      let all = [];
-      notEmptySeat.forEach((element) => {
-        all.push(element.seat);
-      });
+
       let check = 0;
-      all.forEach((item) => {
-        if (item == data.body.seat) {
+
+      let intersection = await notEmptySeat.filter((element) =>
+        arraySeat.includes(element.seat)
+      );
+
+      if (intersection.length != 0) {
+        resolve({
+          status: "ERR",
+          messge: "Seat selection error",
+        });
+        check = 1;
+        return;
+      }
+
+      arraySeat.forEach((ele) => {
+        if (ele > nuberSeat[0].numberOfSeats || ele <= 0) {
           resolve({
             status: "ERR",
             messge: "Seat selection error 1",
@@ -100,25 +114,22 @@ let addNew = async (data) => {
           return;
         }
       });
-      if (data.body.seat > nuberSeat[0].numberOfSeats || data.body.seat <= 0) {
-        resolve({
-          status: "ERR",
-          messge: "Seat selection error",
-        });
-        check = 1;
-        return;
-      }
+
       if (check) {
         return;
       }
+
       const user = await JSON.parse(atob(data.headers.token.split(".")[1]));
-      await dbTemp.create({
-        userId: user.id,
-        calendarReleaseId: data.body.calendarReleaseId,
-        seat: data.body.seat,
-        total: total[0].price,
-        nameStatus: data.body.nameStatus,
-        namePaymentMethod: data.body.namePaymentMethod,
+
+      arraySeat.forEach(async (ele) => {
+        await dbTemp.create({
+          userId: user.id,
+          calendarReleaseId: data.body.calendarReleaseId,
+          seat: ele,
+          total: total[0].price,
+          nameStatus: data.body.nameStatus,
+          namePaymentMethod: data.body.namePaymentMethod,
+        });
       });
       resolve({
         status: "OK",
