@@ -81,11 +81,7 @@ let addNew = async (data) => {
         [data.body.calendarReleaseId]
       );
 
-      let arraySeat = data.body.arraySeat.replace(/\s+/g, " ").trim();
-      arraySeat = arraySeat.split(" ");
-
-      arraySeat = arraySeat.map(Number);
-      console.log(arraySeat);
+      const arraySeat = data.body.arraySeat;
 
       const [notEmptySeat] = await pool.execute(
         "select seat from tickets where calendarReleaseId =?",

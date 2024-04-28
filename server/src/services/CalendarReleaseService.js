@@ -87,22 +87,30 @@ let addNew = async (data) => {
         "SELECT releaseDate FROM films where films.id= ?",
         [data.filmId]
       );
-      let ArrReleaseDate = releaseDate[0].releaseDate.split("/");
+      console.log(releaseDate);
 
+      let ArrReleaseDate = releaseDate[0].releaseDate.split("/");
       let ArrDateWatch = data.dateWatch.split("/");
 
-      if (
-        parseInt(ArrDateWatch[2]) < parseInt(ArrReleaseDate[2]) ||
-        parseInt(ArrDateWatch[1]) < parseInt(ArrReleaseDate[1]) ||
-        parseInt(ArrDateWatch[0]) < parseInt(ArrReleaseDate[0])
-      ) {
-        {
-          resolve({
-            status: "ERR",
-            messge: "DateWatch error",
-          });
-          return;
+      let check = 0;
+      if (parseInt(ArrDateWatch[2]) > parseInt(ArrReleaseDate[2])) {
+        check = 1;
+      } else if (parseInt(ArrDateWatch[2]) == parseInt(ArrReleaseDate[2])) {
+        if (parseInt(ArrDateWatch[1]) > parseInt(ArrReleaseDate[1])) {
+          check = 1;
+        } else if (parseInt(ArrDateWatch[1]) == parseInt(ArrReleaseDate[1])) {
+          if (parseInt(ArrDateWatch[0]) >= parseInt(ArrReleaseDate[0])) {
+            check = 1;
+          }
         }
+      }
+
+      if (check == 0) {
+        resolve({
+          status: "ERR",
+          messge: "DateWatch error",
+        });
+        return;
       }
 
       const [timeFilm] = await pool.execute(
