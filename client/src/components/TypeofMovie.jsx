@@ -17,7 +17,7 @@ const TypeofMovie = () => {
         getType();
     },[]); 
 
-    console.log(typeFilms);
+    // console.log(typeFilms);
 
     return(
         <div className="typof-movies-container">

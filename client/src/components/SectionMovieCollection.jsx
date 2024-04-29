@@ -26,17 +26,25 @@ const SectionMovieCollection = ({ item }) => {
     }, []);
     //======================================
 
+    // gôm nhóm các giờ chiếu cho các phòng chiếu
+    const getNameCinemaRoom = async (idCinemaRoom) => {
+        const res = await axios.get(`http://localhost:8000/api/cinemaRoom/getDetail?id=${idCinemaRoom}`);
+        return res.data.data.nameCinemaRoom;
+    }
+
     useEffect(() => {
         if(crWithFilm.length > 0) {
-            const groupByCinemaRoomId = (array) => {
+            const groupByCinemaRoomId = async (array) => {
                 let grouped = {};
-                array.forEach(item => {
-                    let key = `Phòng ${item.cinemaRoomId} ${item.dateWatch}`;
+                // Sử dụng Promise.all để chờ cho tất cả các cuộc gọi API hoàn thành
+                await Promise.all(array.map(async (item) => {
+                    const detail = await getNameCinemaRoom(item.cinemaRoomId);
+                    const key = `Phòng ${detail} ${item.dateWatch}`;
                     if (!grouped[key]) {
                         grouped[key] = [];
                     }
                     grouped[key].push(item);
-                });
+                }));
                 setGrouped(grouped);
             }
             groupByCinemaRoomId(crWithFilm);

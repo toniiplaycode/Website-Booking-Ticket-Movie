@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 const MoviesCollection = () => {
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
     let films = useSelector((state) => state.films.films.all);
     const status = useSelector((state) => state.films.status);
     const [filteredFilms, setFilteredFilms] = useState([]);

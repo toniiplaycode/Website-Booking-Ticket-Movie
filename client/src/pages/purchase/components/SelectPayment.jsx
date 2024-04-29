@@ -1,10 +1,16 @@
-const SelectPayment = () => {
+const SelectPayment = ({ payments, selectedPayment, setSelectedPayment }) => {
     return(
         <div className="payment-container">
-            <button className="payment-item selected">MOMO</button>
-            <button className="payment-item">MASTER CARD</button>
-            <button className="payment-item">VN PAY</button>
-            <button className="payment-item">ZALO PAY</button>
+            {payments && payments.map((item, index) => (
+                <button className={selectedPayment && selectedPayment.id == item.id ? "payment-item selected" : "payment-item"}
+                    key={index}
+                    onClick={()=>{
+                        setSelectedPayment(item);
+                    }}
+                >
+                    {item.namePaymentMethod}
+                </button>
+            ))}
         </div>
     )
 }

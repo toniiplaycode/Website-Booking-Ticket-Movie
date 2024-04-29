@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toggleTrailer } from "../reducers/modalTrailer";
+import { hanleSelectedFilm } from "../reducers/selectedPurchaseFilm";
 
 const TrailerModal = () => {
     const dispatch = useDispatch();
@@ -36,8 +37,9 @@ const TrailerModal = () => {
                     <div className="trailer-infor-btn">
                         <button
                             onClick={() => {
-                                navigate('/purchase')
+                                dispatch(hanleSelectedFilm(film));
                                 dispatch(toggleTrailer());
+                                navigate('/purchase')
                             }}
                         >
                             Đặt vé

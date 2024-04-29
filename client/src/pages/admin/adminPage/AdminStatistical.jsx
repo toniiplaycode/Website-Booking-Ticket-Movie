@@ -2,8 +2,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AdminTicketPurchasedCard from '../components/AdminTicketPurchasedCard';
 import NavbarAdmin from '../../../components/NavbarAdmin';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const AdminStatistical = () => {
+    const [tickets, setTickets] = useState();
+
+    // useEffect(()=>{
+    //     const getAllCr = async () => {
+    //       const res = await axios.get("http://localhost:8000/api/ticket/getAll");
+    //       setTickets(res.data.all)
+    //     }
+    //     getAllCr();
+    //   }, []);
+
     return(
         <>
             <p className='adminpage-title'>

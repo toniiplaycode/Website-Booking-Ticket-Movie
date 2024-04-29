@@ -7,7 +7,7 @@ import { searchHandle } from '../../../reducers/searchFilm';
 import { selectedType } from '../../../reducers/selectedTypeFilm';
 
 const MoviesHeader = () => {
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
     const search = useSelector((state)=>state.searchFilm.search);
 
@@ -18,8 +18,8 @@ const MoviesHeader = () => {
                     <input
                         value={search}
                         onChange={(e)=>{
-                            dispath(searchHandle(e.target.value))
-                            dispath(selectedType(''))
+                            dispatch(searchHandle(e.target.value))
+                            dispatch(selectedType(''))
                         }}
                         placeholder='Phim bạn muốn tìm...' 
                     />

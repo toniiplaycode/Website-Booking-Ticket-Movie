@@ -10,6 +10,7 @@ const LocationSelect = () => {
     const [cinemaRoom, setCinemaRoom] = useState();
     const [nameCinemaRoom, setNameCinemaRoom] = useState();
 
+    // lấy tất cả rạp chiếu
     useEffect(()=>{
         const getCinemas = async () => {
             try{
@@ -23,6 +24,7 @@ const LocationSelect = () => {
         getCinemas();
     }, [])
     
+    // lấy tất cả phòng chiếu theo từng rạp
     useEffect(()=>{
         const getCinemaRooms = async () => {
             try{
@@ -35,6 +37,7 @@ const LocationSelect = () => {
         getCinemaRooms();
     }, [cinemaId])
 
+    // set giá trị ban đầu (chưa chọn rạp và phòng chiếu nào hết)
     useEffect(() => {
         if(cinema && cinema.length > 0) {
             setAddressCinema(cinema[0].address);
@@ -47,6 +50,7 @@ const LocationSelect = () => {
         }
     }, [cinemaRoom]);
 
+    // chọn rạp và phòng chiếu
     const handleAddressCinema = (event) => {
         const selectedCinemaName = event.target.value;
         const selectedCinema = cinema.find(item => item.nameCinema === selectedCinemaName);

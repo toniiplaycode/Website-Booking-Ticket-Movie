@@ -3,9 +3,8 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { hiddenDrawer } from "../reducers/mobileNavSlice";
 import { useNavigate } from "react-router-dom";
-import { showSignin, showSignup } from "../reducers/modalSigninSignup";
+import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 import { useLocation } from 'react-router-dom';
-import { p } from "react-router-hash-link";
 
 const MobileNav = () => {
     const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const MobileNav = () => {
 
     const location = useLocation();
 
-    const logged = true;
+    const logged = false;
 
     return (
     <div className={drawerClasses}>
@@ -147,11 +146,11 @@ const MobileNav = () => {
                     ) : (
                         <>
                             <p onClick={()=> {
-                                dispatch(showSignin());
+                                dispatch(toggleSignin());
                                 dispatch(hiddenDrawer());
                             }}>Đăng Nhập</p>
                             <p onClick={()=> {
-                                dispatch(showSignup());
+                                dispatch(toggleSignup());
                                 dispatch(hiddenDrawer());
                             }}>Đăng ký</p>
                         </>

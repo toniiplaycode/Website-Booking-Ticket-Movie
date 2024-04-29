@@ -15,8 +15,8 @@ import TrailerModal from './components/TrailerModal.jsx';
 import PurchasePage from './pages/purchase/PurchasePage.jsx';
 import UserPage from './pages/user/UserPage.jsx';
 import AdminPage from './pages/admin/AdminPage.jsx';
-import AdminFilms from './pages/admin/adminPage/AdminFilms.jsx';
-import { hiddenTrailer } from './reducers/modalTrailer.js';
+import { toggleTrailer } from './reducers/modalTrailer.js';
+import { toggleSignin, toggleSignup } from './reducers/modalSigninSignup.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +42,13 @@ function App() {
 
         {showTrailer && <TrailerModal />}
     
-        <div className={blurBackdrop}>
+        <div className={blurBackdrop}
+          onClick={()=>{
+            showTrailer && dispatch(toggleTrailer());
+            showSignin && dispatch(toggleSignin());
+            showSignup && dispatch(toggleSignup());
+          }}
+        >
           <Navbar />
           <Routes>
             <Route path='/' element={<HomePage/>}/>

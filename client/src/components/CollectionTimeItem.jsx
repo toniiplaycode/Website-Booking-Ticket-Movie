@@ -7,7 +7,7 @@ const CollectionTimeItem = ({ grouped }) => {
             {grouped && 
                  Object.entries(grouped).map(([key, value]) => {
                     return <TimeItem name={key} item={value}/>
-                })
+            })
             }
         </div>
     )

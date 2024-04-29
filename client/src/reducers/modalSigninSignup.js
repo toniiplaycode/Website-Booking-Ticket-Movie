@@ -8,21 +8,15 @@ const modalSigninSignup = createSlice({
     name: "modalSigninSignup",
     initialState,
     reducers: {
-        showSignin(state) {
-            state.showSignin = true;
+        toggleSignin(state) {
+            state.showSignin = !state.showSignin;
         },
-        hiddenSignin(state) {
-            state.showSignin = false;
+        toggleSignup(state) {
+            state.showSignup = !state.showSignup;
         },
-        showSignup(state) {
-            state.showSignup = true;
-        },
-        hiddenSignup(state) {
-            state.showSignup = false;
-        }
     }
 });
 
-export const { showSignin, hiddenSignin, showSignup, hiddenSignup } = modalSigninSignup.actions;
+export const { toggleSignin, toggleSignup } = modalSigninSignup.actions;
 
 export default modalSigninSignup.reducer;

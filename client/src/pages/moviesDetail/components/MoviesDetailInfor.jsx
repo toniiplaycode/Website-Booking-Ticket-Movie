@@ -11,6 +11,7 @@ import { convertMinutesToHoursAndMinutes } from '../../../utils/functionCommon';
 import { fetchFilmDetail } from '../../../reducers/apiFilmDetail';
 import { fetchCrWithFilm } from '../../../reducers/apiCrWithFilm';
 import Loading from '../../../components/Loading';
+import axios from 'axios';
 
 const MoviesDetailInfor = () => {
     const dispatch = useDispatch();
@@ -29,17 +30,25 @@ const MoviesDetailInfor = () => {
         dispatch(fetchCrWithFilm(filmDetail.id));
     }, [filmDetail]);
 
+    // gôm nhóm các giờ chiếu cho các phòng chiếu
+    const getNameCinemaRoom = async (idCinemaRoom) => {
+        const res = await axios.get(`http://localhost:8000/api/cinemaRoom/getDetail?id=${idCinemaRoom}`);
+        return res.data.data.nameCinemaRoom;
+    }
+
     useEffect(() => {
         if(crWithFilm.length > 0) {
-            const groupByCinemaRoomId = (array) => {
+            const groupByCinemaRoomId = async (array) => {
                 let grouped = {};
-                array.forEach(item => {
-                    const key = `Phòng ${item.cinemaRoomId} ${item.dateWatch}`;
+                // Sử dụng Promise.all để chờ cho tất cả các cuộc gọi API hoàn thành
+                await Promise.all(array.map(async (item) => {
+                    const detail = await getNameCinemaRoom(item.cinemaRoomId);
+                    const key = `Phòng ${detail} ${item.dateWatch}`;
                     if (!grouped[key]) {
                         grouped[key] = [];
                     }
                     grouped[key].push(item);
-                });
+                }));
                 setGrouped(grouped);
             }
             groupByCinemaRoomId(crWithFilm);
@@ -47,7 +56,7 @@ const MoviesDetailInfor = () => {
             setGrouped({});
         }
     }, [crWithFilm]);
-
+        
     return(
         <Container>
             {statusFilmDetail == "loading" && (

@@ -1,84 +1,136 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays, faClock, faCouch, faCreditCard, faDollar, faLocationDot, faMoneyBill1Wave, faTicket, faTv } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCalendarDays, faClock, faCouch, faCreditCard, faDollar, faLocationDot, faMoneyBill1Wave, faTicket, faTv } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { convertMinutesToHoursAndMinutes, formatMoney } from "../../../utils/functionCommon";
+import { fetchCinemaRoomDetail } from "../../../reducers/apiCinemaRoomDetail";
+import { useEffect } from "react";
+import { fetchCinemaDetail } from "../../../reducers/apiCinemaDetail";
 
-const TicketBill = () => {
+const TicketBill = ({ selectedPayment }) => {
+    const dispatch = useDispatch();
+    let selectedFilm = useSelector((state) => state.selectedPurchaseFilm.selectedFilm);
+
+    const selectedCrWithFilm = useSelector((state) => state.selectedCrWithFilm.selectedCrWithFilm);
+    const selectedSeats = useSelector((state) => state.selectedSeats.selectedSeats);
+    const selectedCinemaRoomDetail = useSelector((state) => state.apiCinemaRoomDetail.CinemaRoomDetail);
+    const selectedCinemaDetail = useSelector((state) => state.apiCinemaDetail.CinemaDetail);
+
+    useEffect(()=>{
+        dispatch(fetchCinemaRoomDetail(selectedCrWithFilm.cinemaRoomId))
+    }, [selectedCrWithFilm]);
+    
+    useEffect(()=>{
+        if(selectedCinemaRoomDetail) dispatch(fetchCinemaDetail(selectedCinemaRoomDetail.CinemaId));
+    }, [selectedCinemaRoomDetail])
+
     return(
         <div className="purchase-ticket-summary">
             <div className="ticket-summary-img-nametime">
-                <img 
-                    src="./images/imgCard.jpg"
-                />
+                {selectedFilm.image && (
+                    <img 
+                        src={selectedFilm.image}
+                    />
+                )}
                 <div className="summary-nametime">
                     <p className="summary-name">
-                        Kẻ ẩn danh
+                        {selectedFilm.nameFilm}
                     </p>
                     <p className="summary-time">
-                        2h 45m
+                        {selectedFilm.time && (
+                            <>
+                                <FontAwesomeIcon className="ticket-summary-icon" icon={faClock} /> &nbsp;
+                                {convertMinutesToHoursAndMinutes(selectedFilm.time)}
+                            </>
+                        )
+                        }
                     </p>
                 </div>
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
-                    <FontAwesomeIcon className="ticket-summary-icon" icon={faLocationDot} />
-                    Đại điểm
+                    <FontAwesomeIcon className="ticket-summary-icon" icon={faBuilding} />
+                    Rạp
                 </p>
-                <p className="summary-content">Cần Thơ</p>
+                {selectedCinemaDetail && Object.keys(selectedCinemaDetail).length !== 0 ? (
+                    <p className="summary-content">{selectedCinemaDetail.nameCinema}</p>
+                ) :  "..."}
+            </div>
+            <div className="ticket-summary-content">
+                <p className="summary-content-title">
+                    <FontAwesomeIcon className="ticket-summary-icon" icon={faLocationDot} />
+                    Địa chỉ
+                </p>
+                {selectedCinemaDetail && Object.keys(selectedCinemaDetail).length !== 0 ? (
+                    <p className="summary-content">{selectedCinemaDetail.address}</p>
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faCalendarDays} />
                     Ngày chiếu
                 </p>
-                <p className="summary-content">10 tháng 4, 2024</p>
+                {selectedCrWithFilm.dateWatch ? (
+                    <p className="summary-content">{selectedCrWithFilm.dateWatch}</p>
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faClock} />
                     Giờ chiếu
                 </p>
-                <p className="summary-content">2h30 PM</p>
+                {selectedCrWithFilm.showTimeStart ? (
+                    <p className="summary-content">{selectedCrWithFilm.showTimeStart}</p>
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faTv} />
                     Phòng chiếu
                 </p>
-                <p className="summary-content">Phòng 1</p>
+                {selectedCinemaRoomDetail ? (
+                    <p className="summary-content">{selectedCinemaRoomDetail.nameCinemaRoom}</p>
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faMoneyBill1Wave} />
                     Giá vé
                 </p>
-                <p className="summary-content">60.000đ</p>
+                <p className="summary-content">{selectedFilm.price > 0 ? formatMoney(selectedFilm.price) : "..."}</p>
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faTicket} />
                     Số lượng vé
                 </p>
-                <p className="summary-content">2</p>
+                {selectedSeats.length > 0 ? (
+                    <p className="summary-content">{selectedSeats.length}</p>   
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faCouch} />
                     Số ghế
                 </p>
-                <p className="summary-content">A1, A2</p>
+                {selectedSeats.length > 0 ? (
+                    <p className="summary-content">{selectedSeats.join(", ")}</p>   
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faCreditCard} />
                     Phương thức thanh toán
                 </p>
-                <p className="summary-content">Momo</p>
+                {selectedPayment ? (
+                    <p className="summary-content">{selectedPayment.namePaymentMethod}</p>
+                ) : "..."}
             </div>
             <div className="ticket-summary-content">
                 <p className="summary-content-title">
                     <FontAwesomeIcon className="ticket-summary-icon" icon={faDollar} />
                     Tổng giá
                 </p>
-                <p className="summary-content">120.000đ</p>
+                <p className="summary-content">{(selectedFilm.price > 0 && selectedSeats.length > 0) ? formatMoney(selectedFilm.price * selectedSeats.length) : "..."}</p>
             </div>
             <div className="ticket-summary-btn-container">
                 <button>

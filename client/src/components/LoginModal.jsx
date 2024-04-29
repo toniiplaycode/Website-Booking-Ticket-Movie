@@ -1,6 +1,6 @@
 import BarLoader from "react-spinners/BarLoader";
 import { useDispatch } from "react-redux";
-import { hiddenSignin } from "../reducers/modalSigninSignup";
+import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 
 
 const LoginModal = () => {
@@ -24,7 +24,7 @@ const LoginModal = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             className="form-icon"
                             viewBox="0 0 512 512"
-                            onClick={()=> dispatch(hiddenSignin())}
+                            onClick={()=> dispatch(toggleSignin())}
                         >
                             <path
                             fill="none"
@@ -38,7 +38,7 @@ const LoginModal = () => {
                     </button>
                 </div>
     
-            <div className="signup-form-body">
+                <div className="signup-form-body">
                     <div className="signup-form-category">
                         <label>
                             Email: <span>*</span>
@@ -69,7 +69,17 @@ const LoginModal = () => {
                             </button>
                         </div>
                     </div>
-        
+                    <span>Bạn chưa có tài khoản? &nbsp;
+                        <span
+                            className="change-modal"
+                            onClick={()=>{
+                                dispatch(toggleSignin());
+                                dispatch(toggleSignup());
+                            }}
+                        >
+                            đăng ký
+                        </span>
+                    </span>
                     <button type="submit" className="btn-reg">
                         {/* <BarLoader color="#e6e6e8" /> : "Sign in"} */}
                         Đăng nhập

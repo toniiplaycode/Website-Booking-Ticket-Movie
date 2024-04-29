@@ -6,7 +6,7 @@ const Footer = () => {
     return(
         <Container>
             <Row className='footer-container'>
-                <Col lg={3}  className='footer-logo'>
+                <Col lg={2}  className='footer-logo'>
                     <img 
                         src="/images/DNC.png"
                         className="logo"
@@ -28,7 +28,7 @@ const Footer = () => {
                         Thầy Trương Hùng Chen
                     </p>
                 </Col>
-                <Col lg={3} className='footer-conent'>
+                <Col lg={4} className='footer-conent footer-flex-more'>
                     <p className='conent-title'>
                         Sinh viên thực hiện đồ án
                     </p>

@@ -7,6 +7,12 @@ import apiFilmDetail from "./reducers/apiFilmDetail";
 import selectedTypeFilm from "./reducers/selectedTypeFilm";
 import searchFilm from "./reducers/searchFilm";
 import apiCrWithFilm from "./reducers/apiCrWithFilm";
+import selectedPurchaseFilm from "./reducers/selectedPurchaseFilm";
+import selectedCrWithFilm from "./reducers/selectedCrWithFilm";
+import selectedSeats from "./reducers/selectedSeats";
+import apiCinemaRoomDetail from "./reducers/apiCinemaRoomDetail";
+import apiCinemaDetail from "./reducers/apiCinemaDetail";
+import apiLoginLogout from "./reducers/apiLoginLogout";
 
 const reduxStore = configureStore({
     reducer: {
@@ -18,6 +24,12 @@ const reduxStore = configureStore({
         selectedTypeFilm: selectedTypeFilm,
         searchFilm: searchFilm,
         apiCrWithFilm: apiCrWithFilm,
+        selectedPurchaseFilm: selectedPurchaseFilm,
+        selectedCrWithFilm: selectedCrWithFilm,
+        selectedSeats:selectedSeats,
+        apiCinemaRoomDetail: apiCinemaRoomDetail,
+        apiCinemaDetail: apiCinemaDetail,
+        apiLoginLogout: apiLoginLogout, 
     }
 });
 

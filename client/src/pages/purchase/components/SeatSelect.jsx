@@ -1,27 +1,57 @@
+import { useEffect, useState } from "react";
 import Seat from "./Seat";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const SeatSelect = () => {
-    // khi nào có BE thì xoá này
-    var alphabet = ["A", "B", "C", "D", "E"];
-    var hardCodeSeat = [];
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    while (i < 50) {
-      if(j < 10) {
-        hardCodeSeat[i] = alphabet[k] + (j+1);
-        j++;
-        i++;
-      } else if(k<5) {
-        k++;
-        j=0;
-      }
-    }
-    //
+    const [seatNotEmpty, setSeatNotEmpty] = useState([]);
+    const [listSeats, setListSeats] = useState([]);
 
+    const selectedCrWithFilm = useSelector((state) => state.selectedCrWithFilm.selectedCrWithFilm);
+    const [seats, setSeats] = useState();
+    const [nameRoom, setNameRoom] = useState();
+    
+    
+    useEffect(() => {
+      const getSeatNotEmpty = async () => {
+        try {
+          const res = await axios.get(`http://localhost:8000/api/ticket/notEmptySeat?calendarReleaseId=${selectedCrWithFilm.id}`);
+          setSeatNotEmpty(res.data.all);
+        } catch (error) {
+          console.error("Error fetching notEmptySeat data:", error);
+        }
+      }
+      getSeatNotEmpty();
+    }, [selectedCrWithFilm]);
+    
+    useEffect(()=>{
+      const getDetailCinemaRoom = async () => {
+        try{
+          const res = await axios.get(`http://localhost:8000/api/cinemaRoom/getDetail?id=${selectedCrWithFilm.cinemaRoomId}`);
+          setSeats(res.data.data.numberOfSeats);
+          setNameRoom(res.data.data.nameCinemaRoom);
+        }catch(error) {
+          console.log("eror from fetch cinema room!!!: ", error);
+        }
+      }
+      getDetailCinemaRoom();
+    }, [selectedCrWithFilm])
+    
+    useEffect(()=>{
+      if(seats > 0) {
+        let arraySeats = [];
+        for (let i = 1; i <= seats; i++) {
+          arraySeats.push(i);
+        }
+        setListSeats(arraySeats);
+      }
+    }, [seats])
 
     return(
         <>
+          <div className="seat-cinemaroom">
+            Phòng {(nameRoom && Object.keys(selectedCrWithFilm).length != 0) ? nameRoom : "..."}
+          </div>
           <div className="seat-guide-container">
             <div className="seat-available-demo"></div>
             <p className="seat-status-details">Sẵn</p>
@@ -37,17 +67,18 @@ const SeatSelect = () => {
           <div className="theatre-screen-heading">Màn hình chiếu</div>
           <div className="seat-container-center">
             <div className="seat-container">
-              {
-                hardCodeSeat.map((item, index) => {
-                    if (item == "A2") 
-                    return <Seat numberSeat={item} status={"selected"} />
-                    if (item == "A1") 
-                    return <Seat numberSeat={item} status={"selected"} />
-                    else if (item == "A3")
-                    return <Seat numberSeat={item} status={"booked"} />
-                    else
-                    return <Seat numberSeat={item} />
-                } )
+              {(listSeats && selectedCrWithFilm.cinemaRoomId) && listSeats.map((item, index) => {
+                    const isBooked = seatNotEmpty.includes(item);
+                    return isBooked ? 
+                      <Seat key={index} numberSeat={item} status={"booked"} /> : 
+                      <Seat key={index} numberSeat={item} />;
+                  })
+              } 
+              {(listSeats.length == 0 || !selectedCrWithFilm.cinemaRoomId) && (
+                <div>
+                  ...
+                </div> 
+              )
               }
             </div>
           </div>
@@ -55,4 +86,4 @@ const SeatSelect = () => {
     )
 }
 
-export default SeatSelect;
+export default SeatSelect; 

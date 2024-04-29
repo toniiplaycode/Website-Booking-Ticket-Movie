@@ -46,10 +46,7 @@ body {
   flex-direction: column;
   line-height: 1.6;
   color: $primary-color;
-
-  :first-child{
-    margin-top: 60px;
-  }
+  margin-top: 20px;
 
   select {
     width: fit-content;
@@ -538,7 +535,7 @@ body {
   position: fixed;
   width: 600px;
   background-color: #fff;
-  top: 5rem;
+  top: 3rem;
   left: 50%;
   transform: translateX(-50%);
   padding: 2.5rem;
@@ -547,6 +544,7 @@ body {
 
   @media (max-width: 992px ) { 
     width: 80%;
+    padding: 1rem;
   }
 
   .signup-form-heading {
@@ -554,6 +552,10 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.8rem;
+
+    @media (max-width: 992px ) { 
+      margin-bottom: 0.8rem;
+    }
   }
   
   .signup-form-heading-text {
@@ -564,7 +566,7 @@ body {
     margin: auto 0;
   
     @media (max-width: 992px ) { 
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
   }
   
@@ -577,10 +579,14 @@ body {
   .signup-form-body {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 1.2rem;
     font-size: 1rem;
     color: #1a1d2c;
     font-weight: 600;
+
+    @media (max-width: 992px ) { 
+      gap: 1.2rem;
+    }
   }
   
   .signup-form-category-sp {
@@ -634,6 +640,17 @@ body {
     -webkit-appearance: none;
     margin: 0;
   }
+
+  .change-modal{
+    color: $primary-color;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .change-modal:hover{
+      font-size: 1.2rem;
+    }
   
   .input-password {
     position: relative;
@@ -699,6 +716,10 @@ body {
     
     @media (max-width: 1200px ) { 
       justify-content: center;
+    
+      .logo{
+        margin-bottom: 40px;
+      }
     }
 
     .logo{
@@ -716,9 +737,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     
     @media (max-width: 992px ) { 
-      text-align: center;
       margin-bottom: 50px;      
     }
 
@@ -728,7 +749,6 @@ body {
       margin-bottom: 20px;
     }
   }
-
 }
 
 //======HOMEPAGE BANNER=====//
@@ -1299,8 +1319,12 @@ body {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+  margin-top: 30px;
+
   
   .purchase-film-item{
+    max-width: 140px;
+
     .purchase-film-item-ticked{
       position: absolute;
       z-index: 10;
@@ -1311,13 +1335,11 @@ body {
 
     img{
       max-width: 140px;
+      height: 200px;
+      object-fit: cover;
       border-radius: 20px;
       cursor: pointer;    
       transition: all 0.3s;
-  
-      @media (max-width: 768px ) { 
-        max-width: 100px;
-      }
     }
 
     img:hover{
@@ -1341,23 +1363,33 @@ body {
 }
 
 .purchase-ticket-summary{
-  background: #151723;
+  box-shadow: 0 1rem 1rem 0.2rem #10111a66;
   border-radius: 20px;
   position: sticky;
   position: -webkit-sticky;
-  top: 0;
+  top: 80px;
   background-color: transparent;
   background-image: linear-gradient(to bottom, #171a28, transparent 70%);
 
   .ticket-summary-img-nametime{
     display: flex;
     flex-direction: row;
-
+    
     img{
       width: 20%;
-      border-radius: 20px;
+      width: 100px;
+      height: 160px;
+      border-radius: 10px;
       margin: 20px;
       object-fit: cover;
+    }
+
+    @media (max-width: 992px ) { 
+      justify-content: center;
+      img{
+        width: 140px;
+        height: 200px;
+      }
     }
 
     .summary-nametime{
@@ -1366,6 +1398,7 @@ body {
       .summary-name{
         font-size: 1.4rem;
         font-weight: 500;
+        line-height: 26px;
       }
     }
   }
@@ -1410,6 +1443,12 @@ body {
 }
 
 /* seat selector */
+.seat-cinemaroom{
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 .seat-guide-container {
   display: flex;
   justify-content: center;
@@ -1540,6 +1579,11 @@ body {
     .seat-item.booked{ 
       background-color: #fbd7dd;
       color: grey;
+      cursor: default;
+    }
+
+    .seat-item.booked:hover{
+      transform: translateY(0);
     }
   
   }
@@ -1549,19 +1593,18 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 
   .payment-item{
     border: 2px solid $primary-color;
-    padding: 10px;
-    width: 100px;
-    margin-bottom: 20px;
+    padding: 20px 10px;
+    margin: 10px;
     text-align: center;
     border-radius: 14px;
     font-weight: 600;
     cursor: pointer;
     background-color: $primary-bg-color;
     color: $primary-text-color;
-    margin: 0 10px;
   }
 
   .payment-item.selected{
@@ -1848,6 +1891,22 @@ input[type=file] {
       line-height: 22px;
     }
 
+    .admin-table-use-client{
+      padding-bottom: 10px;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+
+      @media (max-width: 768px ) { 
+        justify-content: center;
+      }
+
+      div{
+        width: 60px;
+        margin-right: 10px;
+      }
+    }
+
     .admin-table-item.description-type{
       flex: 5;
       margin-left: 20px;
@@ -1898,6 +1957,17 @@ input[type=file] {
         transform: translateY(-0.2rem);
         box-shadow: 0 1rem 1.8rem 0 rgba(68, 68, 68, 0.16);
       }
+    }
+  }
+
+  .admin-table-parent-use-client{
+    @media (max-width: 768px ) { 
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .room-flex-more{
+      flex: 2;
     }
   }
 }

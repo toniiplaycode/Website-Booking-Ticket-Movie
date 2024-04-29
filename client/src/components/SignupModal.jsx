@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { hiddenSignup } from "../reducers/modalSigninSignup";
+import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 
 const SignupModal = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const SignupModal = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="form-icon"
                   viewBox="0 0 512 512"
-                  onClick={()=> dispatch(hiddenSignup())}
+                  onClick={()=> dispatch(toggleSignup())}
                 >
                   <path
                     fill="none"
@@ -113,7 +113,17 @@ const SignupModal = () => {
                   </button>
                 </div>
               </div>
-    
+              <span>Bạn đã có tài khoản? &nbsp;
+                  <span
+                      className="change-modal"
+                      onClick={()=>{
+                          dispatch(toggleSignup());
+                          dispatch(toggleSignin());
+                      }}
+                  >
+                      đăng nhập
+                  </span>
+              </span>
               <button type="submit" className="btn-reg">
                 {/* {loading ? <BarLoader color="#e6e6e8" /> : "Sign up"} */}
                 Đăng ký
