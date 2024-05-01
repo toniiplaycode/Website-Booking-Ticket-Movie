@@ -80,7 +80,7 @@ const updateRole = async (req, res) => {
 
 let deleteUser = async (req, res) => {
   try {
-    await UserService.deleteUser(req.params.id);
+    await UserService.deleteUser(req);
     return res.status(200).json("Delete user successful ");
   } catch (e) {
     return res.status(404).json({

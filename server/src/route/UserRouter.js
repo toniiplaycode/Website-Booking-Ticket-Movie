@@ -21,7 +21,7 @@ router.post("/createNewUser", userController.createNewUser);
 
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.put(
-  "/updateUser/:id",
+  "/updateUser",
   MiddleWare.AuthMiddleWareAdminStaffClientRole,
   userController.updateUser
 );
@@ -35,7 +35,7 @@ router.put(
 
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.delete(
-  "/deleteUser/:id",
+  "/deleteUser",
   MiddleWare.AuthMiddleWareAdminStaffClientRole,
   userController.deleteUser
 );
