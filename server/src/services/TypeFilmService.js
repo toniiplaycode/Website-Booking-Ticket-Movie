@@ -14,12 +14,12 @@ const getDetail = (Id) => {
       if (check === null) {
         resolve({
           status: "ERR",
-          messge: "It is not defined",
+          message: "It is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "Get detail successful",
+        message: "Get detail successful",
         data: check,
       });
     } catch (e) {
@@ -34,7 +34,7 @@ const getAll = () => {
       const all = await dbTemp.findAll();
       resolve({
         status: "OK",
-        messge: "get all successful",
+        message: "get all successful",
         raw: false,
         all: all,
       });

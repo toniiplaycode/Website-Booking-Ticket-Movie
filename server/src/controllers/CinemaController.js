@@ -6,14 +6,14 @@ const getDetailCinema = async (req, res) => {
     if (!Id) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The Cinema is null",
+        message: "The Cinema is null",
       });
     }
     const response = await Service.getDetailCinema(Id);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -24,7 +24,7 @@ const getAllCinema = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -35,7 +35,7 @@ const addNewCinema = async (req, res) => {
     return res.status(200).json("add New Cinema successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -46,7 +46,7 @@ const updateCinema = async (req, res) => {
     return res.status(200).json("Update a successful Cinema");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -57,7 +57,7 @@ let deleteCinema = async (req, res) => {
     return res.status(200).json("Delete a successful Cinema");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };

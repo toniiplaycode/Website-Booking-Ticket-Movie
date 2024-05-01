@@ -17,12 +17,12 @@ const getDetailFilm = (Id) => {
       if (check === null) {
         resolve({
           status: "ERR",
-          messge: "Film is not defined",
+          message: "Film is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "get detail Film",
+        message: "get detail Film",
         data: check,
       });
     } catch (e) {
@@ -39,7 +39,7 @@ const getAllFilm = () => {
       );
       resolve({
         status: "OK",
-        messge: "get all Film",
+        message: "get all Film",
         raw: false,
         all: all,
       });

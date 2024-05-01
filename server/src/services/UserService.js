@@ -13,12 +13,12 @@ const getDetailUser = (userId) => {
       if (checkUser === null) {
         resolve({
           status: "ERR",
-          messge: "User is not defined",
+          message: "User is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "get detail User",
+        message: "get detail User",
         data: checkUser,
       });
     } catch (e) {
@@ -33,7 +33,7 @@ const getAllUser = () => {
       const allUser = await db.User.findAll();
       resolve({
         status: "OK",
-        messge: "get all User",
+        message: "get all User",
         raw: false,
         allUser: allUser,
       });
@@ -63,7 +63,7 @@ let createNewUser = async (data) => {
       if (checkEmail) {
         resolve({
           status: "ERR",
-          messge: "Email already exists",
+          message: "Email already exists",
         });
       }
       let hashPassword = await hashUserPassWord(data.password);
@@ -79,7 +79,7 @@ let createNewUser = async (data) => {
       if (createNewUser) {
         resolve({
           status: "OK",
-          messge: "Create user successful",
+          message: "Create user successful",
         });
       }
     } catch (e) {

@@ -41,7 +41,7 @@ const refreshToken = (token) => {
         console.log("access token", access_token);
         resolve({
           status: "OK",
-          messge: "refreshToken Ok",
+          message: "refreshToken Ok",
           access_token: access_token,
         });
       });

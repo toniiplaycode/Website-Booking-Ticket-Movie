@@ -15,12 +15,12 @@ const getDetail = (Id) => {
       if (check === null) {
         resolve({
           status: "ERR",
-          messge: "It is not defined",
+          message: "It is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "Get detail successful",
+        message: "Get detail successful",
         data: check,
       });
     } catch (e) {
@@ -35,7 +35,7 @@ const getAll = () => {
       const all = await dbTemp.findAll();
       resolve({
         status: "OK",
-        messge: "get all successful",
+        message: "get all successful",
         raw: false,
         all: all,
       });
@@ -53,7 +53,7 @@ const getAllWithFilmId = (data) => {
       });
       resolve({
         status: "OK",
-        messge: "get all successful",
+        message: "get all successful",
         raw: false,
         all: all,
       });
@@ -108,7 +108,7 @@ let addNew = async (data) => {
       if (check == 0) {
         resolve({
           status: "ERR",
-          messge: "DateWatch error",
+          message: "DateWatch error",
         });
         return;
       }
@@ -152,7 +152,7 @@ let addNew = async (data) => {
         ) {
           resolve({
             status: "ERR",
-            messge: "Time selection error",
+            message: "Time selection error",
           });
           return;
         }
@@ -169,7 +169,7 @@ let addNew = async (data) => {
       if (createCalendar) {
         resolve({
           status: "OK",
-          messge: "Create successful",
+          message: "Create successful",
         });
       }
     } catch (e) {

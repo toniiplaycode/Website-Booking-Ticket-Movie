@@ -13,7 +13,7 @@ const getAll = () => {
       const all = await dbTemp.findAll();
       resolve({
         status: "OK",
-        messge: "get all successful",
+        message: "get all successful",
         raw: false,
         all: all,
       });

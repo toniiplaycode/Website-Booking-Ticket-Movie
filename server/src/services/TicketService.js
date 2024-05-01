@@ -21,7 +21,7 @@ const notEmptySeat = (data) => {
       });
       resolve({
         status: "OK",
-        messge: "get test",
+        message: "get test",
         raw: false,
         all: all,
       });
@@ -38,12 +38,12 @@ const getDetail = (Id) => {
       if (check === null) {
         resolve({
           status: "ERR",
-          messge: "It is not defined",
+          message: "It is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "Get detail successful",
+        message: "Get detail successful",
         data: check,
       });
     } catch (e) {
@@ -58,7 +58,7 @@ const getAll = () => {
       const all = await dbTemp.findAll();
       resolve({
         status: "OK",
-        messge: "get all successful",
+        message: "get all successful",
         raw: false,
         all: all,
       });
@@ -97,7 +97,7 @@ let addNew = async (data) => {
       if (intersection.length != 0) {
         resolve({
           status: "ERR",
-          messge: "Seat selection error",
+          message: "Seat selection error",
         });
         check = 1;
         return;
@@ -107,7 +107,7 @@ let addNew = async (data) => {
         if (ele > nuberSeat[0].numberOfSeats || ele <= 0) {
           resolve({
             status: "ERR",
-            messge: "Seat selection error 1",
+            message: "Seat selection error 1",
           });
           check = 1;
           return;
@@ -132,7 +132,7 @@ let addNew = async (data) => {
       });
       resolve({
         status: "OK",
-        messge: "create successful",
+        message: "create successful",
       });
     } catch (e) {
       reject("check");

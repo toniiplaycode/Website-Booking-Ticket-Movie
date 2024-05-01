@@ -6,14 +6,14 @@ const getDetailFilm = async (req, res) => {
     if (!FilmId) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The FilmId is null",
+        message: "The FilmId is null",
       });
     }
     const response = await FilmService.getDetailFilm(FilmId);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -24,7 +24,7 @@ const getAllFilm = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -35,7 +35,7 @@ const addNewFilm = async (req, res) => {
     return res.status(200).json("add New Film successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -46,7 +46,7 @@ const updateFilm = async (req, res) => {
     return res.status(200).json("Update a successful Film");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -57,7 +57,7 @@ let deleteFilm = async (req, res) => {
     return res.status(200).json("Delete a successful user");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };

@@ -7,14 +7,14 @@ const getDetailUser = async (req, res) => {
     if (!UserId) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The userId is null",
+        message: "The userId is null",
       });
     }
     const response = await UserService.getDetailUser(UserId);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -25,7 +25,7 @@ const getAllUser = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -38,7 +38,7 @@ const createNewUser = async (req, res) => {
     if (!isCheckEmail) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The input is email",
+        message: "The input is email",
       });
     }
     if (!email || !password || !firstName || !lastName) {
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
     return res.status(200).json("Update user successful ");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -73,7 +73,7 @@ const updateRole = async (req, res) => {
     return res.status(200).json("Update Role successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -84,7 +84,7 @@ let deleteUser = async (req, res) => {
     return res.status(200).json("Delete user successful ");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -97,12 +97,12 @@ const loginUser = async (req, res) => {
     if (!email || !password) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The input is required" + email + password,
+        message: "The input is required" + email + password,
       });
     } else if (!isCheckEmail) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The input is email",
+        message: "The input is email",
       });
     }
     const response = await UserService.loginUser(req.body);
@@ -116,7 +116,7 @@ const loginUser = async (req, res) => {
     return res.status(200).json({ ...newReponse, refresh_token });
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -141,14 +141,14 @@ const refreshToken = async (req, res) => {
     if (!token) {
       return res.status(200).json({
         status: "ERR",
-        messge: "The token is required",
+        message: "The token is required",
       });
     }
     const response = await jwtService.refreshToken(token);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };

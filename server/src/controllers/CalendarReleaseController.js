@@ -6,14 +6,14 @@ const getDetail = async (req, res) => {
     if (!Id) {
       return res.status(200).json({
         status: "ERR",
-        messge: "It is null",
+        message: "It is null",
       });
     }
     const response = await Service.getDetail(Id);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -24,7 +24,7 @@ const getAllWithFilmId = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -35,7 +35,7 @@ const getAll = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -46,7 +46,7 @@ const addNew = async (req, res) => {
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -57,7 +57,7 @@ const update = async (req, res) => {
     return res.status(200).json("Update successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };
@@ -68,7 +68,7 @@ let deleteOBJ = async (req, res) => {
     return res.status(200).json("Delete successful");
   } catch (e) {
     return res.status(404).json({
-      messge: e,
+      message: e,
     });
   }
 };

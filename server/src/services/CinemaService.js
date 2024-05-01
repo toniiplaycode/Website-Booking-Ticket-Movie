@@ -12,12 +12,12 @@ const getDetailCinema = (Id) => {
       if (check === null) {
         resolve({
           status: "ERR",
-          messge: "Cinema is not defined",
+          message: "Cinema is not defined",
         });
       }
       resolve({
         status: "OK",
-        messge: "get detail Cinema",
+        message: "get detail Cinema",
         data: check,
       });
     } catch (e) {
@@ -32,7 +32,7 @@ const getAllCinema = () => {
       const all = await db.Cinema.findAll();
       resolve({
         status: "OK",
-        messge: "get all Cinema",
+        message: "get all Cinema",
         raw: false,
         all: all,
       });

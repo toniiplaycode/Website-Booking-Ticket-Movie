@@ -46,7 +46,7 @@ const AuthMiddleWareAdminStaffRole = (req, res, next) => {
 
 const AuthMiddleWareAdminStaffClientRole = (req, res, next) => {
   const token = req.headers.token;
-  const userID = req.query.id;
+  const userID = req.query.id || req.params.id;
   jwt.verify(token, process.env.ACCESS_TOKEN, async function (err, users) {
     if (err) {
       return res.status(404).json({
