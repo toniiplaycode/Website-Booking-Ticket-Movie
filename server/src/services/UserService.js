@@ -92,7 +92,7 @@ let updateUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const user = await db.User.findOne({
-        where: { id: data.query.id },
+        where: { id: data.body.id },
         raw: false,
       });
       user.firstName = data.body.firstName;
@@ -130,7 +130,7 @@ let deleteUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
-        where: { id: data.query.id },
+        where: { id: data.body.id },
       });
       await user.destroy();
       resolve();
