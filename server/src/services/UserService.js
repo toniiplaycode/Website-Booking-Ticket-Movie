@@ -100,8 +100,10 @@ let updateUser = async (data) => {
       user.address = data.body.address;
       user.phoneNumber = data.body.phoneNumber;
       user.image = data.body.image;
-      let hashPassword = await hashUserPassWord(data.body.password);
-      user.password = hashPassword;
+      if (data.body.password) {
+        let hashPassword = await hashUserPassWord(data.body.password);
+        user.password = hashPassword;
+      }
       await user.save();
       resolve();
     } catch (e) {
