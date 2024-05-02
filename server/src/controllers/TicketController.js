@@ -29,6 +29,16 @@ const getDetail = async (req, res) => {
   }
 };
 
+const getDetailWithUser = async (req, res) => {
+  try {
+    const response = await Service.getDetailWithUser(req);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
 const getAll = async (req, res) => {
   try {
     const response = await Service.getAll();
@@ -80,4 +90,5 @@ module.exports = {
   update,
   deleteOBJ,
   notEmptySeat,
+  getDetailWithUser,
 };

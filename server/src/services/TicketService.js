@@ -52,6 +52,24 @@ const getDetail = (Id) => {
   });
 };
 
+const getDetailWithUser = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const all = await dbTemp.findAll({
+        where: { userId: data.body.userId },
+      });
+      resolve({
+        status: "OK",
+        message: "get all successful",
+        raw: false,
+        all: all,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -179,4 +197,5 @@ module.exports = {
   update,
   deleteOBJ,
   notEmptySeat,
+  getDetailWithUser,
 };
