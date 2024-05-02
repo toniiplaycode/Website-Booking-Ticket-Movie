@@ -55,9 +55,10 @@ const getDetail = (Id) => {
 const getDetailWithUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const all = await dbTemp.findAll({
-        where: { userId: data.body.userId },
-      });
+      const [all] = await pool.execute(
+        "SELECT *, tickets.id  FROM tickets inner join calendarreleases on tickets.calendarReleaseId = calendarreleases.id inner join cinemarooms on calendarreleases.cinemaRoomId = cinemarooms.id inner join cinemas on cinemarooms.CinemaId = cinemas.id where userId = ?",
+        [data.query.userId]
+      );
       resolve({
         status: "OK",
         message: "get all successful",
