@@ -8,6 +8,7 @@ import { putUpdateUser } from '../../reducers/apiUpdateUser';
 import { fetchListTicketUser } from '../../reducers/apiUserTicket';
 
 const UserPage = () => {
+    window.scrollTo(0, 0);
     const dispatch = useDispatch();
     const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
@@ -44,16 +45,23 @@ const UserPage = () => {
         return check;
       }
 
-      const listTicketEachUser = useSelector((state) => state.apiUserTicket.listTicketEachUser);
-  
-      useEffect(()=>{
-          if(inforUser.id != undefined) {
-              const userId = inforUser.id;
-              dispatch(fetchListTicketUser(userId));
-          } 
-        }, [inforUser]);
-        
-        //   listTicketEachUser.sort((a, b) => a.id - b.id);
+    const [sortedListTicketEachUser, setSortedListTicketEachUser] = useState([]);
+    let listTicketEachUser = useSelector((state) => state.apiUserTicket.listTicketEachUser);
+
+    useEffect(()=>{
+        if(inforUser.id != undefined) {
+            const userId = inforUser.id;
+            dispatch(fetchListTicketUser(userId));
+        } 
+    }, [inforUser, dispatch]);
+    
+    // sắp xếp từ lớn đến nhỏ theo id của vé của từng user
+    useEffect(() => {
+        if (listTicketEachUser.length > 0) {
+            const sortedList = [...listTicketEachUser].sort((a, b) => b.id - a.id);
+            setSortedListTicketEachUser(sortedList);
+        }
+    }, [listTicketEachUser, dispatch]);
 
     return(
         <Container>
@@ -140,7 +148,7 @@ const UserPage = () => {
                     </Col>
                     <Col className='infor-container'>
                         <p className="userpage-info-title">Vé đã mua</p>
-                        {listTicketEachUser.length > 0 && listTicketEachUser.map((item, index)=>{
+                        {sortedListTicketEachUser.length > 0 && sortedListTicketEachUser.map((item, index)=>{
                             return <>
                                 <PurchasedTicket item={item} key={index}/>
                             </>

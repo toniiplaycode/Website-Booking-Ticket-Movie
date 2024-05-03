@@ -6,32 +6,24 @@ import { useState } from "react";
 const PurchasedTicket = ({ item }) => {
     const [filmDetail, setFilmDetail] = useState();
 
-    console.log(item)
-
     useEffect(()=>{
         const getFilmDetail = async () => {
             const res = await axios.get(`http://localhost:8000/api/film/getDetail?id=${item.filmId}`);
             setFilmDetail(res.data.data[0]);
         }
         getFilmDetail();
-    }, [])
+    }, [item])
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        
         const day = date.getDate();
         const month = date.getMonth() + 1; 
         const year = date.getFullYear();
-        
         const formattedDay = day < 10 ? '0' + day : day;
         const formattedMonth = month < 10 ? '0' + month : month;
-        
         const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
-        
         return formattedDate;
     }
-
-    // console.log(item);
 
     return(
         <div className="purchased-ticket-container">
@@ -76,6 +68,9 @@ const PurchasedTicket = ({ item }) => {
                     src={filmDetail && `${filmDetail.image}`}
                 />
             </div>
+            {item.nameStatus == "booked" && <p className="ticket-infor-item-status booked">Mới đặt</p>}
+            {item.nameStatus == "watched" && <p className="ticket-infor-item-status watched">Đã xem</p>}
+            {item.nameStatus == "expired" && <p className="ticket-infor-item-status expired">Hết hạn</p>}
         </div>
     )
 }

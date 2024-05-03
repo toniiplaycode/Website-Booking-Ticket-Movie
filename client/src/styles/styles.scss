@@ -273,11 +273,12 @@ body {
 //======purchased ticket=======//
 .purchased-ticket-container{
   display: flex;
+  position: relative;
   justify-content: space-between;
   background-color: #151723;
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 
   @media (max-width: 768px ) { 
     flex-wrap: wrap;
@@ -312,6 +313,30 @@ body {
         height: 250px;
       }
     }
+  }
+
+  .ticket-infor-item-status{
+    position: absolute;
+    top: -20px;
+    right: 0;
+    padding: 12px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 12px;
+    font-weight: 600;
+  }
+
+  .booked{
+    background: $primary-color;
+  }
+  
+  .watched {
+    background: #35A7FF;
+  }
+
+  .expired{
+    background: #FF0035;
   }
 }
 

@@ -5,6 +5,9 @@ const NavbarAdmin = () => {
     return(
         <div className='adminpage-navbar'>
             <div className='adminpage-navbar-container'>
+                <NavLink to="/admin/statistical" className='adminpage-navbar-item'> 
+                    Thống kê
+                </NavLink>
                 <NavLink to="/admin/adminFilms" className='adminpage-navbar-item'> 
                     Phim
                 </NavLink>

@@ -17,6 +17,7 @@ const AdminPage = () => {
             <NavbarAdmin/>
             <Routes>
                 <Route path="/" element={<AdminStatistical/>}/>
+                <Route path="/statistical" element={<AdminStatistical/>}/>
                 <Route path="/adminFilms" element={<AdminFilms/>}/>
                 <Route path="/adminTypeof" element={<AdminTypeof/>}/>
                 <Route path="/adminCalenderReleases" element={<AdminCalenderReleases/>}/>

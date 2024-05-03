@@ -7,11 +7,12 @@ import { useEffect } from "react";
 import { toggleSignin } from "../../../reducers/modalSigninSignup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { postBookUserTicket } from "../../../reducers/apiUserTicket";
+import { fetchListTicketUser, postBookUserTicket } from "../../../reducers/apiUserTicket";
 import { handleClearSelectedCrWithFilm } from "../../../reducers/selectedCrWithFilm";
 import { handleClearSelectedSeats } from "../../../reducers/selectedSeats";
 import { fetchCinemaDetail } from "../../../reducers/apiCinemaDetail";
 import { hanleClearSelectedFilm } from "../../../reducers/selectedPurchaseFilm";
+import { fetchAllTicket } from '../../../reducers/apiAdminTicket';
 
 const TicketBill = ({ selectedPayment }) => {
     const dispatch = useDispatch();
@@ -163,11 +164,11 @@ const TicketBill = ({ selectedPayment }) => {
                                 let namePaymentMethod = selectedPayment.namePaymentMethod;
                                 let arraySeat = selectedSeats;
                                 dispatch(postBookUserTicket({userId, calendarReleaseId, arraySeat, namePaymentMethod, nameStatus:"..."}))
-                                dispatch(hanleClearSelectedFilm());
                                 dispatch(handleClearSelectedCrWithFilm());
                                 dispatch(handleClearSelectedSeats());
-                                dispatch(hanleClearSelectedFilm());
                                 dispatch(handleClearSelectedCinemaRoomDetail());
+                                dispatch(hanleClearSelectedFilm());
+                                dispatch(fetchListTicketUser(inforUser.id));
                                 navigate(`/user`);
                             }
                         } 
