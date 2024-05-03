@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
 $primary-color: #eb3656;
@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   line-height: 1;
   font-weight: 400;
   background-color: $primary-bg-color;
@@ -38,6 +38,34 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.btn-common{
+  border: 2px solid $primary-color;
+  padding: 10px;
+  width: 200px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $primary-text-color; 
+  margin-bottom: 20px; 
+}
+
+.btn-common:hover{ 
+  transition: 0.3s linear;
+  transform: translateY(-0.4rem);
+  box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.16);
+}
+
+//======not found page=======//
+.notfound{
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 50px 0;
 }
 
 //======location select======//
@@ -530,6 +558,11 @@ body {
 }
 
 //=====MODAL SIGNUP SIGNIN======//
+.warning-login-signup{
+  padding: 0;
+  margin: 0;
+}
+
 .signup-form,
 .login-form {
   position: fixed;
@@ -603,6 +636,9 @@ body {
   .signup-form-category.first-last-name{
     flex-direction: row;
     label{
+      margin-bottom: 10px;
+    }
+    div > div{
       margin-bottom: 10px;
     }
   }
@@ -685,7 +721,7 @@ body {
     margin-top: 0.6rem;
     border: none;
     font-family: inherit;
-    font-family: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
     background-color: #eb3656;
     border-radius: 10px;
@@ -702,10 +738,9 @@ body {
 
 }
 
-
 //=====FOOTER=====//
 .footer-container{
-  box-shadow: 0 1.2rem 1.2rem 1.4rem #10111a66;
+  box-shadow: 0 0.1rem 1.2rem 1.4rem rgba(16, 17, 26, 0.4);
   padding: 20px 0;
   margin: 40px 0;
 
@@ -826,7 +861,7 @@ body {
     .newmovie-container-mobile{
       display: flex;
       overflow-x: scroll;
-      max-width: 80%;
+      max-width: 96%;
     }
 
     .item-container{
@@ -840,6 +875,14 @@ body {
 
   @media (max-width: 576px ) { 
     .item-container{
+      .item-img{
+        width: 200px;
+      }
+    }
+  }
+
+  @media (max-width: 992px ) { 
+    .item-container.item-admin{
       .item-img{
         width: 200px;
       }
@@ -1815,6 +1858,14 @@ body {
 .add-input-container input:first-child{
   margin-top: 40px;
 }
+
+.add-input-container.user-input{
+  margin: 10px 0;
+
+  input:first-child{
+    margin-top: 0;
+  }  
+} 
 
 textarea{
   height: 90px;

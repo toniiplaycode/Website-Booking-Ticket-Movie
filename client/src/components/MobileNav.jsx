@@ -5,6 +5,8 @@ import { hiddenDrawer } from "../reducers/mobileNavSlice";
 import { useNavigate } from "react-router-dom";
 import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 import { useLocation } from 'react-router-dom';
+import { fetchInforUser, handleLogout } from "../reducers/apiLoginLogout";
+import { useEffect } from "react";
 
 const MobileNav = () => {
     const dispatch = useDispatch();
@@ -16,7 +18,13 @@ const MobileNav = () => {
 
     const location = useLocation();
 
-    const logged = false;
+    const idRoleUser  = useSelector((state) => state.apiLoginLogout.idRoleUser);
+    
+    useEffect(() => {
+        dispatch(fetchInforUser(idRoleUser.id));
+    }, [idRoleUser]);
+    
+    const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
     return (
     <div className={drawerClasses}>
@@ -53,84 +61,87 @@ const MobileNav = () => {
                 >
                     Đặt vé
                 </p>
-                <p 
-                    className={location.pathname == "/admin" ? "active-mobile" : ""}
-                    onClick={() => {
-                        navigate("/admin");
-                        dispatch(hiddenDrawer());
-                    }}
-                >
-                    Quản lý
-                </p>
-
-                <div className="drawer-item-child-container">
+                {(inforUser.roleId == 'R1' || inforUser.roleId == 'R2') && 
+                <>
                     <p 
-                        className={location.pathname == "/admin/adminFilms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                        className={location.pathname == "/admin" ? "active-mobile" : ""}
                         onClick={() => {
-                        navigate("/admin/adminFilms");
-                        dispatch(hiddenDrawer());
+                            navigate("/admin");
+                            dispatch(hiddenDrawer());
                         }}
                     >
-                        Phim
+                        Quản lý
                     </p>
-                    <p 
-                        className={location.pathname == "/admin/adminTypeof" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminTypeof");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Thể loại phim
-                    </p>
-                    <p 
-                        className={location.pathname == "/admin/adminCalenderReleases" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminCalenderReleases");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Suất chiếu 
-                    </p>
-                    <p 
-                        className={location.pathname == "/admin/adminCinemas" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminCinemas");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Rạp
-                    </p>
-                    <p 
-                        className={location.pathname == "/admin/adminCinemaRooms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminCinemaRooms");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Phòng chiếu
-                    </p>
-                    <p 
-                        className={location.pathname == "/admin/adminTickets" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminTickets");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Vé
-                    </p>
-                    <p 
-                        className={location.pathname == "/admin/adminUsers" ? "drawer-item-child active-mobile" : "drawer-item-child"}
-                        onClick={() => {
-                        navigate("/admin/adminUsers");
-                        dispatch(hiddenDrawer());
-                        }}
-                    >
-                        Khách hàng
-                    </p>
-                </div>
+                    <div className="drawer-item-child-container">
+                        <p 
+                            className={location.pathname == "/admin/adminFilms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminFilms");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Phim
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminTypeof" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminTypeof");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Thể loại phim
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminCalenderReleases" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminCalenderReleases");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Suất chiếu 
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminCinemas" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminCinemas");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Rạp
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminCinemaRooms" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminCinemaRooms");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Phòng chiếu
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminTickets" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminTickets");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Vé
+                        </p>
+                        <p 
+                            className={location.pathname == "/admin/adminUsers" ? "drawer-item-child active-mobile" : "drawer-item-child"}
+                            onClick={() => {
+                            navigate("/admin/adminUsers");
+                            dispatch(hiddenDrawer());
+                            }}
+                        >
+                            Khách hàng
+                        </p>
+                    </div>
+                </>
+                }
 
                 <div className="drawer-signup-signin">
-                    {logged ? (
+                    {Object.keys(inforUser).length != 0 ? (
                         <>
                             <p
                                 onClick={() => {
@@ -139,9 +150,14 @@ const MobileNav = () => {
                                     }
                                 }
                             >
-                                Toàn
+                                {inforUser.firstName}
                             </p>
-                            <p>Đăng xuất</p>
+                            <p
+                                onClick={() => {
+                                    dispatch(handleLogout());
+                                    dispatch(hiddenDrawer());
+                                }}
+                            >Đăng xuất</p>
                         </>
                     ) : (
                         <>

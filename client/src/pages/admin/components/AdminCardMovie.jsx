@@ -9,7 +9,7 @@ const AdminCardMovie = ({ img }) => {
     const navigate = useNavigate();
 
     return(
-        <div className="item-container"> 
+        <div className="item-container item-admin"> 
             <div className="item-img">
                 <img
                     className="img-card"

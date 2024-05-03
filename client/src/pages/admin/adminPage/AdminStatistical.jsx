@@ -1,20 +1,33 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AdminTicketPurchasedCard from '../components/AdminTicketPurchasedCard';
-import NavbarAdmin from '../../../components/NavbarAdmin';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllTicket } from '../../../reducers/apiAdminTicket';
+import { formatMoney } from "../../../utils/functionCommon";
+import { fetchAllUser } from '../../../reducers/apiAdminUser';
 
 const AdminStatistical = () => {
-    const [tickets, setTickets] = useState();
+    const dispatch = useDispatch();
 
-    // useEffect(()=>{
-    //     const getAllCr = async () => {
-    //       const res = await axios.get("http://localhost:8000/api/ticket/getAll");
-    //       setTickets(res.data.all)
-    //     }
-    //     getAllCr();
-    //   }, []);
+    const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
+    const listAllTicket = useSelector((state) => state.apiAdminTicket.listAllTicket);
+    const listAllUser = useSelector((state) => state.apiAdminUser.listAllUser);
+
+    useEffect(()=>{
+        if(inforUser.roleId == "R1" || inforUser.roleId == "R2") {
+            dispatch(fetchAllTicket());
+            dispatch(fetchAllUser());
+        }
+    }, [inforUser]);
+    
+    const calculateTotal = (data) => {
+        let total = 0;
+        data.forEach(item => {
+          total += item.total;
+        });
+        return total;
+    }
 
     return(
         <>
@@ -23,15 +36,15 @@ const AdminStatistical = () => {
             </p>
             <Row className='adminpage-container'>
                 <Col className='adminpage-summary'>
-                    <p className='adminpage-summary-statistical'>99</p>
+                    <p className='adminpage-summary-statistical'>{listAllTicket.length}</p>
                     <p className='adminpage-summary-title'>Số vé bán được</p>
                 </Col>
                 <Col className='adminpage-summary'>
-                    <p className='adminpage-summary-statistical'>5.940.000đ</p>
+                    <p className='adminpage-summary-statistical'>{formatMoney(calculateTotal(listAllTicket))}</p>
                     <p className='adminpage-summary-title'>Tổng số tiền đã thanh toán</p>
                 </Col>
                 <Col className='adminpage-summary'>
-                    <p className='adminpage-summary-statistical'>20</p>
+                    <p className='adminpage-summary-statistical'>{listAllUser.length}</p>
                     <p className='adminpage-summary-title'>Tổng số khách hàng</p>
                 </Col>
             </Row>

@@ -2,16 +2,23 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faUser, faBars, faSignOut } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showDrawer } from "../reducers/mobileNavSlice";
 import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
+import { useEffect } from "react";
+import { fetchInforUser, handleLogout } from "../reducers/apiLoginLogout";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const logged = false;
-    const loggedAdmin = true;
+    const idRoleUser  = useSelector((state) => state.apiLoginLogout.idRoleUser);
+    
+    useEffect(() => {
+        dispatch(fetchInforUser(idRoleUser.id));
+    }, [idRoleUser]);
+    
+    const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
     return(
         <div className="nav-container">
@@ -58,7 +65,7 @@ const Navbar = () => {
                         Đặt vé
                         </NavLink>
                     </li>
-                    {loggedAdmin && 
+                    {(inforUser.roleId == 'R1' || inforUser.roleId == 'R2') && 
                         <li>
                             <NavLink
                             to="/admin"
@@ -71,15 +78,19 @@ const Navbar = () => {
                 </ul>
             </nav>
             <div className="nav-signup-signin">
-                {logged ? (
+                {Object.keys(inforUser).length != 0 ? (
                     <>
                         <span className="name-user-navbar d-none d-lg-inline"
                             onClick={() => navigate("/user")}
                         >
-                            Toàn
+                            {inforUser.firstName}
                         </span>
                         <FontAwesomeIcon icon={faUser} className="switch-modal-icon" onClick={() => navigate("/user")}/>
-                        <FontAwesomeIcon icon={faSignOut} className="switch-modal-icon icon-signout d-none d-lg-inline" />
+                        <FontAwesomeIcon icon={faSignOut} className="switch-modal-icon icon-signout d-none d-lg-inline" 
+                            onClick={() => {
+                                dispatch(handleLogout());
+                            }}
+                        />
                     </>
                 ) : (
                     <>

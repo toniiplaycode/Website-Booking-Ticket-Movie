@@ -15,7 +15,11 @@ export const fetchCinemaRoomDetail = createAsyncThunk('cinemaRoomDetail/apiCinem
 const apiCinemaRoomDetail = createSlice({
     name: 'apiCinemaRoomDetail',
     initialState,
-    reducers: {},
+    reducers: {
+        handleClearSelectedCinemaRoomDetail(state, action) {
+            state.CinemaRoomDetail = {};
+        },
+    },
     extraReducers: (builder) => {
         builder
         .addCase(fetchCinemaRoomDetail.pending, (state) => {
@@ -31,5 +35,7 @@ const apiCinemaRoomDetail = createSlice({
         });
 },
 });
-  
-  export default apiCinemaRoomDetail.reducer;
+
+export const { handleClearSelectedCinemaRoomDetail } = apiCinemaRoomDetail.actions;
+
+ export default apiCinemaRoomDetail.reducer;

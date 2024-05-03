@@ -12,7 +12,12 @@ import selectedCrWithFilm from "./reducers/selectedCrWithFilm";
 import selectedSeats from "./reducers/selectedSeats";
 import apiCinemaRoomDetail from "./reducers/apiCinemaRoomDetail";
 import apiCinemaDetail from "./reducers/apiCinemaDetail";
-import apiLoginLogout from "./reducers/apiLoginLogout";
+import apiLoginLogout, { fetchInforUser } from "./reducers/apiLoginLogout";
+import apiSignup from "./reducers/apiSignup";
+import apiUpdateUser from "./reducers/apiUpdateUser";
+import apiUserTicket from "./reducers/apiUserTicket";
+import apiAdminTicket from "./reducers/apiAdminTicket";
+import apiAdminUser from "./reducers/apiAdminUser";
 
 const reduxStore = configureStore({
     reducer: {
@@ -29,11 +34,22 @@ const reduxStore = configureStore({
         selectedSeats:selectedSeats,
         apiCinemaRoomDetail: apiCinemaRoomDetail,
         apiCinemaDetail: apiCinemaDetail,
-        apiLoginLogout: apiLoginLogout, 
+        apiLoginLogout: apiLoginLogout,
+        apiSignup: apiSignup,
+        apiUpdateUser: apiUpdateUser,
+        apiUserTicket: apiUserTicket,
+        apiAdminTicket: apiAdminTicket,
+        apiAdminUser: apiAdminUser,
     }
 });
 
 //tự động getAll films khi chạy ứng dụng
 reduxStore.dispatch(fetchFilms());
+
+// ghi nhớ đăng nhập 
+if(localStorage.getItem('inforUser') != null) {
+    reduxStore.dispatch(fetchInforUser(JSON.parse(localStorage.getItem('inforUser')).id));
+}
+
 
 export default reduxStore;

@@ -56,7 +56,7 @@ const getDetailWithUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [all] = await pool.execute(
-        "SELECT *, tickets.id  FROM tickets inner join calendarreleases on tickets.calendarReleaseId = calendarreleases.id inner join cinemarooms on calendarreleases.cinemaRoomId = cinemarooms.id inner join cinemas on cinemarooms.CinemaId = cinemas.id where userId = ?",
+        "SELECT *, tickets.id, tickets.createdAt, tickets.updatedAt FROM tickets inner join calendarreleases on tickets.calendarReleaseId = calendarreleases.id inner join cinemarooms on calendarreleases.cinemaRoomId = cinemarooms.id inner join cinemas on cinemarooms.CinemaId = cinemas.id where userId = ?",
         [data.query.userId]
       );
       resolve({
