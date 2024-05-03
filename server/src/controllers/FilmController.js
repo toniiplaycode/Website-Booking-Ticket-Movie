@@ -29,6 +29,17 @@ const getAllFilm = async (req, res) => {
   }
 };
 
+const getAllTicketWithFilm = async (req, res) => {
+  try {
+    const response = await FilmService.getAllTicketWithFilm(req);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
+
 const addNewFilm = async (req, res) => {
   try {
     await FilmService.addNewFilm(req.body);
@@ -68,4 +79,5 @@ module.exports = {
   addNewFilm,
   updateFilm,
   deleteFilm,
+  getAllTicketWithFilm,
 };

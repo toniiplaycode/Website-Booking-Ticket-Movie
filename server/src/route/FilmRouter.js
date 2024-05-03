@@ -6,6 +6,11 @@ const MiddleWare = require("../middleware/AuthMiddleware");
 router.get("/getDetail", Controller.getDetailFilm);
 
 router.get("/getAll", Controller.getAllFilm);
+router.get(
+  "/getAllTicketWithFilm",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.getAllTicketWithFilm
+);
 
 //Chỉ có role R1 R2, data được đưa từ body xuống
 router.post(

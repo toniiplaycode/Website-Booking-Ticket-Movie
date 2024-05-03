@@ -72,6 +72,17 @@ const update = async (req, res) => {
   }
 };
 
+const updateStatus = async (req, res) => {
+  try {
+    await Service.updateStatus(req);
+    return res.status(200).json("Update successful");
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
+
 let deleteOBJ = async (req, res) => {
   try {
     await Service.deleteOBJ(req.body.id);
@@ -91,4 +102,5 @@ module.exports = {
   deleteOBJ,
   notEmptySeat,
   getDetailWithUser,
+  updateStatus,
 };

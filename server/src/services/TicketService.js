@@ -145,7 +145,6 @@ let addNew = async (data) => {
           calendarReleaseId: data.body.calendarReleaseId,
           seat: ele,
           total: total[0].price,
-          nameStatus: data.body.nameStatus,
           namePaymentMethod: data.body.namePaymentMethod,
         });
       });
@@ -162,13 +161,28 @@ let addNew = async (data) => {
 let update = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const user = JSON.parse(atob(data.headers.token.split(".")[1]));
       const temp = await dbTemp.findOne({
-        where: { id: user.id },
+        where: { id: data.body.id },
         raw: false,
       });
       temp.seat = data.body.seat;
       temp.namePaymentMethod = data.body.namePaymentMethod;
+      await temp.save();
+      resolve();
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+let updateStatus = async (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const temp = await dbTemp.findOne({
+        where: { id: data.body.id },
+        raw: false,
+      });
+      temp.nameStatus = data.body.nameStatus;
       await temp.save();
       resolve();
     } catch (e) {
@@ -199,4 +213,5 @@ module.exports = {
   deleteOBJ,
   notEmptySeat,
   getDetailWithUser,
+  updateStatus,
 };

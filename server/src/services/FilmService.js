@@ -49,6 +49,42 @@ const getAllFilm = () => {
   });
 };
 
+const getAllTicketWithFilm = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const [listIdCal] = await pool.execute(
+        "SELECT id FROM calendarreleases where filmId = ?",
+        [data.query.filmId]
+      );
+
+      let list = [];
+      const [listTicket] = await pool.execute("SELECT * FROM tickets");
+      let cnt = 0;
+      listTicket.forEach((element) => {
+        listIdCal.forEach((item) => {
+          if (element.calendarReleaseId == item.id) {
+            cnt += element.total;
+            list.push(element.id);
+          }
+        });
+      });
+
+      const listFull = [];
+      listFull.push({ quantity: list.length, total: cnt });
+
+      resolve({
+        status: "OK",
+        message: "get all Film",
+        raw: false,
+        listIdTicket: list,
+        All: listFull,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let addNewFilm = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -118,4 +154,5 @@ module.exports = {
   addNewFilm,
   updateFilm,
   deleteFilm,
+  getAllTicketWithFilm,
 };

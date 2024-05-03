@@ -26,6 +26,12 @@ router.get("/notEmptySeat", Controller.notEmptySeat);
 //data chuyền từ body lên chùng với tài khoảng đang nhập mới sữa được (k thể sữa UserId)
 router.put("/update", MiddleWare.AuthMiddleWareBody, Controller.update);
 
+router.put(
+  "/updateStatus",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.updateStatus
+);
+
 //Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới xóa được
 router.delete(
   "/deleteOBJ",
