@@ -12,7 +12,7 @@ router.get(
   Controller.getAllTicketWithFilm
 );
 
-//Chỉ có role R1 R2, data được đưa từ body xuống
+//Chỉ có role R1 R2, data được đưa từ body xuống mới được
 router.post(
   "/addNew",
   MiddleWare.AuthMiddleWareAdminStaffRole,
