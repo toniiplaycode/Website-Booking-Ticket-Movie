@@ -18,7 +18,7 @@ router.get(
 
 //Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới thêm được
 //data chuyền từ body lên chùng với tài khoảng đang nhập mới thêm được
-router.post("/addNew", MiddleWare.AuthMiddleWareBody, Controller.addNew);
+router.post("/addNew", Controller.addNew);
 
 router.get("/notEmptySeat", Controller.notEmptySeat);
 
