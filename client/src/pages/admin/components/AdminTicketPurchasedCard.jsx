@@ -1,16 +1,39 @@
-import Col from 'react-bootstrap/Col';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Col from "react-bootstrap/Col";
+import { useSelector } from "react-redux";
+import { formatMoney } from "../../../utils/functionCommon";
 
-const AdminTicketPurchasedCard = () => {
-    return(
-        <Col className='adminpage-ticket'>
-            <p className='adminpage-ticket-statistical'>99</p>
-            <img 
-                className='adminpage-ticket-img'
-                src='./images/imgCard.jpg'
-            />
-            <p className='adminpage-ticket-title'>Kẻ ẩn danh</p>
-        </Col>
-    )
-}
+const AdminTicketPurchasedCard = ({ item }) => {
+  const [quantityTotal, setQuantityTotal] = useState();
+  const token = useSelector((state) => state.apiLoginLogout.token);
+  useEffect(() => {
+    const getQuantityTotal = async () => {
+      const res = await axios.get(
+        `http://localhost:8000/api/film/getAllTicketWithFilm?filmId=${item.id}`,
+        {
+          headers: {
+            token: `${token}`,
+          },
+        }
+      );
+      setQuantityTotal(res.data);
+    };
+    getQuantityTotal();
+  }, [item]);
+
+  return (
+    <Col className="adminpage-ticket">
+      <p className="adminpage-ticket-statistical">
+        {quantityTotal && quantityTotal.All[0].quantity} vé
+      </p>
+      <p className="adminpage-ticket-statistical">
+        {quantityTotal && formatMoney(quantityTotal.All[0].total)}
+      </p>
+      <img className="adminpage-ticket-img" src={item.image} />
+      <p className="adminpage-ticket-title">{item.nameFilm}</p>
+    </Col>
+  );
+};
 
 export default AdminTicketPurchasedCard;
