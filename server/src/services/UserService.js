@@ -58,7 +58,7 @@ let createNewUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const checkEmail = await db.User.findOne({
-        where: { email: data.email },
+        where: { email: data.body.email },
       });
       if (checkEmail) {
         resolve({
@@ -66,15 +66,14 @@ let createNewUser = async (data) => {
           message: "Email already exists",
         });
       }
-      let hashPassword = await hashUserPassWord(data.password);
+      let hashPassword = await hashUserPassWord(data.body.password);
       const createNewUser = await db.User.create({
-        email: data.email,
+        email: data.body.email,
         password: hashPassword,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        address: data.address,
-        image: data.image,
-        phoneNumber: data.phoneNumber,
+        firstName: data.body.firstName,
+        lastName: data.body.lastName,
+        address: data.body.address,
+        phoneNumber: data.body.phoneNumber,
       });
       if (createNewUser) {
         resolve({
@@ -91,15 +90,17 @@ let createNewUser = async (data) => {
 let updateUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const userId = await JSON.parse(atob(data.headers.token.split(".")[1]));
+
       const user = await db.User.findOne({
-        where: { id: data.body.id },
+        where: { id: userId.id },
         raw: false,
       });
       user.firstName = data.body.firstName;
       user.lastName = data.body.lastName;
       user.address = data.body.address;
       user.phoneNumber = data.body.phoneNumber;
-      user.image = data.body.image;
+      user.image = data.file.path;
       if (data.body.password) {
         let hashPassword = await hashUserPassWord(data.body.password);
         user.password = hashPassword;
@@ -132,7 +133,7 @@ let deleteUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
-        where: { id: data.body.id },
+        where: { id: data.query.id },
       });
       await user.destroy();
       resolve();

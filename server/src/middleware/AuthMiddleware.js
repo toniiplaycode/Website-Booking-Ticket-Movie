@@ -46,7 +46,7 @@ const AuthMiddleWareAdminStaffRole = (req, res, next) => {
 
 const AuthMiddleWareAdminStaffClientRole = (req, res, next) => {
   const token = req.headers.token;
-  const userID = req.query.id || req.params.id || req.body.id;
+  const userID = req.query.id || req.body.id || req.params.id;
   jwt.verify(token, process.env.ACCESS_TOKEN, async function (err, users) {
     if (err) {
       return res.status(404).json({
@@ -69,9 +69,8 @@ const AuthMiddleWareAdminStaffClientRole = (req, res, next) => {
   });
 };
 
-const AuthMiddleWareBody = (req, res, next) => {
+const AuthMiddleWareCheckLogin = (req, res, next) => {
   const token = req.headers.token;
-  const userID = req.body.userId || req.query.userId;
   jwt.verify(token, process.env.ACCESS_TOKEN, async function (err, users) {
     if (err) {
       return res.status(404).json({
@@ -79,11 +78,7 @@ const AuthMiddleWareBody = (req, res, next) => {
         message: "The authMiddleWare",
       });
     }
-    if (
-      users?.roleId === "R1" ||
-      users?.roleId === "R2" ||
-      users?.id == userID
-    ) {
+    if (users) {
       next();
     } else {
       return res.status(404).json({
@@ -98,5 +93,5 @@ module.exports = {
   AuthMiddleWareAdminRole,
   AuthMiddleWareAdminStaffRole,
   AuthMiddleWareAdminStaffClientRole,
-  AuthMiddleWareBody,
+  AuthMiddleWareCheckLogin,
 };

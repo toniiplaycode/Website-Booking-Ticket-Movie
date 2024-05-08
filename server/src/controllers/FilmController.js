@@ -42,11 +42,13 @@ const getAllTicketWithFilm = async (req, res) => {
 
 const addNewFilm = async (req, res) => {
   try {
-    await FilmService.addNewFilm(req.body);
-    return res.status(200).json("add New Film successful");
+    const response = await FilmService.addNewFilm(req);
+    return res.status(200).json({
+      response,
+    });
   } catch (e) {
     return res.status(404).json({
-      message: e,
+      message: "check",
     });
   }
 };

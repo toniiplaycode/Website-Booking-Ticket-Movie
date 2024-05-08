@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/UserController");
 const MiddleWare = require("../middleware/AuthMiddleware");
+const { uploadUser } = require("../middleware/uploadMiddleware");
+
+router.post("/createNewUser", userController.createNewUser);
 
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.get(
@@ -17,12 +20,11 @@ router.get(
   userController.getAllUser
 );
 
-router.post("/createNewUser", userController.createNewUser);
-
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
-router.put(
+router.post(
   "/updateUser",
   MiddleWare.AuthMiddleWareAdminStaffClientRole,
+  uploadUser.single("file"),
   userController.updateUser
 );
 

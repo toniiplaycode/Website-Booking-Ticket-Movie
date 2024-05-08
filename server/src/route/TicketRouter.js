@@ -4,12 +4,18 @@ const Controller = require("../controllers/TicketController");
 const MiddleWare = require("../middleware/AuthMiddleware");
 
 //Nếu role là R1 R2 hoặc có userId chuyền từ body lên chùng với tài khoản đang nhập mới xem được
-router.get("/getDetail", MiddleWare.AuthMiddleWareBody, Controller.getDetail);
+router.get(
+  "/getDetail",
+  MiddleWare.AuthMiddleWareCheckLogin,
+  Controller.getDetail
+); //*
+
 router.get(
   "/getDetailWithUser",
-  MiddleWare.AuthMiddleWareBody,
+  MiddleWare.AuthMiddleWareCheckLogin,
   Controller.getDetailWithUser
 );
+
 router.get(
   "/getAll",
   MiddleWare.AuthMiddleWareAdminStaffRole,
@@ -24,7 +30,7 @@ router.get("/notEmptySeat", Controller.notEmptySeat);
 
 //Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới sữa được
 //data chuyền từ body lên chùng với tài khoảng đang nhập mới sữa được (k thể sữa UserId)
-router.put("/update", MiddleWare.AuthMiddleWareBody, Controller.update);
+router.put("/update", MiddleWare.AuthMiddleWareCheckLogin, Controller.update); //*
 
 router.put(
   "/updateStatus",
@@ -35,8 +41,8 @@ router.put(
 //Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới xóa được
 router.delete(
   "/deleteOBJ",
-  MiddleWare.AuthMiddleWareBody,
+  MiddleWare.AuthMiddleWareCheckLogin,
   Controller.deleteOBJ
-);
+); //*
 
 module.exports = router;

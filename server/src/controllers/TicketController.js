@@ -85,7 +85,7 @@ const updateStatus = async (req, res) => {
 
 let deleteOBJ = async (req, res) => {
   try {
-    await Service.deleteOBJ(req.body.id);
+    await Service.deleteOBJ(req.query.id);
     return res.status(200).json("Delete successful");
   } catch (e) {
     return res.status(404).json({

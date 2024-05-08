@@ -6,15 +6,15 @@ const MiddleWare = require("../middleware/AuthMiddleware");
 router.get("/getAll", Controller.getAll);
 
 //Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
-router.post("/addNew", MiddleWare.AuthMiddleWareBody, Controller.addNew);
+router.post("/addNew", MiddleWare.AuthMiddleWareCheckLogin, Controller.addNew);
 
 //Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
-router.put("/update", MiddleWare.AuthMiddleWareBody, Controller.update);
+router.put("/update", MiddleWare.AuthMiddleWareCheckLogin, Controller.update);
 
 //Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
 router.delete(
   "/deleteOBJ",
-  MiddleWare.AuthMiddleWareBody,
+  MiddleWare.AuthMiddleWareCheckLogin,
   Controller.deleteOBJ
 );
 

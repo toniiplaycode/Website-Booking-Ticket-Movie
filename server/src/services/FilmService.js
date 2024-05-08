@@ -89,19 +89,21 @@ let addNewFilm = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       await db.Film.create({
-        nameFilm: data.nameFilm,
-        description: data.description,
-        nameTypeFilm: data.nameTypeFilm,
-        time: data.time,
-        author: data.author,
-        actor: data.actor,
-        image: data.image,
-        trailer: data.trailer,
-        price: data.price,
-        language: data.language,
-        releaseDate: data.releaseDate,
+        nameFilm: data.body.nameFilm,
+        description: data.body.description,
+        nameTypeFilm: data.body.nameTypeFilm,
+        time: data.body.time,
+        author: data.body.author,
+        actor: data.body.actor,
+        image: data.file.path,
+        trailer: data.body.trailer,
+        price: data.body.price,
+        language: data.body.language,
+        releaseDate: data.body.releaseDate,
       });
-      resolve();
+      resolve({
+        message: "create successful ",
+      });
     } catch (e) {
       reject(e);
     }
@@ -121,7 +123,7 @@ let updateFilm = async (data) => {
       film.time = data.body.time;
       film.author = data.body.author;
       film.actor = data.body.actor;
-      film.image = data.body.image;
+      film.image = data.file.path;
       film.trailer = data.body.trailer;
       film.price = data.body.price;
       film.language = data.body.language;

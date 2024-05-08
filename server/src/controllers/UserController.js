@@ -47,7 +47,7 @@ const createNewUser = async (req, res) => {
         message: "The input is required",
       });
     }
-    const response = await UserService.createNewUser(req.body);
+    const response = await UserService.createNewUser(req);
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
@@ -59,7 +59,7 @@ const createNewUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     await UserService.updateUser(req);
-    return res.status(200).json("Update user successful ");
+    return res.status(200).json("Update user successful");
   } catch (e) {
     return res.status(404).json({
       message: e,
