@@ -88,6 +88,7 @@ const getAllTicketWithFilm = (data) => {
 let addNewFilm = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log(data.body);
       await db.Film.create({
         nameFilm: data.body.nameFilm,
         description: data.body.description,
