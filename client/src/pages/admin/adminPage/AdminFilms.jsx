@@ -76,21 +76,20 @@ const AdminFilms = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      const obj = {
-        nameFilm: movieName,
-        description,
-        nameTypeFilm: genre,
-        time: duration,
-        author,
-        actor: cast,
-        trailer: trailerLink,
-        price,
-        language,
-        releaseDate: selectedReleaseDate,
-        image,
-      };
+      const formData = new FormData();
+      formData.append("nameFilm", movieName);
+      formData.append("description", description);
+      formData.append("nameTypeFilm", genre);
+      formData.append("time", duration);
+      formData.append("author", author);
+      formData.append("actor", cast);
+      formData.append("trailer", trailerLink);
+      formData.append("price", price);
+      formData.append("language", language);
+      formData.append("releaseDate", selectedReleaseDate);
+      formData.append("image", image);
 
-      postNewFilm(obj);
+      postNewFilm(formData);
     }
   };
 
@@ -102,6 +101,7 @@ const AdminFilms = () => {
         obj,
         {
           headers: {
+            "Content-Type": "multipart/form-data",
             token: token,
           },
         }
@@ -204,7 +204,7 @@ const AdminFilms = () => {
               type="file"
               onChange={(e) => {
                 handlePreviewImg(e);
-                setImage(e);
+                setImage(e.target.files[0]);
               }}
             />
           </div>
