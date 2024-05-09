@@ -10,8 +10,17 @@ import AdminTickets from "./adminPage/AdminTickets";
 import AdminTicketDetail from "./components/AdminTicketDetail";
 import AdminUsers from "./adminPage/AdminUsers";
 import AdminCalenderReleases from "./adminPage/AdminCalenderReleases";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllTypeof } from "../../reducers/apiAdminTypeof";
+import { useEffect } from "react";
 
 const AdminPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllTypeof());
+  }, []);
+
   return (
     <Container>
       <NavbarAdmin />

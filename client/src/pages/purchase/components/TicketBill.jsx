@@ -245,11 +245,11 @@ const TicketBill = ({ selectedPayment }) => {
                 // });
                 dispatch(
                   postBookUserTicket({
-                    userId,
+                    // userId,
                     calendarReleaseId,
                     arraySeat,
                     namePaymentMethod,
-                    nameStatus: "...",
+                    // nameStatus: "...",
                   })
                 );
                 dispatch(handleClearSelectedCrWithFilm());

@@ -14,8 +14,13 @@ body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   line-height: 1;
   font-weight: 400;
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   color: #cccdd0;
+}
+@media (max-width: 576px) {
+  body {
+    font-size: 0.9rem;
+  }
 }
 
 .name-cinema {
@@ -202,7 +207,7 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   color: #cccdd0;
 }
 .typof-movies-container .typof-movies-item:hover {
@@ -231,7 +236,7 @@ body {
   border-radius: 20px;
   font-weight: 600;
   cursor: pointer;
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   color: #cccdd0;
   margin-bottom: 20px;
 }
@@ -252,11 +257,12 @@ body {
 
 .purchased-ticket-container {
   display: flex;
+  position: relative;
   justify-content: space-between;
   background-color: #151723;
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 @media (max-width: 768px) {
   .purchased-ticket-container {
@@ -294,6 +300,26 @@ body {
     height: 250px;
   }
 }
+.purchased-ticket-container .ticket-infor-item-status {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  padding: 12px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 12px;
+  font-weight: 600;
+}
+.purchased-ticket-container .booked {
+  background: #eb3656;
+}
+.purchased-ticket-container .watched {
+  background: #35a7ff;
+}
+.purchased-ticket-container .expired {
+  background: #ff0035;
+}
 
 .search-movies-container {
   display: flex;
@@ -304,7 +330,7 @@ body {
   padding: 6px 10px;
   border-radius: 10px;
   width: 60%;
-  background: #1A1D2C;
+  background: #1a1d2c;
   border: 3px solid #eb3656;
   color: #cccdd0;
 }
@@ -360,7 +386,8 @@ body {
           backdrop-filter: blur(12px);
   border-radius: 20px;
 }
-.nav-container ol, .nav-container ul {
+.nav-container ol,
+.nav-container ul {
   padding: 0;
 }
 .nav-container .nav-item:link,
@@ -430,7 +457,7 @@ body {
 .side-drawer {
   position: fixed;
   height: 100%;
-  background: #1A1D2C;
+  background: #1a1d2c;
   top: 0;
   right: 100%;
   width: 40%;
@@ -454,16 +481,18 @@ body {
   padding: 20px 20px 30px 20px;
 }
 
-.drawer-item > p, .drawer-signup-signin > p {
+.drawer-item > p,
+.drawer-signup-signin > p {
   border-bottom: 0.1px solid gray;
   margin-left: 10px;
   margin-right: 10px;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
   font-weight: 600;
   cursor: pointer;
 }
 
-.drawer-item > p:hover, .drawer-signup-signin > p:hover {
+.drawer-item > p:hover,
+.drawer-signup-signin > p:hover {
   color: #eb3656;
   transition: all 0.3s;
 }
@@ -831,7 +860,7 @@ body {
   }
 }
 .newmovie-container .newmovie-title {
-  width: 240px;
+  width: 250px;
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
@@ -841,7 +870,7 @@ body {
 }
 .newmovie-container .item-container {
   position: relative;
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   border-radius: 10px;
   margin-bottom: 16px;
   font-size: 0.7rem;
@@ -1001,7 +1030,7 @@ body {
   padding: 60px 0;
 }
 .movies-backdrop .movies-collection-item {
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   border-radius: 20px;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.2509803922);
   margin: 0 10px 40px 10px;
@@ -1156,7 +1185,7 @@ body {
 .trailer-container {
   position: fixed;
   width: 60%;
-  background: #1A1D2C;
+  background: #1a1d2c;
   border-radius: 10px;
   z-index: 200;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
@@ -1526,7 +1555,7 @@ body {
   border-radius: 14px;
   font-weight: 600;
   cursor: pointer;
-  background-color: #1A1D2C;
+  background-color: #1a1d2c;
   color: #cccdd0;
 }
 .payment-container .payment-item.selected {
@@ -1648,15 +1677,16 @@ body {
   text-align: center;
   font-weight: 600;
 }
-.adminpage-ticket-container .adminpage-ticket .adminpage-ticket-title {
-  color: #eb3656;
-}
 .adminpage-ticket-container .adminpage-ticket .adminpage-ticket-img {
   width: 100%;
   border-radius: 10px;
   -o-object-fit: cover;
      object-fit: cover;
   margin-bottom: 20px;
+}
+.adminpage-ticket-container .adminpage-ticket .adminpage-ticket-title {
+  height: 50px;
+  line-height: 19px;
 }
 
 .form-heading-container {
@@ -1669,7 +1699,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .form-movie-add *:focus {
@@ -1689,7 +1719,11 @@ body {
   }
 }
 
-.form-movie-add div input, textarea, .admin-select-type, .add-input-container input, .form-movie-add .admin-picker-film {
+.form-movie-add div input,
+textarea,
+.admin-select-type,
+.add-input-container input,
+.form-movie-add .admin-picker-film {
   width: 80%;
   margin-left: auto;
   font-family: inherit;
@@ -1702,13 +1736,17 @@ body {
   cursor: pointer;
 }
 @media (max-width: 992px) {
-  .form-movie-add div input, textarea, .admin-select-type, .add-input-container input, .form-movie-add .admin-picker-film {
+  .form-movie-add div input,
+  textarea,
+  .admin-select-type,
+  .add-input-container input,
+  .form-movie-add .admin-picker-film {
     width: 100%;
   }
 }
 
 .admin-picker-film {
-  background: #FFFFFF;
+  background: #ffffff;
 }
 .admin-picker-film .admin-picker-film-item {
   padding: 0;
@@ -1719,7 +1757,8 @@ body {
   }
 }
 
-.add-input-container input, .add-input-container textarea {
+.add-input-container input,
+.add-input-container textarea {
   width: 100%;
   margin: 10px 0;
 }
@@ -1740,7 +1779,7 @@ textarea {
 }
 
 input[type=file] {
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 .img-preview-container {
@@ -1877,4 +1916,15 @@ input[type=file] {
 }
 .admin-table-container .admin-table-parent-use-client .room-flex-more {
   flex: 2;
+}
+
+.error-admin-film {
+  color: #eb3656;
+  text-align: right;
+  font-weight: 600;
+}
+@media (max-width: 992px) {
+  .error-admin-film {
+    text-align: center;
+  }
 }/*# sourceMappingURL=styles.css.map */

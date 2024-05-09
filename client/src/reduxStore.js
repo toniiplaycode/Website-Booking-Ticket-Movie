@@ -18,6 +18,8 @@ import apiUpdateUser from "./reducers/apiUpdateUser";
 import apiUserTicket from "./reducers/apiUserTicket";
 import apiAdminTicket from "./reducers/apiAdminTicket";
 import apiAdminUser from "./reducers/apiAdminUser";
+import apiAdminTypeof from "./reducers/apiAdminTypeof";
+import dialogAlert from "./reducers/dialogAlert";
 
 const reduxStore = configureStore({
     reducer: {
@@ -40,6 +42,8 @@ const reduxStore = configureStore({
         apiUserTicket: apiUserTicket,
         apiAdminTicket: apiAdminTicket,
         apiAdminUser: apiAdminUser,
+        apiAdminTypeof: apiAdminTypeof,
+        dialogAlert: dialogAlert,
     }
 });
 
