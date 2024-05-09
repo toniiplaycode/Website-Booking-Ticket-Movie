@@ -91,7 +91,6 @@ let updateUser = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const userId = await JSON.parse(atob(data.headers.token.split(".")[1]));
-
       const user = await db.User.findOne({
         where: { id: userId.id },
         raw: false,

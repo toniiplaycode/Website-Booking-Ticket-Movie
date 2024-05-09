@@ -18,7 +18,7 @@ router.get(
 router.post(
   "/addNew",
   MiddleWare.AuthMiddleWareAdminStaffRole,
-  uploadFilm.single("file"),
+  uploadFilm.single("image"),
   Controller.addNewFilm
 );
 
@@ -26,7 +26,7 @@ router.post(
 router.post(
   "/update",
   MiddleWare.AuthMiddleWareAdminStaffRole,
-  uploadFilm.single("file"),
+  uploadFilm.single("image"),
   Controller.updateFilm
 );
 

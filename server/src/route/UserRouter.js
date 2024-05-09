@@ -24,7 +24,7 @@ router.get(
 router.post(
   "/updateUser",
   MiddleWare.AuthMiddleWareAdminStaffClientRole,
-  uploadUser.single("file"),
+  uploadUser.single("avatar"),
   userController.updateUser
 );
 
