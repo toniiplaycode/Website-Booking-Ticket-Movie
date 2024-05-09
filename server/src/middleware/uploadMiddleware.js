@@ -3,7 +3,7 @@ const multer = require("multer");
 
 const storageFilm = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../client/upload/images/films");
+    cb(null, "../client/public/images/films");
   },
   filename: (req, file, cb) => {
     return cb(
@@ -19,7 +19,7 @@ const uploadFilm = multer({
 
 const storageUser = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../client/upload/images/users");
+    cb(null, "../client/public/images/users");
   },
   filename: (req, file, cb) => {
     return cb(
