@@ -88,6 +88,15 @@ const getAllTicketWithFilm = (data) => {
 let addNewFilm = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const checknameFilm = await db.Film.findOne({
+        where: { nameFilm: data.body.nameFilm },
+      });
+      if (checknameFilm) {
+        resolve({
+          status: "ERR",
+          message: "nameFilm already exist",
+        });
+      }
       await db.Film.create({
         nameFilm: data.body.nameFilm,
         description: data.body.description,
@@ -102,6 +111,7 @@ let addNewFilm = async (data) => {
         releaseDate: data.body.releaseDate,
       });
       resolve({
+        status: "OK",
         message: "create successful ",
       });
     } catch (e) {

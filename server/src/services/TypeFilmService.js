@@ -47,11 +47,23 @@ const getAll = () => {
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const checknameTypeFilm = await dbTemp.findOne({
+        where: { nameTypeFilm: data.body.nameTypeFilm },
+      });
+      if (checknameTypeFilm) {
+        resolve({
+          status: "ERR",
+          message: "nameTypeFilm already exist",
+        });
+      }
       await dbTemp.create({
         nameTypeFilm: data.body.nameTypeFilm,
         descriptionType: data.body.descriptionType,
       });
-      resolve();
+      resolve({
+        status: "OK",
+        message: "create successful",
+      });
     } catch (e) {
       reject(e);
     }
