@@ -97,6 +97,31 @@ let addNewFilm = async (data) => {
           message: "nameFilm already exist",
         });
       }
+
+      let ArrReleaseDate = data.body.releaseDate.split("/");
+
+      let check = 0;
+      if (parseInt(ArrReleaseDate[2]) > new Date().getFullYear()) {
+        check = 1;
+      } else if (parseInt(ArrReleaseDate[2]) == new Date().getFullYear()) {
+        if (parseInt(ArrReleaseDate[1]) > new Date().getMonth() + 1) {
+          check = 1;
+        } else if (parseInt(ArrReleaseDate[1]) == new Date().getMonth() + 1) {
+          if (parseInt(ArrReleaseDate[0]) > new Date().getDate()) {
+            check = 1;
+          }
+        }
+      }
+
+      console.log(check);
+      if (check == 0) {
+        resolve({
+          status: "ERR",
+          message: "releaseDate error",
+        });
+        return;
+      }
+
       await db.Film.create({
         nameFilm: data.body.nameFilm,
         description: data.body.description,
