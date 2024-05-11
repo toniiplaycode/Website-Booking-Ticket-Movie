@@ -1,155 +1,224 @@
-import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import { TimePicker } from "@mui/x-date-pickers/TimePicker"
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useState } from "react";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCr, postAddCr } from "../../../reducers/apiAdminCr";
+import axios from "axios";
+import AdminCrItem from "../components/AdminCrItem";
+import { fetchCinemaDetail } from "../../../reducers/apiCinemaDetail";
+import { toast } from "react-toastify";
+import AlertDialog from "../../../components/AlertDialog";
 
 const AdminCalenderReleases = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-        const fullDate = (`${date.$D}/${date.$M + 1}/${date.$y}`);
-        console.log(fullDate);
-    };
+  const dispatch = useDispatch();
+  const [date, setDate] = useState(null);
+  const [selectDate, setSelectDate] = useState(null);
+  const handleDateChange = (date) => {
+    setDate(date);
+    setSelectDate(`${date.$D}/${date.$M + 1}/${date.$y}`);
+  };
 
-    const [selectedTime, setSelectedTime] = useState(null);
-    const handleTimeChange = (time) => {
-        setSelectedTime(time);
-        // Check if time is not null before logging
-        if (time) {
-          const hours = time.$H;
-          const minutes = time.$m;
-          const formattedHours = hours % 12 || 12;
-          const ampm = hours >= 12 ? 'PM' : 'AM';
-          console.log(`${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`);
+  const [time, setTime] = useState(null);
+  const [selectTime, setSelectTime] = useState(null);
+  const handleTimeChange = (time) => {
+    setTime(time);
+    // Check if time is not null before logging
+    if (time) {
+      const hours = time.$H;
+      const minutes = time.$m;
+      setSelectTime(
+        `${hours < 10 ? "0" + hours : hours}:${
+          minutes < 10 ? "0" + minutes : minutes
+        }`
+      );
+    }
+  };
+
+  const [listCinemaRoom, setListCinemaRoom] = useState();
+  const [groupCr, setGroupCr] = useState();
+  const listAllCr = useSelector((state) => state.apiAdminCr.listAllCr);
+  let films = useSelector((state) => state.films.films.all);
+  let CinemaDetail = useSelector((state) => state.apiCinemaDetail.CinemaDetail);
+  let statusPostAddCr = useSelector(
+    (state) => state.apiAdminCr.statusPostAddCr
+  );
+  const [selectedRoomCinema, setSelectedRoomCinema] = useState();
+  const [selectedIdFilm, setSelectedIdFilm] = useState();
+
+  useEffect(() => {
+    dispatch(fetchAllCr());
+  }, []);
+
+  useEffect(() => {
+    // nhóm các lịch chiếu phim theo từng phim
+    const groupElementsByFilmId = async (data) => {
+      let groupedData = {};
+      const axiosPromises = data.map(async (element) => {
+        try {
+          const res = await axios.get(
+            `http://localhost:8000/api/film/getDetail?id=${element.filmId}`
+          );
+          const filmName = res.data.data[0].nameFilm;
+          if (!groupedData[filmName]) {
+            groupedData[filmName] = [];
+          }
+          groupedData[filmName].push(element);
+        } catch (error) {
+          console.error(
+            `Error fetching film details for filmId ${element.filmId}:`,
+            error
+          );
         }
+      });
+
+      // Đợi cho tất cả các promise hoàn thành
+      await Promise.all(axiosPromises);
+      setGroupCr(groupedData);
+      return groupedData;
     };
 
-    return(
-        <>
-            <p className='adminpage-title'>
-                Suất chiếu hiện có
-            </p>
-            <div className="admin-table-container">
-                <div className="admin-table-parent">
-                    <div className="admin-table-item">
-                        Kẻ ẩn danh
-                    </div>
-                    <div className="admin-table-item table-item-time">
-                        10/4/2024
-                        <span>2:30 PM</span>
-                        <span>4:30 PM</span>
-                    </div>
-                    <div className="admin-table-item">
-                        Rạp phim Cần Thơ
-                    </div>
-                    <div className="admin-table-item">
-                        Phòng CT1
-                    </div>
-                    <div className="admin-table-handle">
-                        <button>
-                            Sửa
-                        </button>
-                        <button>
-                            Xoá
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className="admin-table-container">
-                <div className="admin-table-parent">
-                    <div className="admin-table-item">
-                        DUNE
-                    </div>
-                    <div className="admin-table-item table-item-time">
-                        12/4/2024
-                        <span>2:30 PM</span>
-                        <span>4:30 PM</span>
-                        <span>6:30 PM</span>
-                    </div>
-                    <div className="admin-table-item">
-                        Rạp phim HCM
-                    </div>
-                    <div className="admin-table-item">
-                        Phòng CT2
-                    </div>
-                    <div className="admin-table-handle">
-                        <button>
-                            Sửa
-                        </button>
-                        <button>
-                            Xoá
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <p className='adminpage-title'>
-                Thêm suất chiếu
-            </p>
-            <div className="form-heading-container">
-                <div
-                    className="form-movie-add"
-                    onSubmit={(e) => {
-                    }}
-                >
-                    <div>
-                        <p>Phim:</p>
-                        <select className="admin-select-type">
-                            <option>
-                                Kẻ ẩn danh
-                            </option>
-                            <option>
-                                DUNE
-                            </option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Ngày và giờ:</p>
-                        
-                        <div className='admin-picker-film'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker label="Chọn ngày"
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
-                                    className='admin-picker-film-item'
-                                />
-                                <TimePicker label="Chọn giờ" 
-                                    value={selectedTime}
-                                    onChange={handleTimeChange}
-                                    className='admin-picker-film-item'
-                                />
-                            </LocalizationProvider>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Rạp:</p>
-                        <select className="admin-select-type">
-                            <option>
-                               Rạp phim Cần Thơ
-                            </option>
-                            <option>
-                               Rạp phim HCM
-                            </option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Phòng chiếu:</p>
-                        <select className="admin-select-type">
-                            <option>
-                               CT1
-                            </option>
-                            <option>
-                               CT2
-                            </option>
-                        </select>
-                    </div>
-                    <button type="submit" className="btn-admin">
-                        Thêm suất
-                    </button>
-                </div>
-            </div>
-        </>
-    )
-}
+    groupElementsByFilmId(listAllCr);
+  }, [listAllCr]);
 
-export default AdminCalenderReleases 
+  useEffect(() => {
+    const getAllCinema = async () => {
+      const res = await axios.get(
+        `http://localhost:8000/api/cinemaRoom/getAll`
+      );
+      setListCinemaRoom(res.data.all);
+    };
+    getAllCinema();
+  }, []);
+
+  useEffect(() => {
+    if (selectedRoomCinema) {
+      dispatch(fetchCinemaDetail(selectedRoomCinema.CinemaId));
+    }
+  }, [selectedRoomCinema]);
+
+  const handleAddCr = () => {
+    if (
+      !selectedRoomCinema ||
+      !selectedRoomCinema.id ||
+      !selectedIdFilm ||
+      !selectTime ||
+      !selectDate
+    ) {
+      toast.error("Vui lòng điền đủ thông tin !");
+      return;
+    }
+
+    const obj = {
+      nameCalendarRelease: "...",
+      cinemaRoomId: selectedRoomCinema.id,
+      filmId: selectedIdFilm,
+      showTimeStart: selectTime,
+      dateWatch: selectDate,
+    };
+
+    dispatch(postAddCr(obj));
+  };
+
+  useEffect(() => {
+    if (statusPostAddCr == "succeeded") {
+      setSelectedRoomCinema("");
+      setSelectedIdFilm("");
+      setTime(null);
+      setDate(null);
+    }
+  }, [statusPostAddCr]);
+
+  return (
+    <>
+      <AlertDialog />
+      <p className="adminpage-title">Suất chiếu hiện có</p>
+      {groupCr &&
+        Object.entries(groupCr).map(([filmName, schedules], index) => (
+          <div key={index}>
+            <p className="admin-table-group-tile">{filmName}</p>
+            {schedules.map((item, subIndex) => (
+              <AdminCrItem item={item} key={subIndex} />
+            ))}
+          </div>
+        ))}
+      <p className="adminpage-title">Thêm suất chiếu</p>
+      <div className="form-heading-container">
+        <div className="form-movie-add" onSubmit={(e) => {}}>
+          <div>
+            <p>Phim:</p>
+            <select
+              className="admin-select-type"
+              onChange={(e) => setSelectedIdFilm(e.target.value)}
+              value={selectedIdFilm}
+            >
+              <option value=""></option>
+              {films &&
+                films.map((item, index) => (
+                  <option key={index} value={item.id}>
+                    {item.nameFilm}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <div>
+            <p>Ngày và giờ:</p>
+
+            <div className="admin-picker-film">
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Chọn ngày"
+                  value={date}
+                  onChange={handleDateChange}
+                  className="admin-picker-film-item"
+                />
+                <TimePicker
+                  label="Chọn giờ"
+                  value={time}
+                  ampm={false}
+                  onChange={handleTimeChange}
+                  className="admin-picker-film-item"
+                />
+              </LocalizationProvider>
+            </div>
+          </div>
+          <div>
+            <p>Phòng chiếu:</p>
+            <select
+              className="admin-select-type"
+              onChange={(e) => {
+                setSelectedRoomCinema(JSON.parse(e.target.value));
+              }}
+              value={selectedRoomCinema && selectedRoomCinema.nameCinema}
+            >
+              <option value=""></option>
+              {listCinemaRoom &&
+                listCinemaRoom.map((item, index) => (
+                  <option key={index} value={JSON.stringify(item)}>
+                    {item.nameCinemaRoom}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <div>
+            <p>Rạp:</p>
+            <input
+              value={selectedRoomCinema ? CinemaDetail.nameCinema : ""}
+              readonly
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn-admin"
+            onClick={() => handleAddCr()}
+          >
+            Thêm suất
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AdminCalenderReleases;

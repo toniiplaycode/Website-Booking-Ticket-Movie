@@ -371,6 +371,12 @@ body {
   font-weight: 500;
 }
 
+//=====warning time date====//
+.warning-time-date{
+  margin-top: 20px;
+  font-size: 1.4rem;
+}
+
 //=====NAVBAR=====//
 .nav-container {
   max-width: 100%;
@@ -1936,6 +1942,12 @@ input[type="file"] {
   }
 }
 
+.admin-table-group-tile{
+  font-size: 1.4rem;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
 .admin-table-container {
   display: flex;
   flex-direction: column;
@@ -1984,7 +1996,7 @@ input[type="file"] {
       flex: 3;
 
       span {
-        margin-left: 10px;
+        margin-left: 20px;
       }
 
       @media (max-width: 992px) {

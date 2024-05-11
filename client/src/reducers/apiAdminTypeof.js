@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isFluxStandardAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -18,18 +18,20 @@ export const fetchAllTypeof = createAsyncThunk(
 
 export const postTypeof = createAsyncThunk('postTypeof/apiAdminTypeof', async (obj, thunkAPI) => {
   const token = thunkAPI.getState().apiLoginLogout.token;
-  try {
     const res = await axios.post(`http://localhost:8000/api/typeFilm/addNew`, obj, {
       headers: {
         'token': token
       }
     });    
-    toast.success("Thêm thể loại thành công !");
     thunkAPI.dispatch(fetchAllTypeof()); // post xong tự động fetch lại
+    if(res.data.message == "create successful") {
+      toast.success("Thêm thể loại thành công !");
+    }
+    if(res.data.message == "nameTypeFilm already exist") {
+      toast.error("Thể loại đã tồn tại !");
+    }
+  
     return res.data;
-  } catch (error) {
-    toast.error("Tên thể loại đã tồn tại !");
-  }
 });
 
 export const deleteTypeof = createAsyncThunk('deleteTypeof/apiAdminTypeof', async (obj, thunkAPI) => {

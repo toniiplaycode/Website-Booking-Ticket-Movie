@@ -7,6 +7,7 @@ const initialState = {
     error: null,
 };
 
+
 export const fetchCrWithFilm = createAsyncThunk('crWithFilm/apiCrWithFilm', async (filmId) => {
     const res = await axios.get(`http://localhost:8000/api/calendarRelease/getAllWithFilmId?filmId=${filmId}`);
     return res.data.all;

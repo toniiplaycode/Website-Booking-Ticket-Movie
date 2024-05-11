@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide() {
+export default function AlertDialog() {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.dialogAlert.showDialog);

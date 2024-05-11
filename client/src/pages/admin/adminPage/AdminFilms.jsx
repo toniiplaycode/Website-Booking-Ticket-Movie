@@ -7,8 +7,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
-import { fetchFilms } from "../../../reducers/apiFilms";
-import axios from "axios";
+import { fetchFilms, postFilms } from "../../../reducers/apiFilms";
+import AlertDialog from "../../../components/AlertDialog";
 
 const AdminFilms = () => {
   const dispatch = useDispatch();
@@ -38,11 +38,11 @@ const AdminFilms = () => {
   });
 
   const token = useSelector((state) => state.apiLoginLogout.token);
+  const statusPost = useSelector((state) => state.films.statusPost);
+  const listTypeof = useSelector((state) => state.apiAdminTypeof.listTypeof);
 
   const handlePreviewImg = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
-
-    // console.log(e.target.value);
 
     if (errors.file) {
       setErrors({ ...errors, file: "" });
@@ -89,26 +89,7 @@ const AdminFilms = () => {
       formData.append("releaseDate", selectedReleaseDate);
       formData.append("image", image);
 
-      postNewFilm(formData);
-    }
-  };
-
-  const postNewFilm = async (obj) => {
-    console.log(obj);
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/api/film/addNew",
-        obj,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            token: token,
-          },
-        }
-      );
-      console.log("Response:", res.data);
-    } catch (error) {
-      console.error("Error:", error);
+      dispatch(postFilms(formData));
     }
   };
 
@@ -135,8 +116,27 @@ const AdminFilms = () => {
     }
   }, [films, search]);
 
+  useEffect(() => {
+    if (statusPost == "succeeded") {
+      setFile("");
+      setImage("");
+      setMovieName("");
+      setDescription("");
+      setDuration("");
+      setReleaseDate(null);
+      setSelectedReleaseDate("");
+      setCast("");
+      setAuthor("");
+      setPrice("");
+      setTrailerLink("");
+      setGenre("Hành động");
+      setLanguage("Phụ đề tiếng Việt");
+    }
+  }, [statusPost]);
+
   return (
     <>
+      <AlertDialog />
       <p className="adminpage-title">Thêm - sửa phim</p>
       <div className="search-movies-container">
         <input
@@ -180,7 +180,7 @@ const AdminFilms = () => {
         </div>
       </div>
       <div className="form-heading-container">
-        <div className="form-movie-add" onSubmit={(e) => {}}>
+        <div className="form-movie-add">
           <div>
             <p>Tên phim:</p>
             <input
@@ -338,8 +338,9 @@ const AdminFilms = () => {
                 setGenre(e.target.value);
               }}
             >
-              <option>Hành động</option>
-              <option>Tình cảm</option>
+              {listTypeof.map((item, index) => (
+                <option key={index}>{item.nameTypeFilm}</option>
+              ))}
             </select>
           </div>
 
@@ -357,7 +358,7 @@ const AdminFilms = () => {
             </select>
           </div>
 
-          <button type="submit" className="btn-admin" onClick={handleSubmit}>
+          <button className="btn-admin" onClick={handleSubmit}>
             Thêm phim
           </button>
         </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import InputAddTypeof from "../components/InputAddTypeof";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTypeof, fetchAllTypeof } from "../../../reducers/apiAdminTypeof";
-import AlertDialogSlide from "../../../components/AlertDialogSlide";
+import AlertDialog from "../../../components/AlertDialog";
 import { showDialog } from "../../../reducers/dialogAlert";
 
 const AdminTypeof = () => {
@@ -21,7 +21,7 @@ const AdminTypeof = () => {
 
   return (
     <>
-      <AlertDialogSlide />
+      <AlertDialog />
       <p className="adminpage-title">Thể loại phim</p>
       <div className="admin-table-container">
         {listTypeof.length > 0 &&

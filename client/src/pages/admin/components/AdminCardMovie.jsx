@@ -1,12 +1,23 @@
-import {
-  faCalendarDays,
-  faClock,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertMinutesToHoursAndMinutes } from "../../../utils/functionCommon";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTypeof } from "../../../reducers/apiAdminTypeof";
+import { deleteFilms } from "../../../reducers/apiFilms";
+import { showDialog } from "../../../reducers/dialogAlert";
+import { useEffect, useState } from "react";
 
 const AdminCardMovie = ({ item }) => {
+  const dispatch = useDispatch();
+  const [deleteFilm, setDeleteFilm] = useState();
+  const confirm = useSelector((state) => state.dialogAlert.confirm);
+
+  useEffect(() => {
+    if (confirm.payload == true) {
+      dispatch(deleteFilms({ id: deleteFilm }));
+    }
+  }, [confirm]);
+
   return (
     <div className="item-container item-admin">
       <div className="item-img">
@@ -27,7 +38,15 @@ const AdminCardMovie = ({ item }) => {
         </p>
       </div>
       <button className="book-btn">Sửa</button>
-      <button className="book-btn book-btn-traler">Xoá</button>
+      <button
+        className="book-btn book-btn-traler"
+        onClick={() => {
+          dispatch(showDialog());
+          setDeleteFilm(item.id);
+        }}
+      >
+        Xoá
+      </button>
     </div>
   );
 };
