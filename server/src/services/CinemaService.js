@@ -45,12 +45,28 @@ const getAllCinema = () => {
 let addNewCinema = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const check = await db.Cinema.findOne({ where: { id: data.id } });
+      const checkName = await db.Cinema.findOne({
+        where: { nameCinema: data.nameCinema },
+      });
+      if (check || checkName) {
+        resolve({
+          status: "ERR",
+          message: "cinema already exist",
+        });
+        return;
+      }
+
       await db.Cinema.create({
         id: data.id,
         nameCinema: data.nameCinema,
         address: data.address,
       });
-      resolve();
+
+      resolve({
+        status: "OK",
+        message: "create successful",
+      });
     } catch (e) {
       reject(e);
     }

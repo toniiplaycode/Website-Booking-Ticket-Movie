@@ -31,8 +31,8 @@ const getAllCinema = async (req, res) => {
 
 const addNewCinema = async (req, res) => {
   try {
-    await Service.addNewCinema(req.body);
-    return res.status(200).json("add New Cinema successful");
+    const response = await Service.addNewCinema(req.body);
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       message: e,
