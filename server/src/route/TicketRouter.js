@@ -38,6 +38,12 @@ router.put(
   Controller.updateStatus
 );
 
+router.put(
+  "/updateStatusExpired",
+  MiddleWare.AuthMiddleWareAdminStaffRole,
+  Controller.updateStatusExpired
+);
+
 //Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới xóa được
 router.delete(
   "/deleteOBJ",

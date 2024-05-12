@@ -3,6 +3,7 @@ const db = require("../models/index");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
 const pool = require("../config/commectDBWithQuery");
+const { Op } = require("@sequelize/core");
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -203,6 +204,44 @@ let updateStatus = async (data) => {
   });
 };
 
+let updateStatusExpired = async (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const AllCalendarRelease = await db.CalendarRelease.findAll();
+      let listCalendarReleaseExpired = [];
+      AllCalendarRelease.forEach((item) => {
+        let arrTmp = [];
+        arrTmp[0] = item.dateWatch.split("/")[1];
+        arrTmp[1] = item.dateWatch.split("/")[0];
+        arrTmp[2] = item.dateWatch.split("/")[2];
+        item.dateWatch = arrTmp.join("/");
+        if (Date.parse(item.dateWatch) < Date.parse(new Date())) {
+          listCalendarReleaseExpired.push(item);
+        }
+      });
+      listCalendarReleaseExpired.forEach(async (item) => {
+        const listTicket = await db.Ticket.findAll({
+          where: {
+            calendarReleaseId: item.id,
+          },
+        });
+        listTicket.forEach(async (ele) => {
+          ele.nameStatus = "Expired";
+          await ele.save();
+        });
+      });
+      resolve({
+        status: "OK",
+        message: "Update successful",
+        // all: AllCalendarRelease,
+        listCalendarReleaseExpired: listCalendarReleaseExpired,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let deleteOBJ = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -226,4 +265,5 @@ module.exports = {
   notEmptySeat,
   getDetailWithUser,
   updateStatus,
+  updateStatusExpired,
 };

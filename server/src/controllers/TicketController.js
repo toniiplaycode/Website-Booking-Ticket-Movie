@@ -83,6 +83,17 @@ const updateStatus = async (req, res) => {
   }
 };
 
+const updateStatusExpired = async (req, res) => {
+  try {
+    const response = await Service.updateStatusExpired(req);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
+
 let deleteOBJ = async (req, res) => {
   try {
     await Service.deleteOBJ(req.query.id);
@@ -103,4 +114,5 @@ module.exports = {
   notEmptySeat,
   getDetailWithUser,
   updateStatus,
+  updateStatusExpired,
 };
