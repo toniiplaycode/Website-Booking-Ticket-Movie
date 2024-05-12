@@ -182,9 +182,21 @@ let updateStatus = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
-      temp.nameStatus = data.body.nameStatus;
-      await temp.save();
-      resolve();
+      if (
+        data.body.nameStatus == "Watched" ||
+        data.body.nameStatus == "Expired"
+      ) {
+        temp.nameStatus = data.body.nameStatus;
+        await temp.save();
+        resolve({
+          status: "OK",
+          message: "Update successful",
+        });
+      }
+      resolve({
+        status: "ERR",
+        message: "input only: Watched or Watched",
+      });
     } catch (e) {
       reject(e);
     }

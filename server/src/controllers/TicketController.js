@@ -74,8 +74,8 @@ const update = async (req, res) => {
 
 const updateStatus = async (req, res) => {
   try {
-    await Service.updateStatus(req);
-    return res.status(200).json("Update successful");
+    const response = await Service.updateStatus(req);
+    return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
       message: e,
