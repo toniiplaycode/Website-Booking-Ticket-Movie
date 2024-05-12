@@ -38,7 +38,7 @@ router.put(
 //Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
 router.delete(
   "/deleteUser",
-  MiddleWare.AuthMiddleWareAdminRole,
+  MiddleWare.AuthMiddleWareDeleteUser,
   userController.deleteUser
 );
 
