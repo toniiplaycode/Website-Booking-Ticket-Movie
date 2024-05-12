@@ -65,13 +65,24 @@ const getAllWithCanema = (data) => {
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const check = await dbTemp.findOne({ where: { id: data.id } });
+      if (check) {
+        resolve({
+          status: "ERR",
+          message: "cinemaRoom already exist",
+        });
+        return;
+      }
       await dbTemp.create({
         id: data.id,
         CinemaId: data.CinemaId,
         nameCinemaRoom: data.nameCinemaRoom,
         numberOfSeats: data.numberOfSeats,
       });
-      resolve();
+      resolve({
+        status: "OK",
+        message: "create successful",
+      });
     } catch (e) {
       reject(e);
     }
