@@ -40,7 +40,6 @@ router.put(
 
 router.put(
   "/updateStatusExpired",
-  MiddleWare.AuthMiddleWareAdminStaffRole,
   Controller.updateStatusExpired
 );
 

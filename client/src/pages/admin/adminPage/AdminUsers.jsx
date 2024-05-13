@@ -1,43 +1,61 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, fetchAllUser } from "../../../reducers/apiAdminUser";
+import { showDialog } from "../../../reducers/dialogAlert";
+import AlertDialog from "../../../components/AlertDialog";
+import Loading from "../../../components/Loading";
+
 const AdminUsers = () => {
-    return(
-        <>
-            <p className='adminpage-title'>
-                Thông tin các khách hàng
-            </p>
-            <div className="admin-table-container">
-                <div className="admin-table-parent">
-                    <div className="admin-table-item">
-                        Lê Thanh Toàn
-                    </div>
-                    <div className="admin-table-item">
-                        Ninh Kiều, Cần Thơ
-                    </div>
-                    <div className="admin-table-item">
-                        toan@gmail.com
-                    </div>
-                    <div className="admin-table-item">
-                        0775844073
-                    </div>
-                </div>
+  const dispatch = useDispatch();
+  const listAllUser = useSelector((state) => state.apiAdminUser.listAllUser);
+  const statusFetchAllUser = useSelector(
+    (state) => state.apiAdminUser.statusFetchAllUser
+  );
+  const confirm = useSelector((state) => state.dialogAlert.confirm);
+  const [userDelete, setUserDelete] = useState();
+
+  useEffect(() => {
+    dispatch(fetchAllUser());
+  }, []);
+
+  useEffect(() => {
+    if (confirm.payload == true) {
+      dispatch(deleteUser({ id: userDelete }));
+    }
+  }, [confirm]);
+
+  return (
+    <>
+      <AlertDialog />
+      <p className="adminpage-title">Thông tin các khách hàng</p>
+      {statusFetchAllUser == "loading" && <Loading />}
+      {listAllUser &&
+        listAllUser.map((item, index) => (
+          <div className="admin-table-container">
+            <div className="admin-table-parent">
+              <div className="admin-table-item">
+                {item.firstName + " " + item.lastName}
+              </div>
+              <div className="admin-table-item">{item.address}</div>
+              <div className="admin-table-item">
+                <div>{item.email}</div>
+                <div>{item.phoneNumber}</div>
+              </div>
+              <div className="admin-table-handle">
+                <button
+                  onClick={() => {
+                    dispatch(showDialog());
+                    setUserDelete(item.id);
+                  }}
+                >
+                  Xoá
+                </button>
+              </div>
             </div>
-            <div className="admin-table-container">
-                <div className="admin-table-parent">
-                    <div className="admin-table-item">
-                        Huỳnh Khánh Trân
-                    </div>
-                    <div className="admin-table-item">
-                        Hà Tiên, Kiên Giang
-                    </div>
-                    <div className="admin-table-item">
-                        tran@gmail.com
-                    </div>
-                    <div className="admin-table-item">
-                        0775844073
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
+          </div>
+        ))}
+    </>
+  );
+};
 
 export default AdminUsers;

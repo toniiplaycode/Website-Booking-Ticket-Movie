@@ -19,7 +19,7 @@ import {
 import {
   fetchCinemaRoomDetail,
   handleClearSelectedCinemaRoomDetail,
-} from "../../../reducers/apiCinemaRoomDetail";
+} from "../../../reducers/apiCinemaRoom";
 import { useEffect } from "react";
 import { toggleSignin } from "../../../reducers/modalSigninSignup";
 import { toast } from "react-toastify";
@@ -30,7 +30,7 @@ import {
 } from "../../../reducers/apiUserTicket";
 import { handleClearSelectedCrWithFilm } from "../../../reducers/selectedCrWithFilm";
 import { handleClearSelectedSeats } from "../../../reducers/selectedSeats";
-import { fetchCinemaDetail } from "../../../reducers/apiCinemaDetail";
+import { fetchCinemaDetail } from "../../../reducers/apiCinema";
 import { hanleClearSelectedFilm } from "../../../reducers/selectedPurchaseFilm";
 
 const TicketBill = ({ selectedPayment }) => {
@@ -47,10 +47,10 @@ const TicketBill = ({ selectedPayment }) => {
     (state) => state.selectedSeats.selectedSeats
   );
   const selectedCinemaRoomDetail = useSelector(
-    (state) => state.apiCinemaRoomDetail.CinemaRoomDetail
+    (state) => state.apiCinemaRoom.CinemaRoomDetail
   );
   const selectedCinemaDetail = useSelector(
-    (state) => state.apiCinemaDetail.CinemaDetail
+    (state) => state.apiCinema.CinemaDetail
   );
 
   useEffect(() => {

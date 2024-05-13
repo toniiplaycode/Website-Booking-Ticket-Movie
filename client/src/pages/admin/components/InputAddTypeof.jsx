@@ -2,28 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postTypeof, updateTypeof } from "../../../reducers/apiAdminTypeof";
+import { toast } from "react-toastify";
 
-const InputAddTypeof = ({ nameTypeFilmEdit, descTypeFilmEdit }) => {
+const InputAddTypeof = ({
+  nameTypeFilmEdit,
+  descTypeFilmEdit,
+  setNameTypeFilmEdit,
+  setDescTypeFilmEdit,
+}) => {
   const dispatch = useDispatch();
   const [typeOf, setTypeOf] = useState("");
-  const [checkTypeOf, setCheckTypeOf] = useState("");
   const [description, setDescription] = useState("");
-  const [checkDescription, setCheckDescription] = useState("");
 
   useEffect(() => {
     setTypeOf(nameTypeFilmEdit);
     setDescription(descTypeFilmEdit);
   }, [nameTypeFilmEdit, descTypeFilmEdit]);
 
-  const handleSubmit = () => {
-    let check = true;
-    if (typeOf == undefined || typeOf.trim().length == 0) {
-      setCheckTypeOf("Vui lòng nhập thể loại !");
-      check = false;
-    }
-    if (description == undefined || description.trim().length == 0) {
-      setCheckDescription("Vui lòng nhập mô tả !");
-      check = false;
+  const handleAdd = () => {
+    if (!typeOf || !description) {
+      toast.warning("Vui lòng điền đủ thông tin !");
+      return;
     }
 
     const obj = {
@@ -31,48 +30,57 @@ const InputAddTypeof = ({ nameTypeFilmEdit, descTypeFilmEdit }) => {
       descriptionType: description,
     };
 
-    if (check) {
-      dispatch(postTypeof(obj));
-      setTypeOf("");
-      setDescription("");
+    dispatch(postTypeof(obj));
+    setTypeOf("");
+    setDescription("");
+  };
+
+  const handleUpdate = () => {
+    if (!typeOf || !description) {
+      toast.warning("Vui lòng điền đủ thông tin !");
+      return;
     }
+
+    const obj = {
+      nameTypeFilm: typeOf,
+      descriptionType: description,
+    };
+
+    dispatch(updateTypeof(obj));
+    setNameTypeFilmEdit(undefined);
+    setDescTypeFilmEdit(undefined);
+    setTypeOf("");
+    setDescription("");
   };
 
   return (
     <div className="add-input-container">
-      <input
-        value={typeOf}
-        onChange={(e) => {
-          setTypeOf(e.target.value);
-          setCheckTypeOf("");
-        }}
-        placeholder="Thêm thể loại phim"
-      />
-      {checkTypeOf && <p className="error-admin-film">{checkTypeOf}</p>}
+      {nameTypeFilmEdit && descTypeFilmEdit ? (
+        <div className="add-input-edit">Thể loại: {nameTypeFilmEdit}</div>
+      ) : (
+        <>
+          <input
+            value={typeOf}
+            onChange={(e) => {
+              setTypeOf(e.target.value);
+            }}
+            placeholder="Thêm thể loại phim"
+          />
+        </>
+      )}
       <textarea
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
-          setCheckDescription("");
         }}
         placeholder="Thêm mô tả"
       />
-      {checkDescription && (
-        <p className="error-admin-film">{checkDescription}</p>
-      )}
-      {nameTypeFilmEdit && descTypeFilmEdit && typeOf && description ? (
+      {nameTypeFilmEdit && descTypeFilmEdit ? (
         <>
           <button
             className="btn-admin"
             onClick={() => {
-              dispatch(
-                updateTypeof({
-                  nameTypeFilm: typeOf,
-                  descriptionType: description,
-                })
-              );
-              setTypeOf("");
-              setDescription("");
+              handleUpdate();
             }}
           >
             Sửa thể loại
@@ -83,7 +91,7 @@ const InputAddTypeof = ({ nameTypeFilmEdit, descTypeFilmEdit }) => {
           <button
             className="btn-admin"
             onClick={() => {
-              handleSubmit();
+              handleAdd();
             }}
           >
             Thêm thể loại

@@ -4,10 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteTypeof, fetchAllTypeof } from "../../../reducers/apiAdminTypeof";
 import AlertDialog from "../../../components/AlertDialog";
 import { showDialog } from "../../../reducers/dialogAlert";
+import Loading from "../../../components/Loading";
 
 const AdminTypeof = () => {
   const dispatch = useDispatch();
   const listTypeof = useSelector((state) => state.apiAdminTypeof.listTypeof);
+  const statusFetchAllTypeof = useSelector(
+    (state) => state.apiAdminTypeof.statusFetchAllTypeof
+  );
   const confirm = useSelector((state) => state.dialogAlert.confirm);
   const [nameTypeFilmDelete, setNameTypeFilmDelete] = useState();
   const [nameTypeFilmEdit, setNameTypeFilmEdit] = useState();
@@ -24,6 +28,7 @@ const AdminTypeof = () => {
       <AlertDialog />
       <p className="adminpage-title">Thể loại phim</p>
       <div className="admin-table-container">
+        {statusFetchAllTypeof == "loading" && <Loading />}
         {listTypeof.length > 0 &&
           listTypeof.map((item, index) => (
             <div className="admin-table-parent" key={index}>
@@ -56,7 +61,9 @@ const AdminTypeof = () => {
       </div>
       <InputAddTypeof
         nameTypeFilmEdit={nameTypeFilmEdit}
+        setNameTypeFilmEdit={setNameTypeFilmEdit}
         descTypeFilmEdit={descTypeFilmEdit}
+        setDescTypeFilmEdit={setDescTypeFilmEdit}
       />
     </>
   );

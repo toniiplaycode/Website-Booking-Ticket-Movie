@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCr, postAddCr } from "../../../reducers/apiAdminCr";
 import axios from "axios";
 import AdminCrItem from "../components/AdminCrItem";
-import { fetchCinemaDetail } from "../../../reducers/apiCinemaDetail";
+import { fetchCinemaDetail } from "../../../reducers/apiCinema";
 import { toast } from "react-toastify";
 import AlertDialog from "../../../components/AlertDialog";
+import Loading from "../../../components/Loading";
+import { fetchAllCinemaRoom } from "../../../reducers/apiCinemaRoom";
 
 const AdminCalenderReleases = () => {
   const dispatch = useDispatch();
@@ -36,11 +38,16 @@ const AdminCalenderReleases = () => {
     }
   };
 
-  const [listCinemaRoom, setListCinemaRoom] = useState();
+  const listAllCinemaRoom = useSelector(
+    (state) => state.apiCinemaRoom.listAllCinemaRoom
+  );
   const [groupCr, setGroupCr] = useState();
   const listAllCr = useSelector((state) => state.apiAdminCr.listAllCr);
+  const statuslistAllCr = useSelector(
+    (state) => state.apiAdminCr.statuslistAllCr
+  );
   let films = useSelector((state) => state.films.films.all);
-  let CinemaDetail = useSelector((state) => state.apiCinemaDetail.CinemaDetail);
+  let CinemaDetail = useSelector((state) => state.apiCinema.CinemaDetail);
   let statusPostAddCr = useSelector(
     (state) => state.apiAdminCr.statusPostAddCr
   );
@@ -83,13 +90,7 @@ const AdminCalenderReleases = () => {
   }, [listAllCr]);
 
   useEffect(() => {
-    const getAllCinema = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/cinemaRoom/getAll`
-      );
-      setListCinemaRoom(res.data.all);
-    };
-    getAllCinema();
+    dispatch(fetchAllCinemaRoom());
   }, []);
 
   useEffect(() => {
@@ -106,7 +107,7 @@ const AdminCalenderReleases = () => {
       !selectTime ||
       !selectDate
     ) {
-      toast.error("Vui lòng điền đủ thông tin !");
+      toast.warning("Vui lòng điền đủ thông tin !");
       return;
     }
 
@@ -134,6 +135,7 @@ const AdminCalenderReleases = () => {
     <>
       <AlertDialog />
       <p className="adminpage-title">Suất chiếu hiện có</p>
+      {statuslistAllCr == "loading" && <Loading />}
       {groupCr &&
         Object.entries(groupCr).map(([filmName, schedules], index) => (
           <div key={index}>
@@ -193,8 +195,8 @@ const AdminCalenderReleases = () => {
               value={selectedRoomCinema && selectedRoomCinema.nameCinema}
             >
               <option value=""></option>
-              {listCinemaRoom &&
-                listCinemaRoom.map((item, index) => (
+              {listAllCinemaRoom &&
+                listAllCinemaRoom.map((item, index) => (
                   <option key={index} value={JSON.stringify(item)}>
                     {item.nameCinemaRoom}
                   </option>

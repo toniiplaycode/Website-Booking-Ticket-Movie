@@ -50,7 +50,6 @@ export const deleteTypeof = createAsyncThunk('deleteTypeof/apiAdminTypeof', asyn
 
 export const updateTypeof = createAsyncThunk('updateTypeof/apiAdminTypeof', async (obj, thunkAPI) => {
   const token = thunkAPI.getState().apiLoginLogout.token;
-  try {
     const res = await axios.put(`http://localhost:8000/api/typeFilm/update`, obj, {
       headers: {
         'token': token
@@ -59,9 +58,6 @@ export const updateTypeof = createAsyncThunk('updateTypeof/apiAdminTypeof', asyn
     toast.success("Sửa thể loại thành công !");
     thunkAPI.dispatch(fetchAllTypeof()); // post xong tự động fetch lại
     return res.data;
-  } catch (error) {
-
-  }
 });
 
 const apiAdminTypeof = createSlice({

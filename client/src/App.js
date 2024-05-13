@@ -21,6 +21,7 @@ import { fetchInforUser } from "./reducers/apiLoginLogout.js";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { fetchListTicketUser } from "./reducers/apiUserTicket.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,9 +65,13 @@ function App() {
     (state) => state.apiUserTicket.statusBookUserTicket
   );
 
+
   useEffect(() => {
     if (statusPostLogin == "login failed") toast.error("Đăng nhập thất bại !");
-    if (statusPostLogin == "succeeded") toast.success("Đăng nhập thành công !");
+    if (statusPostLogin == "succeeded") {
+      dispatch(fetchListTicketUser(idRoleUser.id));
+      toast.success("Đăng nhập thành công !")
+    };
   }, [statusPostLogin]);
 
   useEffect(() => {

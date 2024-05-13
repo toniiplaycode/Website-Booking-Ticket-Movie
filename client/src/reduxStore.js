@@ -10,8 +10,8 @@ import apiCrWithFilm from "./reducers/apiCrWithFilm";
 import selectedPurchaseFilm from "./reducers/selectedPurchaseFilm";
 import selectedCrWithFilm from "./reducers/selectedCrWithFilm";
 import selectedSeats from "./reducers/selectedSeats";
-import apiCinemaRoomDetail from "./reducers/apiCinemaRoomDetail";
-import apiCinemaDetail from "./reducers/apiCinemaDetail";
+import apiCinemaRoom from "./reducers/apiCinemaRoom";
+import apiCinema from "./reducers/apiCinema";
 import apiLoginLogout, { fetchInforUser } from "./reducers/apiLoginLogout";
 import apiSignup from "./reducers/apiSignup";
 import apiUpdateUser from "./reducers/apiUpdateUser";
@@ -21,6 +21,7 @@ import apiAdminUser from "./reducers/apiAdminUser";
 import apiAdminTypeof from "./reducers/apiAdminTypeof";
 import dialogAlert from "./reducers/dialogAlert";
 import apiAdminCr  from "./reducers/apiAdminCr";
+import apiCheckExpiredTicket, { checkExpiredTicket } from "./reducers/apiCheckExpiredTicket";
 
 const reduxStore = configureStore({
     reducer: {
@@ -35,8 +36,8 @@ const reduxStore = configureStore({
         selectedPurchaseFilm: selectedPurchaseFilm,
         selectedCrWithFilm: selectedCrWithFilm,
         selectedSeats:selectedSeats,
-        apiCinemaRoomDetail: apiCinemaRoomDetail,
-        apiCinemaDetail: apiCinemaDetail,
+        apiCinemaRoom: apiCinemaRoom,
+        apiCinema: apiCinema,
         apiLoginLogout: apiLoginLogout,
         apiSignup: apiSignup,
         apiUpdateUser: apiUpdateUser,
@@ -46,11 +47,13 @@ const reduxStore = configureStore({
         apiAdminTypeof: apiAdminTypeof,
         dialogAlert: dialogAlert,
         apiAdminCr: apiAdminCr,
+        apiCheckExpiredTicket: apiCheckExpiredTicket,
     }
 });
 
-//tự động getAll films khi chạy ứng dụng
+//tự động khi chạy ứng dụng
 reduxStore.dispatch(fetchFilms());
+reduxStore.dispatch(checkExpiredTicket());
 
 // ghi nhớ đăng nhập 
 if(localStorage.getItem('inforUser') != null) {

@@ -274,6 +274,25 @@ body {
 }
 
 //======purchased ticket=======//
+.approve-btn{
+  border: 2px solid;
+  padding: 15px 10px;
+  min-width: 100px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: $primary-bg-color;
+}
+
+.approve-btn:hover{
+  background-color: #ef5e78;
+  transform: translateY(-0.05rem);
+  transition: 0.1s linear;
+  box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.3);
+}
+
 .purchased-ticket-container {
   display: flex;
   position: relative;
@@ -317,7 +336,7 @@ body {
       }
     }
   }
-
+  
   .ticket-infor-item-status {
     position: absolute;
     top: -20px;
@@ -1863,6 +1882,16 @@ textarea,
   }
 }
 
+.admin-select-type.select-exception{
+  width: 100%;
+  margin: 10px 0;
+}
+
+.add-input-edit{
+  margin-top: 30px;
+  font-weight: 600;
+}
+
 .admin-picker-film {
   background: #ffffff;
   .admin-picker-film-item {
@@ -1968,7 +1997,7 @@ input[type="file"] {
     .admin-table-item {
       flex: 1;
       margin-right: 6px;
-      line-height: 22px;
+      line-height: 22px;      
     }
 
     .admin-table-use-client {
