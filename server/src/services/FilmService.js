@@ -152,6 +152,16 @@ let updateFilm = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
+      const checkName = await db.Film.findOne({
+        where: { nameFilm: data.body.nameFilm },
+      });
+      if (checkName) {
+        resolve({
+          status: "ERR",
+          message: "nameFilm already exist",
+        });
+        return;
+      }
       film.nameFilm = data.body.nameFilm;
       film.description = data.body.description;
       film.nameTypeFilm = data.body.nameTypeFilm;
@@ -164,7 +174,10 @@ let updateFilm = async (data) => {
       film.language = data.body.language;
       film.releaseDate = data.body.releaseDate;
       await film.save();
-      resolve();
+      resolve({
+        status: "OK",
+        message: "Update a successful Film",
+      });
     } catch (e) {
       reject(e);
     }

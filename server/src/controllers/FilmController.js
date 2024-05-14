@@ -55,8 +55,8 @@ const addNewFilm = async (req, res) => {
 
 const updateFilm = async (req, res) => {
   try {
-    await FilmService.updateFilm(req);
-    return res.status(200).json("Update a successful Film");
+    const respone = await FilmService.updateFilm(req);
+    return res.status(200).json(respone);
   } catch (e) {
     return res.status(404).json({
       message: e,
