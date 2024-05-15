@@ -159,7 +159,9 @@ let updateFilm = async (data) => {
       film.time = data.body.time;
       film.author = data.body.author;
       film.actor = data.body.actor;
-      film.image = data.file.path.slice("../client/public".length);
+      if (data.file) {
+        film.image = data.file.path.slice("../client/public".length);
+      }
       film.trailer = data.body.trailer;
       film.price = data.body.price;
       film.language = data.body.language;
