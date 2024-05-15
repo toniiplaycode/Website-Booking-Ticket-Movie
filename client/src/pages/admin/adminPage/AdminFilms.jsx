@@ -7,8 +7,9 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
-import { fetchFilms, postFilms } from "../../../reducers/apiFilms";
+import { fetchFilms, postFilms, putFilms } from "../../../reducers/apiFilms";
 import AlertDialog from "../../../components/AlertDialog";
+import dayjs from "dayjs";
 
 const AdminFilms = () => {
   const dispatch = useDispatch();
@@ -36,9 +37,11 @@ const AdminFilms = () => {
     price: "",
     trailerLink: "",
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFilmId, setEditingFilmId] = useState(null);
 
-  const token = useSelector((state) => state.apiLoginLogout.token);
   const statusPost = useSelector((state) => state.films.statusPost);
+  const statusPut = useSelector((state) => state.films.statusPut);
   const listTypeof = useSelector((state) => state.apiAdminTypeof.listTypeof);
 
   const handlePreviewImg = (e) => {
@@ -60,7 +63,6 @@ const AdminFilms = () => {
   };
 
   const handleSubmit = async () => {
-    // Kiểm tra các trường không được để trống
     const newErrors = {};
     if (!file) newErrors.file = "Vui lòng thêm ảnh";
     if (!movieName) newErrors.movieName = "Vui lòng nhập tên phim";
@@ -88,9 +90,54 @@ const AdminFilms = () => {
       formData.append("language", language);
       formData.append("releaseDate", selectedReleaseDate);
       formData.append("image", image);
-
-      dispatch(postFilms(formData));
+      if (isEditing) {
+        formData.append("id", editingFilmId);
+        dispatch(putFilms(formData));
+        setIsEditing(false);
+      } else {
+        dispatch(postFilms(formData));
+      }
     }
+  };
+
+  // check thêm các format ngày
+  const parseDate = (dateStr) => {
+    const date1 = dayjs(dateStr, "DD/MM/YYYY", true);
+    if (date1.isValid()) {
+      return date1;
+    }
+    const date2 = dayjs(dateStr, "D/M/YYYY", true);
+    if (date2.isValid()) {
+      return date2;
+    }
+    const date3 = dayjs(dateStr, "DD/M/YYYY", true);
+    if (date3.isValid()) {
+      return date3;
+    }
+    const date4 = dayjs(dateStr, "D/MM/YYYY", true);
+    if (date4.isValid()) {
+      return date4;
+    }
+    return null;
+  };
+
+  const handleEdit = (film) => {
+    const validDate = parseDate(film.releaseDate);
+
+    setReleaseDate(validDate);
+    setSelectedReleaseDate(film.releaseDate);
+    setMovieName(film.nameFilm);
+    setDescription(film.description);
+    setDuration(film.time);
+    setCast(film.actor);
+    setAuthor(film.author);
+    setPrice(film.price);
+    setTrailerLink(film.trailer);
+    setGenre(film.nameTypeFilm);
+    setLanguage(film.language);
+    setFile(film.image);
+    setEditingFilmId(film.id);
+    setIsEditing(true);
   };
 
   useEffect(() => {
@@ -117,7 +164,7 @@ const AdminFilms = () => {
   }, [films, search]);
 
   useEffect(() => {
-    if (statusPost == "succeeded") {
+    if (statusPost == "succeeded" || statusPut == "succeeded") {
       setFile("");
       setImage("");
       setMovieName("");
@@ -131,8 +178,10 @@ const AdminFilms = () => {
       setTrailerLink("");
       setGenre("Hành động");
       setLanguage("Phụ đề tiếng Việt");
+      setEditingFilmId(null);
+      setIsEditing(false);
     }
-  }, [statusPost]);
+  }, [statusPost, statusPut]);
 
   return (
     <>
@@ -149,22 +198,29 @@ const AdminFilms = () => {
           <Row>
             {status == "loading" && <Loading />}
             {status == "succeeded" &&
+              search.length == 0 &&
               filteredFilms.map((item, index) => {
-                if (search.length > 0) {
-                  return (
-                    <Col>
-                      <AdminCardMovie item={item} key={index} />
-                    </Col>
-                  );
-                } else {
-                  return (
-                    <Col xxl={2} xl={3} sm={4}>
-                      <AdminCardMovie item={item} key={index} />
-                    </Col>
-                  );
-                }
+                return (
+                  <Col xxl={2} xl={3} sm={4} key={index}>
+                    <AdminCardMovie
+                      item={item}
+                      onEdit={() => handleEdit(item)}
+                    />
+                  </Col>
+                );
               })}
-
+            {status == "succeeded" &&
+              search.length != 0 &&
+              filteredFilms.map((item, index) => {
+                return (
+                  <Col key={index}>
+                    <AdminCardMovie
+                      item={item}
+                      onEdit={() => handleEdit(item)}
+                    />
+                  </Col>
+                );
+              })}
             {filteredFilms.length == 0 && (
               <div className="warning-search">Không có phim nào !</div>
             )}
@@ -175,7 +231,11 @@ const AdminFilms = () => {
           {status == "loading" && <Loading />}
           {status == "succeeded" &&
             filteredFilms.map((item, index) => (
-              <AdminCardMovie item={item} key={index} />
+              <AdminCardMovie
+                item={item}
+                key={index}
+                onEdit={() => handleEdit(item)}
+              />
             ))}
         </div>
       </div>
@@ -199,12 +259,13 @@ const AdminFilms = () => {
           )}
 
           <div>
-            <p>Ảnh banner:</p>
+            <p>Ảnh poster:</p>
             <input
               type="file"
               onChange={(e) => {
                 handlePreviewImg(e);
                 setImage(e.target.files[0]);
+                // console.log(e.target.files[0]);
               }}
             />
           </div>
@@ -359,7 +420,7 @@ const AdminFilms = () => {
           </div>
 
           <button className="btn-admin" onClick={handleSubmit}>
-            Thêm phim
+            {isEditing ? "Cập nhật phim" : "Thêm phim"}
           </button>
         </div>
       </div>

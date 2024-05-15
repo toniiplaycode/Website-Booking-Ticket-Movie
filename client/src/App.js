@@ -87,11 +87,6 @@ function App() {
   }, [statusLogout]);
 
   useEffect(() => {
-    if (statusUpdateUser == "succeeded")
-      toast.success("Đã thay đổi thông tin !");
-  }, [statusUpdateUser]);
-
-  useEffect(() => {
     if (statusBookUserTicket == "succeeded")
       toast.success("Đặt vé thành công !");
   }, [statusBookUserTicket]);

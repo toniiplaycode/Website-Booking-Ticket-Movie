@@ -1,5 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, isFluxStandardAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { fetchInforUser } from './apiLoginLogout';
+import { toast } from 'react-toastify';
 
 const initialState = {
     statusUpdateUser: "idle",
@@ -13,6 +15,10 @@ export const putUpdateUser = createAsyncThunk('message/apiUpdateUser', async (ob
             'token': `${token}`
         }
     });
+    thunkAPI.dispatch(fetchInforUser(obj.id)); // post xong tự động fetch lại
+    if(res.data == "Update user successful") {
+      toast.success("Đã thay đổi thông tin !");
+    }
     return res.data;
 });
   

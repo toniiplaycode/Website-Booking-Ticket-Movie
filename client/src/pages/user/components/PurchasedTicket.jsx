@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { approveTicket } from "../../../reducers/apiAdminTicket";
 
 const PurchasedTicket = ({ item }) => {
-  console.log(item.nameStatus);
   const dispatch = useDispatch();
   const [filmDetail, setFilmDetail] = useState();
 

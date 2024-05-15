@@ -2,12 +2,11 @@ import { faCalendarDays, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertMinutesToHoursAndMinutes } from "../../../utils/functionCommon";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTypeof } from "../../../reducers/apiAdminTypeof";
 import { deleteFilms } from "../../../reducers/apiFilms";
 import { showDialog } from "../../../reducers/dialogAlert";
 import { useEffect, useState } from "react";
 
-const AdminCardMovie = ({ item }) => {
+const AdminCardMovie = ({ item, onEdit }) => {
   const dispatch = useDispatch();
   const [deleteFilm, setDeleteFilm] = useState();
   const confirm = useSelector((state) => state.dialogAlert.confirm);
@@ -37,7 +36,14 @@ const AdminCardMovie = ({ item }) => {
           {convertMinutesToHoursAndMinutes(item.time)}
         </p>
       </div>
-      <button className="book-btn">Sửa</button>
+      <button
+        className="book-btn"
+        onClick={() => {
+          onEdit(item);
+        }}
+      >
+        Sửa
+      </button>
       <button
         className="book-btn book-btn-traler"
         onClick={() => {

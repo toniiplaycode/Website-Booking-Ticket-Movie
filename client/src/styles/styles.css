@@ -255,6 +255,25 @@ body {
   background-color: #eb3656;
 }
 
+.approve-btn {
+  border: 2px solid;
+  padding: 15px 10px;
+  min-width: 100px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: #1a1d2c;
+}
+
+.approve-btn:hover {
+  background-color: #ef5e78;
+  transform: translateY(-0.05rem);
+  transition: 0.1s linear;
+  box-shadow: 0 1rem 1.8rem 0 rgba(235, 54, 87, 0.3);
+}
+
 .purchased-ticket-container {
   display: flex;
   position: relative;
@@ -343,6 +362,11 @@ body {
   text-align: center;
   font-size: 1.6rem;
   font-weight: 500;
+}
+
+.warning-time-date {
+  margin-top: 20px;
+  font-size: 1.4rem;
 }
 
 .nav-container {
@@ -1676,6 +1700,7 @@ body {
   padding: 20px;
   text-align: center;
   font-weight: 600;
+  min-width: 100%;
 }
 .adminpage-ticket-container .adminpage-ticket .adminpage-ticket-img {
   width: 100%;
@@ -1743,6 +1768,16 @@ textarea,
   .form-movie-add .admin-picker-film {
     width: 100%;
   }
+}
+
+.admin-select-type.select-exception {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.add-input-edit {
+  margin-top: 30px;
+  font-weight: 600;
 }
 
 .admin-picker-film {
@@ -1823,6 +1858,12 @@ input[type=file] {
   margin-top: 10px;
 }
 
+.admin-table-group-tile {
+  font-size: 1.4rem;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
 .admin-table-container {
   display: flex;
   flex-direction: column;
@@ -1869,7 +1910,7 @@ input[type=file] {
   flex: 3;
 }
 .admin-table-container .admin-table-parent .table-item-time span {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 @media (max-width: 992px) {
   .admin-table-container .admin-table-parent .table-item-time {
@@ -1927,4 +1968,18 @@ input[type=file] {
   .error-admin-film {
     text-align: center;
   }
+}
+
+.dialog {
+  background-color: #ffffff;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.dialog .dialog-btn {
+  font-weight: 600;
+}
+.dialog .dialog-btn.ok {
+  color: #eb3656;
 }/*# sourceMappingURL=styles.css.map */

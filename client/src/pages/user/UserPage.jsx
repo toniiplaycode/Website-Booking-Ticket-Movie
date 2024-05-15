@@ -13,33 +13,39 @@ const UserPage = () => {
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
   const [isEdit, setIsEdit] = useState(false);
+  const [isChange, setIsChange] = useState(false);
   const [id, setId] = useState(inforUser.id);
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState(inforUser.firstName || "");
-  const [lastName, setLastName] = useState(inforUser.lastName || "");
-  const [address, setAddress] = useState(inforUser.address || "");
-  const [phoneNumber, setPhoneNumber] = useState(inforUser.phoneNumber || "");
+  const [firstName, setFirstName] = useState(inforUser.firstName);
+  const [lastName, setLastName] = useState(inforUser.lastName);
+  const [address, setAddress] = useState(inforUser.address);
+  const [phoneNumber, setPhoneNumber] = useState(inforUser.phoneNumber);
   const [checkFirstName, setCheckFirstName] = useState(false);
   const [checkLastName, setCheckLastName] = useState(false);
   const [checkAddress, setCheckAddress] = useState(false);
   const [checkPhoneNumber, setCheckPhoneNumber] = useState(false);
+  const [checkPassword, setCheckPassword] = useState(false);
 
   const handleCheck = () => {
     let check = true;
-    if (lastName.trim().length == 0) {
+    if (lastName.length == 0) {
       setCheckLastName(true);
       check = false;
     }
-    if (firstName.trim().length == 0) {
+    if (firstName.length == 0) {
       setCheckFirstName(true);
       check = false;
     }
-    if (address.trim().length == 0) {
+    if (address.length == 0) {
       setCheckAddress(true);
       check = false;
     }
-    if (phoneNumber.trim().length < 10) {
+    if (phoneNumber.length < 10) {
       setCheckPhoneNumber(true);
+      check = false;
+    }
+    if (password.length > 0 && password.length < 8) {
+      setCheckPassword(true);
       check = false;
     }
     return check;
@@ -52,6 +58,10 @@ const UserPage = () => {
 
   useEffect(() => {
     if (inforUser.id != undefined) {
+      setFirstName(inforUser.firstName);
+      setLastName(inforUser.lastName);
+      setPhoneNumber(inforUser.phoneNumber);
+      setAddress(inforUser.address);
       const userId = inforUser.id;
       dispatch(fetchListTicketUser(userId));
     }
@@ -103,6 +113,7 @@ const UserPage = () => {
                     <input
                       value={lastName}
                       onChange={(e) => {
+                        setIsChange(true);
                         setLastName(e.target.value);
                         setCheckLastName(false);
                       }}
@@ -116,6 +127,7 @@ const UserPage = () => {
                     <input
                       value={firstName}
                       onChange={(e) => {
+                        setIsChange(true);
                         setFirstName(e.target.value);
                         setCheckFirstName(false);
                       }}
@@ -129,6 +141,7 @@ const UserPage = () => {
                     <input
                       value={address}
                       onChange={(e) => {
+                        setIsChange(true);
                         setAddress(e.target.value);
                         setCheckAddress(false);
                       }}
@@ -142,6 +155,7 @@ const UserPage = () => {
                     <input
                       type="number"
                       onChange={(e) => {
+                        setIsChange(true);
                         setPhoneNumber(e.target.value);
                         setCheckPhoneNumber(false);
                       }}
@@ -156,16 +170,23 @@ const UserPage = () => {
                     <input
                       type="password"
                       onChange={(e) => {
+                        setIsChange(true);
                         setPassword(e.target.value);
+                        setCheckPassword(false);
                       }}
                       placeholder="Đổi mật khẩu mới"
                       value={password}
                     />
+                    {checkPassword && (
+                      <span className="warning-login-signup">
+                        Tối thiểu 8 ký tự
+                      </span>
+                    )}
                   </div>
                   <button
                     className="btn-common"
                     onClick={() => {
-                      if (handleCheck()) {
+                      if (handleCheck() && isChange) {
                         if (password.length > 0) {
                           dispatch(
                             putUpdateUser({
@@ -188,6 +209,9 @@ const UserPage = () => {
                             })
                           );
                         }
+                        setIsChange(false);
+                      }
+                      if (handleCheck() == true) {
                         setIsEdit(false);
                       }
                     }}

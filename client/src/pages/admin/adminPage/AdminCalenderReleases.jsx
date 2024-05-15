@@ -192,9 +192,9 @@ const AdminCalenderReleases = () => {
               onChange={(e) => {
                 setSelectedRoomCinema(JSON.parse(e.target.value));
               }}
-              value={selectedRoomCinema && selectedRoomCinema.nameCinema}
+              value={selectedRoomCinema ? selectedRoomCinema.nameCinema : ""}
             >
-              <option value=""></option>
+              <option value="" disabled></option>
               {listAllCinemaRoom &&
                 listAllCinemaRoom.map((item, index) => (
                   <option key={index} value={JSON.stringify(item)}>
