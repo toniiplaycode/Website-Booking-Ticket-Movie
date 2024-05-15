@@ -99,7 +99,6 @@ let updateUser = async (data) => {
       user.lastName = data.body.lastName;
       user.address = data.body.address;
       user.phoneNumber = data.body.phoneNumber;
-      user.image = data.file.path.slice("../client/public".length);
       if (data.body.password) {
         let hashPassword = await hashUserPassWord(data.body.password);
         user.password = hashPassword;
