@@ -20,7 +20,7 @@ router.get(
   userController.getAllUser
 );
 
-//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
+//Chỉ có user login
 router.put(
   "/updateUser",
   MiddleWare.AuthMiddleWareCheckLogin,

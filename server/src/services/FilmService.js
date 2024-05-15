@@ -152,23 +152,14 @@ let updateFilm = async (data) => {
         where: { id: data.body.id },
         raw: false,
       });
-      const checkName = await db.Film.findOne({
-        where: { nameFilm: data.body.nameFilm },
-      });
-      if (checkName) {
-        resolve({
-          status: "ERR",
-          message: "nameFilm already exist",
-        });
-        return;
-      }
+
       film.nameFilm = data.body.nameFilm;
       film.description = data.body.description;
       film.nameTypeFilm = data.body.nameTypeFilm;
       film.time = data.body.time;
       film.author = data.body.author;
       film.actor = data.body.actor;
-      film.image = data.file.path;
+      film.image = data.file.path.slice("../client/public".length);
       film.trailer = data.body.trailer;
       film.price = data.body.price;
       film.language = data.body.language;
