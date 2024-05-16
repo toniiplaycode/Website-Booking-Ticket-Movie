@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../models/index");
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
+const pool = require("../config/commectDBWithQuery");
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -26,9 +27,11 @@ const getAll = () => {
 const getAllWithFilm = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const all = await dbTemp.findAll({
-        where: { filmId: data.query.filmId },
-      });
+      const [all] = await pool.execute(
+        "SELECT coments.*, users.firstName, users.lastName FROM coments JOIN users ON coments.userId=users.id where filmId = ?",
+        [data.query.filmId]
+      );
+
       resolve({
         status: "OK",
         message: "get getAllWithFilm successful",
