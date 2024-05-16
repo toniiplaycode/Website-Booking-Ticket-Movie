@@ -23,6 +23,24 @@ const getAll = () => {
   });
 };
 
+const getAllWithFilm = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const all = await dbTemp.findAll({
+        where: { filmId: data.query.filmId },
+      });
+      resolve({
+        status: "OK",
+        message: "get getAllWithFilm successful",
+        raw: false,
+        all: all,
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let addNew = async (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -74,4 +92,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithFilm,
 };

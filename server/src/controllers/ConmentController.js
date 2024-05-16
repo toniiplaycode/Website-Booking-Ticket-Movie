@@ -11,6 +11,17 @@ const getAll = async (req, res) => {
   }
 };
 
+const getAllWithFilm = async (req, res) => {
+  try {
+    const response = await Service.getAllWithFilm(req);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
+
 const addNew = async (req, res) => {
   try {
     await Service.addNew(req);
@@ -49,4 +60,5 @@ module.exports = {
   addNew,
   update,
   deleteOBJ,
+  getAllWithFilm,
 };
