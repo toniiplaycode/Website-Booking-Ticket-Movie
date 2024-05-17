@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTypeof } from "../../reducers/apiAdminTypeof";
 import { useEffect } from "react";
 import { fetchAllCinema } from "../../reducers/apiCinema";
+import AdminPayments from "./adminPage/AdminPayments";
+import { fetchAllPayment } from "../../reducers/apiAdminPayment";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const AdminPage = () => {
   useEffect(() => {
     dispatch(fetchAllTypeof());
     dispatch(fetchAllCinema());
+    dispatch(fetchAllPayment());
   }, []);
 
   return (
@@ -37,6 +40,7 @@ const AdminPage = () => {
         />
         <Route path="/adminCinemas" element={<AdminCinemas />} />
         <Route path="/adminCinemaRooms" element={<AdminCinemaRooms />} />
+        <Route path="/AdminPayments" element={<AdminPayments />} />
         <Route path="/adminTickets" element={<AdminTickets />} />
         <Route path="/adminTicketDetail" element={<AdminTicketDetail />} />
         <Route path="/adminUsers" element={<AdminUsers />} />

@@ -32,7 +32,11 @@ const AdminTickets = () => {
         {!listUserId && <Loading />}
         {listUserId &&
           listUserId.map((item, index) => (
-            <AdminTicketItem key={index} id={item} />
+            <AdminTicketItem
+              key={index}
+              id={item}
+              listAllTicket={listAllTicket}
+            />
           ))}
       </div>
     </>

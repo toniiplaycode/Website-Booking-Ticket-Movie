@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const AdminTicketItem = ({ id }) => {
+const AdminTicketItem = ({ id, listAllTicket }) => {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.apiLoginLogout.token);
@@ -24,15 +24,27 @@ const AdminTicketItem = ({ id }) => {
     getDetailUser();
   }, [id]);
 
+  const countBookedTickets = (userId) => {
+    return listAllTicket.filter(
+      (ticket) => ticket.userId === userId && ticket.nameStatus === "Booked"
+    ).length;
+  };
+
   return (
     <>
       <div className="admin-table-parent">
         <div className="admin-table-item">
-          {detailUser && detailUser.firstName + " " + detailUser.lastName}
+          <div>
+            {detailUser && detailUser.firstName + " " + detailUser.lastName}
+          </div>
+          <div>{detailUser && detailUser.email}</div>
         </div>
-        <div className="admin-table-item">{detailUser && detailUser.email}</div>
+        <div className="admin-table-item">
+          {detailUser && `Vé mới đặt: ${countBookedTickets(detailUser.id)}`}
+        </div>
         <div className="admin-table-handle">
           <button
+            className="btn-detail"
             onClick={() =>
               navigate("/admin/adminTicketDetail", {
                 state: detailUser,

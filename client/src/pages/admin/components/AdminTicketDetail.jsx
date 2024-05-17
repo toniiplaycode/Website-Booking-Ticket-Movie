@@ -51,7 +51,8 @@ const AdminTicketDetail = () => {
   return (
     <>
       <p className="adminpage-title">
-        {detailUser && detailUser.firstName + " " + detailUser.lastName}
+        {detailUser && detailUser.firstName + " " + detailUser.lastName}&nbsp; -
+        &nbsp;
         {detailUser && detailUser.email}
       </p>
       {sortedListTicketEachUser.length > 0 &&

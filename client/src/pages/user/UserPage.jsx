@@ -6,11 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { putUpdateUser } from "../../reducers/apiUpdateUser";
 import { fetchListTicketUser } from "../../reducers/apiUserTicket";
+import { fetchInforUser } from "../../reducers/apiLoginLogout";
 
 const UserPage = () => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
+  const statusUpdateUser = useSelector(
+    (state) => state.apiUpdateUser.statusUpdateUser
+  );
+
+  useEffect(() => {
+    if (statusUpdateUser == "succeeded") {
+      dispatch(fetchInforUser(inforUser.id));
+    }
+  }, [statusUpdateUser]);
 
   const [isEdit, setIsEdit] = useState(false);
   const [isChange, setIsChange] = useState(false);
@@ -216,7 +226,7 @@ const UserPage = () => {
                       }
                     }}
                   >
-                    Sửa thông tin
+                    Cập nhật thông tin
                   </button>
                 </>
               )}
@@ -243,6 +253,9 @@ const UserPage = () => {
                     </>
                   );
                 })}
+              {sortedListTicketEachUser.length == 0 && (
+                <div className="warning-search">Chưa mua vé nào !</div>
+              )}
             </Col>
           </>
         )}

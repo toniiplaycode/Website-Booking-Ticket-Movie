@@ -45,7 +45,7 @@ const AdminFilms = () => {
   const listTypeof = useSelector((state) => state.apiAdminTypeof.listTypeof);
 
   const handlePreviewImg = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
+    e && setFile(URL.createObjectURL(e.target.files[0]));
 
     if (errors.file) {
       setErrors({ ...errors, file: "" });

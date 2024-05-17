@@ -165,6 +165,19 @@ const MobileNav = () => {
                 </p>
                 <p
                   className={
+                    location.pathname == "/admin/AdminPayments"
+                      ? "drawer-item-child active-mobile"
+                      : "drawer-item-child"
+                  }
+                  onClick={() => {
+                    navigate("/admin/AdminPayments");
+                    dispatch(hiddenDrawer());
+                  }}
+                >
+                  Thanh toán
+                </p>
+                <p
+                  className={
                     location.pathname == "/admin/adminTickets"
                       ? "drawer-item-child active-mobile"
                       : "drawer-item-child"

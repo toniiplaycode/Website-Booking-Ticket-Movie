@@ -22,6 +22,8 @@ import apiAdminTypeof from "./reducers/apiAdminTypeof";
 import dialogAlert from "./reducers/dialogAlert";
 import apiAdminCr  from "./reducers/apiAdminCr";
 import apiCheckExpiredTicket, { checkExpiredTicket } from "./reducers/apiCheckExpiredTicket";
+import apiAdminPayment from "./reducers/apiAdminPayment";
+import apiComment from "./reducers/apiComment";
 
 const reduxStore = configureStore({
     reducer: {
@@ -48,6 +50,8 @@ const reduxStore = configureStore({
         dialogAlert: dialogAlert,
         apiAdminCr: apiAdminCr,
         apiCheckExpiredTicket: apiCheckExpiredTicket,
+        apiAdminPayment: apiAdminPayment,
+        apiComment: apiComment,
     }
 });
 

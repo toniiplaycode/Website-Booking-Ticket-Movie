@@ -206,7 +206,11 @@ const AdminCalenderReleases = () => {
           <div>
             <p>Rạp:</p>
             <input
-              value={selectedRoomCinema ? CinemaDetail.nameCinema : ""}
+              value={
+                selectedRoomCinema && CinemaDetail
+                  ? CinemaDetail.nameCinema
+                  : ""
+              }
               readonly
             />
           </div>

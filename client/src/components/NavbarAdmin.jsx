@@ -40,6 +40,9 @@ const NavbarAdmin = () => {
         <NavLink to="/admin/adminCinemaRooms" className="adminpage-navbar-item">
           Phòng chiếu
         </NavLink>
+        <NavLink to="/admin/AdminPayments" className="adminpage-navbar-item">
+          Thanh toán
+        </NavLink>
         <NavLink to="/admin/adminTickets" className="adminpage-navbar-item">
           Vé
         </NavLink>
