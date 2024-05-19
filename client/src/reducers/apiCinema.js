@@ -29,7 +29,7 @@ export const postAddCinema = createAsyncThunk('postAddCinema/apiCinema', async (
           'token': token
         }
       });    
-      thunkAPI.dispatch(fetchAllCinema()); // post xong tự đ ộng fetch lại
+      thunkAPI.dispatch(fetchAllCinema()); // post xong tự động fetch lại
       if(res.data.message == "create successful") {
         toast.success("Thêm rạp thành công !");
       }

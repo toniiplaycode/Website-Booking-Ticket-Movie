@@ -92,6 +92,7 @@ const Navbar = () => {
               className="switch-modal-icon icon-signout d-none d-lg-inline"
               onClick={() => {
                 dispatch(handleLogout());
+                navigate("/");
               }}
             />
           </>

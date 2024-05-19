@@ -5,12 +5,13 @@ const initialState = {
   statusBookUserTicket: "idle",
   message: "",
   listTicketEachUser: [],
-  statusListTicketEachUser: "idle",
+  statusListTicketEachUser: "idle", 
 };
 
 export const postBookUserTicket = createAsyncThunk(
   "postBookUserTicket/apiUserTicket",
   async (obj, thunkAPI) => {
+    console.log(obj)
     const token = thunkAPI.getState().apiLoginLogout.token; //lấy token bên apiLoginLogout
     const res = await axios.post(
       `http://localhost:8000/api/ticket/addNew`,

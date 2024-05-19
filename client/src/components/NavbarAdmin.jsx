@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const NavbarAdmin = () => {
   const location = useLocation();
@@ -12,6 +14,8 @@ const NavbarAdmin = () => {
     // Gọi hàm isStatistical khi location (URL) thay đổi
     isStatistical();
   }, [location]);
+
+  const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
   return (
     <div className="adminpage-navbar">
@@ -34,12 +38,6 @@ const NavbarAdmin = () => {
         >
           Suất chiếu phim
         </NavLink>
-        <NavLink to="/admin/adminCinemas" className="adminpage-navbar-item">
-          Rạp
-        </NavLink>
-        <NavLink to="/admin/adminCinemaRooms" className="adminpage-navbar-item">
-          Phòng chiếu
-        </NavLink>
         <NavLink to="/admin/AdminPayments" className="adminpage-navbar-item">
           Thanh toán
         </NavLink>
@@ -49,6 +47,51 @@ const NavbarAdmin = () => {
         <NavLink to="/admin/adminUsers" className="adminpage-navbar-item">
           Khách hàng
         </NavLink>
+        {inforUser && inforUser.roleId == "R1" ? (
+          <NavLink to="/admin/adminCinemas" className="adminpage-navbar-item">
+            Rạp
+          </NavLink>
+        ) : (
+          <div
+            className="adminpage-navbar-item"
+            onClick={() => {
+              toast.warning("Chỉ có quản lý mới truy cập !");
+            }}
+          >
+            Rạp
+          </div>
+        )}
+        {inforUser && inforUser.roleId == "R1" ? (
+          <NavLink
+            to="/admin/adminCinemaRooms"
+            className="adminpage-navbar-item"
+          >
+            Phòng chiếu
+          </NavLink>
+        ) : (
+          <div
+            className="adminpage-navbar-item"
+            onClick={() => {
+              toast.warning("Chỉ có quản lý mới truy cập !");
+            }}
+          >
+            Phòng chiếu
+          </div>
+        )}
+        {inforUser && inforUser.roleId == "R1" ? (
+          <NavLink to="/admin/adminRole" className="adminpage-navbar-item">
+            Chức vụ
+          </NavLink>
+        ) : (
+          <div
+            className="adminpage-navbar-item"
+            onClick={() => {
+              toast.warning("Chỉ có quản lý mới truy cập !");
+            }}
+          >
+            Chức vụ
+          </div>
+        )}
       </div>
     </div>
   );

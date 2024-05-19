@@ -7,6 +7,7 @@ import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 import { useLocation } from "react-router-dom";
 import { fetchInforUser, handleLogout } from "../reducers/apiLoginLogout";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const MobileNav = () => {
   const dispatch = useDispatch();
@@ -139,32 +140,6 @@ const MobileNav = () => {
                 </p>
                 <p
                   className={
-                    location.pathname == "/admin/adminCinemas"
-                      ? "drawer-item-child active-mobile"
-                      : "drawer-item-child"
-                  }
-                  onClick={() => {
-                    navigate("/admin/adminCinemas");
-                    dispatch(hiddenDrawer());
-                  }}
-                >
-                  Rạp
-                </p>
-                <p
-                  className={
-                    location.pathname == "/admin/adminCinemaRooms"
-                      ? "drawer-item-child active-mobile"
-                      : "drawer-item-child"
-                  }
-                  onClick={() => {
-                    navigate("/admin/adminCinemaRooms");
-                    dispatch(hiddenDrawer());
-                  }}
-                >
-                  Phòng chiếu
-                </p>
-                <p
-                  className={
                     location.pathname == "/admin/AdminPayments"
                       ? "drawer-item-child active-mobile"
                       : "drawer-item-child"
@@ -202,6 +177,81 @@ const MobileNav = () => {
                 >
                   Khách hàng
                 </p>
+
+                {inforUser && inforUser.roleId == "R1" ? (
+                  <p
+                    className={
+                      location.pathname == "/admin/adminCinemas"
+                        ? "drawer-item-child active-mobile"
+                        : "drawer-item-child"
+                    }
+                    onClick={() => {
+                      navigate("/admin/adminCinemas");
+                      dispatch(hiddenDrawer());
+                    }}
+                  >
+                    Rạp
+                  </p>
+                ) : (
+                  <p
+                    className="drawer-item-child"
+                    onClick={() => {
+                      toast.warning("Chỉ có quản lý mới truy cập !");
+                    }}
+                  >
+                    Rạp
+                  </p>
+                )}
+
+                {inforUser && inforUser.roleId == "R1" ? (
+                  <p
+                    className={
+                      location.pathname == "/admin/adminCinemaRooms"
+                        ? "drawer-item-child active-mobile"
+                        : "drawer-item-child"
+                    }
+                    onClick={() => {
+                      navigate("/admin/adminCinemaRooms");
+                      dispatch(hiddenDrawer());
+                    }}
+                  >
+                    Phòng chiếu
+                  </p>
+                ) : (
+                  <p
+                    className="drawer-item-child"
+                    onClick={() => {
+                      toast.warning("Chỉ có quản lý mới truy cập !");
+                    }}
+                  >
+                    Phòng chiếu
+                  </p>
+                )}
+
+                {inforUser && inforUser.roleId == "R1" ? (
+                  <p
+                    className={
+                      location.pathname == "/admin/adminRole"
+                        ? "drawer-item-child active-mobile"
+                        : "drawer-item-child"
+                    }
+                    onClick={() => {
+                      navigate("/admin/adminRole");
+                      dispatch(hiddenDrawer());
+                    }}
+                  >
+                    Chức vụ
+                  </p>
+                ) : (
+                  <p
+                    className="drawer-item-child"
+                    onClick={() => {
+                      toast.warning("Chỉ có quản lý mới truy cập !");
+                    }}
+                  >
+                    Chứ vụ
+                  </p>
+                )}
               </div>
             </>
           )}
@@ -221,6 +271,7 @@ const MobileNav = () => {
                   onClick={() => {
                     dispatch(handleLogout());
                     dispatch(hiddenDrawer());
+                    navigate("/");
                   }}
                 >
                   Đăng xuất

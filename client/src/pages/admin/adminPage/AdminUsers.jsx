@@ -12,6 +12,7 @@ const AdminUsers = () => {
     (state) => state.apiAdminUser.statusFetchAllUser
   );
   const confirm = useSelector((state) => state.dialogAlert.confirm);
+  const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
   const [userDelete, setUserDelete] = useState();
 
   useEffect(() => {
@@ -30,30 +31,34 @@ const AdminUsers = () => {
       <p className="adminpage-title">Thông tin các khách hàng</p>
       {statusFetchAllUser == "loading" && <Loading />}
       {listAllUser &&
-        listAllUser.map((item, index) => (
-          <div className="admin-table-container">
-            <div className="admin-table-parent">
-              <div className="admin-table-item">
-                {item.firstName + " " + item.lastName}
+        listAllUser.map((item, index) => {
+          if (item.roleId == "R3") {
+            return (
+              <div className="admin-table-container">
+                <div className="admin-table-parent">
+                  <div className="admin-table-item">
+                    {item.firstName + " " + item.lastName}
+                  </div>
+                  <div className="admin-table-item">{item.address}</div>
+                  <div className="admin-table-item">
+                    <div>{item.email}</div>
+                    <div>{item.phoneNumber}</div>
+                  </div>
+                  <div className="admin-table-handle">
+                    <button
+                      onClick={() => {
+                        dispatch(showDialog());
+                        setUserDelete(item.id);
+                      }}
+                    >
+                      Xoá
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="admin-table-item">{item.address}</div>
-              <div className="admin-table-item">
-                <div>{item.email}</div>
-                <div>{item.phoneNumber}</div>
-              </div>
-              <div className="admin-table-handle">
-                <button
-                  onClick={() => {
-                    dispatch(showDialog());
-                    setUserDelete(item.id);
-                  }}
-                >
-                  Xoá
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+            );
+          }
+        })}
     </>
   );
 };

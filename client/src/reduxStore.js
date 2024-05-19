@@ -24,6 +24,7 @@ import apiAdminCr  from "./reducers/apiAdminCr";
 import apiCheckExpiredTicket, { checkExpiredTicket } from "./reducers/apiCheckExpiredTicket";
 import apiAdminPayment from "./reducers/apiAdminPayment";
 import apiComment from "./reducers/apiComment";
+import apiAdminRole from "./reducers/apiAdminRole";
 
 const reduxStore = configureStore({
     reducer: {
@@ -52,6 +53,7 @@ const reduxStore = configureStore({
         apiCheckExpiredTicket: apiCheckExpiredTicket,
         apiAdminPayment: apiAdminPayment,
         apiComment: apiComment,
+        apiAminRole: apiAdminRole,
     }
 });
 

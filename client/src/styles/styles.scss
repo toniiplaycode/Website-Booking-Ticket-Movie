@@ -70,6 +70,10 @@ body {
   font-size: 1.6rem;
   font-weight: 600;
   margin: 50px 0;
+
+  .img-notfound{
+    width: 30%;
+  }
 }
 
 //======location select======//
@@ -696,11 +700,11 @@ body {
   border-bottom: 0.1px solid gray;
   margin-left: 10px;
   margin-right: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
   font-weight: 600;
   cursor: pointer;
 }
-
+  
 .drawer-item > p:hover,
 .drawer-signup-signin > p:hover {
   color: $primary-color;
@@ -1896,6 +1900,7 @@ body {
       transition: all 0.1s ease-in;
       color: $primary-text-color;
       text-decoration: none;
+      text-align: center;
     }
 
     .adminpage-navbar-item:hover {
@@ -2196,13 +2201,17 @@ input[type="file"] {
         padding: 10px 30px;
         background-color: #eb3656;
         border: none;
-        margin: 6px;
+        margin: 6px 0;
         font-family: inherit;
         color: #e6e6e6;
         letter-spacing: 0.75px;
         font-weight: 600;
         transition: all 0.3s;
         cursor: pointer;
+        
+        @media (min-width: 992px) {
+          margin-left: 10px; 
+        }
       }
 
       button:hover {
@@ -2215,6 +2224,29 @@ input[type="file"] {
         @media (max-width: 992px) {
           padding: 10px !important; 
         }
+      }
+    
+      select {
+        width: 140px;
+        padding: 10px 4px;
+        text-decoration: none;
+        font-family: inherit;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: $primary-text-color;
+        border: none;
+        background-color: #313441;
+        border-radius: 9px;
+        margin: 0.4rem 0;
+    
+        @media (max-width: 992px) {
+          font-size: 1rem;
+        }
+      }
+    
+      select:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem $primary-color;
       }
     }
   }

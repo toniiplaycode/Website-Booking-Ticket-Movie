@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import { fetchAllCinema } from "../../reducers/apiCinema";
 import AdminPayments from "./adminPage/AdminPayments";
 import { fetchAllPayment } from "../../reducers/apiAdminPayment";
+import AdminRole from "./adminPage/AdminRole";
+import NotFoundPage from "../../components/NotFoundPage";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -26,10 +28,13 @@ const AdminPage = () => {
     dispatch(fetchAllPayment());
   }, []);
 
+  const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
+
   return (
     <Container>
       <NavbarAdmin />
       <Routes>
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<AdminStatistical />} />
         <Route path="/statistical" element={<AdminStatistical />} />
         <Route path="/adminFilms" element={<AdminFilms />} />
@@ -44,6 +49,9 @@ const AdminPage = () => {
         <Route path="/adminTickets" element={<AdminTickets />} />
         <Route path="/adminTicketDetail" element={<AdminTicketDetail />} />
         <Route path="/adminUsers" element={<AdminUsers />} />
+        {inforUser && inforUser.roleId == "R1" && (
+          <Route path="/adminRole" element={<AdminRole />} />
+        )}
       </Routes>
     </Container>
   );

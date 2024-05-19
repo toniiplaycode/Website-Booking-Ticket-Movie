@@ -12,8 +12,12 @@ const UserPage = () => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
+
   const statusUpdateUser = useSelector(
     (state) => state.apiUpdateUser.statusUpdateUser
+  );
+  const statusBookUserTicket = useSelector(
+    (state) => state.apiUserTicket.statusBookUserTicket
   );
 
   useEffect(() => {
@@ -67,15 +71,17 @@ const UserPage = () => {
   );
 
   useEffect(() => {
+    dispatch(fetchListTicketUser(inforUser.id));
+  }, [statusBookUserTicket]);
+
+  useEffect(() => {
     if (inforUser.id != undefined) {
       setFirstName(inforUser.firstName);
       setLastName(inforUser.lastName);
       setPhoneNumber(inforUser.phoneNumber);
       setAddress(inforUser.address);
-      const userId = inforUser.id;
-      dispatch(fetchListTicketUser(userId));
     }
-  }, [inforUser, dispatch]);
+  }, [inforUser]);
 
   // sắp xếp theo vé mới đặt và từ lớn đến nhỏ theo id của vé của từng user
   useEffect(() => {
