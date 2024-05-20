@@ -112,8 +112,6 @@ let addNewFilm = async (data) => {
           }
         }
       }
-
-      console.log(check);
       if (check == 0) {
         resolve({
           status: "ERR",

@@ -91,8 +91,20 @@ let addNew = async (data) => {
 
       let ArrReleaseDate = releaseDate[0].releaseDate.split("/");
       let ArrDateWatch = data.dateWatch.split("/");
-
       let check = 0;
+
+      if (parseInt(ArrReleaseDate[2]) > new Date().getFullYear()) {
+        check = 1;
+      } else if (parseInt(ArrReleaseDate[2]) == new Date().getFullYear()) {
+        if (parseInt(ArrReleaseDate[1]) > new Date().getMonth() + 1) {
+          check = 1;
+        } else if (parseInt(ArrReleaseDate[1]) == new Date().getMonth() + 1) {
+          if (parseInt(ArrReleaseDate[0]) > new Date().getDate()) {
+            check = 1;
+          }
+        }
+      }
+
       if (parseInt(ArrDateWatch[2]) > parseInt(ArrReleaseDate[2])) {
         check = 1;
       } else if (parseInt(ArrDateWatch[2]) == parseInt(ArrReleaseDate[2])) {
@@ -108,7 +120,7 @@ let addNew = async (data) => {
       if (check == 0) {
         resolve({
           status: "ERR",
-          message: "DateWatch error",
+          message: "releaseDate error",
         });
         return;
       }
