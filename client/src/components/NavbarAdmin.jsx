@@ -1,3 +1,5 @@
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -44,9 +46,6 @@ const NavbarAdmin = () => {
         <NavLink to="/admin/adminTickets" className="adminpage-navbar-item">
           Vé
         </NavLink>
-        <NavLink to="/admin/adminUsers" className="adminpage-navbar-item">
-          Khách hàng
-        </NavLink>
         {inforUser && inforUser.roleId == "R1" ? (
           <NavLink to="/admin/adminCinemas" className="adminpage-navbar-item">
             Rạp
@@ -58,7 +57,11 @@ const NavbarAdmin = () => {
               toast.warning("Chỉ có quản lý mới truy cập !");
             }}
           >
-            Rạp
+            Rạp &nbsp;
+            <FontAwesomeIcon
+              className="card-icon"
+              icon={faTriangleExclamation}
+            />
           </div>
         )}
         {inforUser && inforUser.roleId == "R1" ? (
@@ -75,7 +78,29 @@ const NavbarAdmin = () => {
               toast.warning("Chỉ có quản lý mới truy cập !");
             }}
           >
-            Phòng chiếu
+            Phòng chiếu &nbsp;
+            <FontAwesomeIcon
+              className="card-icon"
+              icon={faTriangleExclamation}
+            />
+          </div>
+        )}
+        {inforUser && inforUser.roleId == "R1" ? (
+          <NavLink to="/admin/adminUsers" className="adminpage-navbar-item">
+            Khách hàng
+          </NavLink>
+        ) : (
+          <div
+            className="adminpage-navbar-item"
+            onClick={() => {
+              toast.warning("Chỉ có quản lý mới truy cập !");
+            }}
+          >
+            Khách hàng &nbsp;
+            <FontAwesomeIcon
+              className="card-icon"
+              icon={faTriangleExclamation}
+            />
           </div>
         )}
         {inforUser && inforUser.roleId == "R1" ? (
@@ -89,7 +114,12 @@ const NavbarAdmin = () => {
               toast.warning("Chỉ có quản lý mới truy cập !");
             }}
           >
-            Chức vụ
+            Chức vụ &nbsp;
+            <FontAwesomeIcon
+              className="card-icon"
+              icon={faTriangleExclamation}
+            />
+            <div className="adminpage-navbar-item-block"></div>
           </div>
         )}
       </div>

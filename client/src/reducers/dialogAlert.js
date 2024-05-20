@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     showDialog: false,
     confirm: false,
+    message: "",
 }
 
 const dialogAlert = createSlice({
     name: "dialogAlert",
     initialState,
     reducers: {
-        showDialog(state) {
+        showDialog(state, action) {
             state.showDialog = true;
+            state.message = action.payload;
         },
         hiddenDialog(state) {
             state.showDialog = false;

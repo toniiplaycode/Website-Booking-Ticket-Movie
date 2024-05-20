@@ -17,6 +17,7 @@ export default function AlertDialog() {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.dialogAlert.showDialog);
+  const message = useSelector((state) => state.dialogAlert.message);
 
   return (
     <>
@@ -28,6 +29,7 @@ export default function AlertDialog() {
       >
         <div className="dialog">
           <DialogTitle>{"Chắc chắn xoá chứ ?"}</DialogTitle>
+          {message && <DialogContent>{message}</DialogContent>}
           <DialogActions className="dialog-btn-container">
             <Button
               className="dialog-btn"

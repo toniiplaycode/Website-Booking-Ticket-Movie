@@ -32,7 +32,7 @@ const PurchaseFilmCard = ({ item }) => {
         className={selectedFilm.id == item.id && "active"}
         src={item.image}
       />
-      <p className="purchase-film-item-title">{item.nameFilm}</p>
+      <p className="purchase-film-item-title">{item.nameFilm.toUpperCase()}</p>
     </div>
   );
 };

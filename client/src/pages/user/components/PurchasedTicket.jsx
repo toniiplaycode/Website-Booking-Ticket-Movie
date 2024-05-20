@@ -51,7 +51,8 @@ const PurchasedTicket = ({ item }) => {
       <div className="purchased-ticket-container">
         <div className="purchased-ticket-infor">
           <p className="ticket-infor-item">
-            <span>Phim: </span> {filmDetail && <>{filmDetail.nameFilm}</>}
+            <span>Phim: </span>{" "}
+            {filmDetail && <>{filmDetail.nameFilm.toUpperCase()}</>}
           </p>
           <p className="ticket-infor-item">
             <span>Mã vé: </span> {item.id}

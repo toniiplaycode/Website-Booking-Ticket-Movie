@@ -720,6 +720,11 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
   }
+
+  .drawer-item-child-block{
+    display: flex;
+    gap: 10px;
+  }
 }
 
 .drawer-signup-signin {
@@ -1590,6 +1595,7 @@ body {
       margin-top: 10px;
       font-size: 1.2rem;
       font-weight: 500;
+      line-height: 24px;
     }
   }
 }
@@ -1901,6 +1907,7 @@ body {
       color: $primary-text-color;
       text-decoration: none;
       text-align: center;
+      position: relative;
     }
 
     .adminpage-navbar-item:hover {

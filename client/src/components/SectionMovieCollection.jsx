@@ -64,7 +64,7 @@ const SectionMovieCollection = ({ item }) => {
       <Col sm={12} md={4} className="collection-item-card">
         <div className="collection-item-container">
           <img src={item.image} />
-          <p className="collection-item-title">{item.nameFilm}</p>
+          <p className="collection-item-title">{item.nameFilm.toUpperCase()}</p>
           <div className="collection-item-btn-container">
             <button
               className="collection-item-btn"

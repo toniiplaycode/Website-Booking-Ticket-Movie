@@ -31,7 +31,7 @@ const AdminTicketPurchasedCard = ({ item }) => {
         {quantityTotal && formatMoney(quantityTotal.All[0].total)}
       </p>
       <img className="adminpage-ticket-img" src={item.image} />
-      <p className="adminpage-ticket-title">{item.nameFilm}</p>
+      <p className="adminpage-ticket-title">{item.nameFilm.toUpperCase()}</p>
     </Col>
   );
 };

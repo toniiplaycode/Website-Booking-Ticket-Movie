@@ -87,7 +87,9 @@ const TicketBill = ({ selectedPayment }) => {
       <div className="ticket-summary-img-nametime">
         {selectedFilm.image && <img src={selectedFilm.image} />}
         <div className="summary-nametime">
-          <p className="summary-name">{selectedFilm.nameFilm}</p>
+          <p className="summary-name">
+            {selectedFilm.nameFilm && selectedFilm.nameFilm.toUpperCase()}
+          </p>
           <p className="summary-time">
             {selectedFilm.time && (
               <>

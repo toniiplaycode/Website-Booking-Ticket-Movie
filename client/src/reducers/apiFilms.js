@@ -17,9 +17,6 @@ export const fetchFilms = createAsyncThunk('films/fetchFilms', async () => {
 });
 
 export const postFilms = createAsyncThunk('films/postFilms', async (obj, thunkAPI) => {
-    for (var pair of obj.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]);
-        }
     const token = thunkAPI.getState().apiLoginLogout.token; //lấy token bên apiLoginLogout
     const response = await axios.post("http://localhost:8000/api/film/addNew",
     obj,
@@ -33,8 +30,11 @@ export const postFilms = createAsyncThunk('films/postFilms', async (obj, thunkAP
     if(response.data.response.message == "create successful ") {
         toast.success("Thêm phim thành công !");
     }
+    if(response.data.response.message == "releaseDate error") {
+        toast.warning("Không được chọn ngày ở quá khứ !");
+    }
     if(response.data.response.message == "nameFilm already exist") {
-        toast.error("Không được trùng tên phim đã có!");
+        toast.warning("Không được trùng tên phim đã có!");
     }
     return response.data;
 });

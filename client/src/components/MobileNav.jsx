@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation, faX } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { hiddenDrawer } from "../reducers/mobileNavSlice";
 import { useNavigate } from "react-router-dom";
@@ -164,19 +164,6 @@ const MobileNav = () => {
                 >
                   Vé
                 </p>
-                <p
-                  className={
-                    location.pathname == "/admin/adminUsers"
-                      ? "drawer-item-child active-mobile"
-                      : "drawer-item-child"
-                  }
-                  onClick={() => {
-                    navigate("/admin/adminUsers");
-                    dispatch(hiddenDrawer());
-                  }}
-                >
-                  Khách hàng
-                </p>
 
                 {inforUser && inforUser.roleId == "R1" ? (
                   <p
@@ -194,12 +181,18 @@ const MobileNav = () => {
                   </p>
                 ) : (
                   <p
-                    className="drawer-item-child"
+                    className="drawer-item-child drawer-item-child-block"
                     onClick={() => {
                       toast.warning("Chỉ có quản lý mới truy cập !");
                     }}
                   >
                     Rạp
+                    <div className="adminpage-navbar-item-block">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faTriangleExclamation}
+                      />
+                    </div>
                   </p>
                 )}
 
@@ -219,12 +212,49 @@ const MobileNav = () => {
                   </p>
                 ) : (
                   <p
-                    className="drawer-item-child"
+                    className="drawer-item-child drawer-item-child-block"
                     onClick={() => {
                       toast.warning("Chỉ có quản lý mới truy cập !");
                     }}
                   >
                     Phòng chiếu
+                    <div className="adminpage-navbar-item-block">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faTriangleExclamation}
+                      />
+                    </div>
+                  </p>
+                )}
+
+                {inforUser && inforUser.roleId == "R1" ? (
+                  <p
+                    className={
+                      location.pathname == "/admin/adminUsers"
+                        ? "drawer-item-child active-mobile"
+                        : "drawer-item-child"
+                    }
+                    onClick={() => {
+                      navigate("/admin/adminUsers");
+                      dispatch(hiddenDrawer());
+                    }}
+                  >
+                    Khách hàng
+                  </p>
+                ) : (
+                  <p
+                    className="drawer-item-child drawer-item-child-block"
+                    onClick={() => {
+                      toast.warning("Chỉ có quản lý mới truy cập !");
+                    }}
+                  >
+                    Khách hàng
+                    <div className="adminpage-navbar-item-block">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faTriangleExclamation}
+                      />
+                    </div>
                   </p>
                 )}
 
@@ -244,12 +274,18 @@ const MobileNav = () => {
                   </p>
                 ) : (
                   <p
-                    className="drawer-item-child"
+                    className="drawer-item-child drawer-item-child-block"
                     onClick={() => {
                       toast.warning("Chỉ có quản lý mới truy cập !");
                     }}
                   >
                     Chứ vụ
+                    <div className="adminpage-navbar-item-block">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faTriangleExclamation}
+                      />
+                    </div>
                   </p>
                 )}
               </div>

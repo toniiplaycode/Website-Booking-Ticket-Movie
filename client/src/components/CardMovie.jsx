@@ -20,7 +20,7 @@ const CardMovie = ({ item }) => {
         <img className="img-card" src={item.image} />
       </div>
       <div className="item-name-rating">
-        <p className="item-name">{item.nameFilm}</p>
+        <p className="item-name">{item.nameFilm.toUpperCase()}</p>
         {/* <p className="item-rating">
                     <FontAwesomeIcon className="card-icon" icon={faStar} /> 
                     9.5

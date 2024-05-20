@@ -47,7 +47,11 @@ const AdminTypeof = () => {
                 </button>
                 <button
                   onClick={() => {
-                    dispatch(showDialog());
+                    dispatch(
+                      showDialog(
+                        "Xoá thì các phim liên quan đến thể loại sẽ bị xoá theo !"
+                      )
+                    );
                     setNameTypeFilmDelete({
                       nameTypeFilm: item.nameTypeFilm,
                     });
