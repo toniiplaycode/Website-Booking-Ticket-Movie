@@ -87,7 +87,6 @@ let addNew = async (data) => {
         "SELECT releaseDate FROM films where films.id= ?",
         [data.filmId]
       );
-      console.log(releaseDate);
 
       let ArrReleaseDate = releaseDate[0].releaseDate.split("/");
       let ArrDateWatch = data.dateWatch.split("/");
@@ -103,6 +102,13 @@ let addNew = async (data) => {
             check = 1;
           }
         }
+      }
+      if (check == 0) {
+        resolve({
+          status: "ERR",
+          message: "releaseDate error",
+        });
+        return;
       }
 
       if (parseInt(ArrDateWatch[2]) > parseInt(ArrReleaseDate[2])) {
