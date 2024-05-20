@@ -99,7 +99,7 @@ let addNew = async (data) => {
         if (parseInt(ArrReleaseDate[1]) > new Date().getMonth() + 1) {
           check = 1;
         } else if (parseInt(ArrReleaseDate[1]) == new Date().getMonth() + 1) {
-          if (parseInt(ArrReleaseDate[0]) > new Date().getDate()) {
+          if (parseInt(ArrReleaseDate[0]) >= new Date().getDate()) {
             check = 1;
           }
         }
