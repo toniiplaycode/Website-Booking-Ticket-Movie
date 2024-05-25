@@ -95,7 +95,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchInforUser(inforUser.id));
   }, [statusUpdateUser]);
-
+  
   return (
     <div className="App">
       <MobileNav />
