@@ -31,10 +31,10 @@ export const postFilms = createAsyncThunk('films/postFilms', async (obj, thunkAP
         toast.success("Thêm phim thành công !");
     }
     if(response.data.response.message == "releaseDate error") {
-        toast.warning("Không được chọn ngày ở quá khứ !");
+        toast.warning("Chọn ngày không hợp lệ ! ");
     }
     if(response.data.response.message == "nameFilm already exist") {
-        toast.warning("Không được trùng tên phim đã có!");
+        toast.warning("Không được trùng tên phim đã có !");
     }
     return response.data;
 });
@@ -93,7 +93,9 @@ const apiFilms = createSlice({
             state.statusPost = 'loading';
         })
         .addCase(postFilms.fulfilled, (state, action) => {
-            state.statusPost = 'succeeded';
+            if(action.payload.response.message == "create successful ") {
+                state.statusPost = 'succeeded';
+            } 
         })
         .addCase(postFilms.rejected, (state, action) => {
             state.statusPost = 'failed';

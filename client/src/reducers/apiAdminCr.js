@@ -29,7 +29,7 @@ export const postAddCr = createAsyncThunk('postAddCr/apiAdminCr', async (obj, th
         toast.error("Thời gian chưa hợp lệ !")
     }
     if(res.data.message == "releaseDate error") {
-        toast.error("Không được chọn ngày ở quá khứ !")
+        toast.error("Chọn ngày không hợp lệ ! ")
     }
     return res.data
 });
