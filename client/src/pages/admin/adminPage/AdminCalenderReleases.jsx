@@ -139,7 +139,7 @@ const AdminCalenderReleases = () => {
       {groupCr &&
         Object.entries(groupCr).map(([filmName, schedules], index) => (
           <div key={index}>
-            <p className="admin-table-group-tile">{filmName}</p>
+            <p className="admin-table-group-tile">{filmName.toUpperCase()}</p>
             {schedules.map((item, subIndex) => (
               <AdminCrItem item={item} key={subIndex} />
             ))}
@@ -159,7 +159,7 @@ const AdminCalenderReleases = () => {
               {films &&
                 films.map((item, index) => (
                   <option key={index} value={item.id}>
-                    {item.nameFilm}
+                    {item.nameFilm.toUpperCase()}
                   </option>
                 ))}
             </select>

@@ -6,7 +6,7 @@ import { deleteFilms } from "../../../reducers/apiFilms";
 import { showDialog } from "../../../reducers/dialogAlert";
 import { useEffect, useState } from "react";
 
-const AdminCardMovie = ({ item, onEdit }) => {
+const AdminCardMovie = ({ item, onEdit, targetRef }) => {
   const dispatch = useDispatch();
   const [deleteFilm, setDeleteFilm] = useState();
   const confirm = useSelector((state) => state.dialogAlert.confirm);
@@ -23,7 +23,7 @@ const AdminCardMovie = ({ item, onEdit }) => {
         <img className="img-card" src={item.image} />
       </div>
       <div className="item-name-rating">
-        <p className="item-name">{item.nameFilm}</p>
+        <p className="item-name">{item.nameFilm.toUpperCase()}</p>
       </div>
       <div className="item-typeof">{item.nameTypeFilm}</div>
       <div className="item-date-duration">
@@ -40,6 +40,7 @@ const AdminCardMovie = ({ item, onEdit }) => {
         className="book-btn"
         onClick={() => {
           onEdit(item);
+          targetRef.current.scrollIntoView({ behavior: 'smooth' });
         }}
       >
         Sửa

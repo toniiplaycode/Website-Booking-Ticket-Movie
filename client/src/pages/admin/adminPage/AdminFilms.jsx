@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import AdminCardMovie from "../components/AdminCardMovie";
@@ -12,6 +12,7 @@ import AlertDialog from "../../../components/AlertDialog";
 import dayjs from "dayjs";
 
 const AdminFilms = () => {
+  const targetRef = useRef(null);
   const dispatch = useDispatch();
   const [file, setFile] = useState();
   const [image, setImage] = useState();
@@ -205,6 +206,7 @@ const AdminFilms = () => {
                     <AdminCardMovie
                       item={item}
                       onEdit={() => handleEdit(item)}
+                      targetRef={targetRef}
                     />
                   </Col>
                 );
@@ -239,7 +241,9 @@ const AdminFilms = () => {
             ))}
         </div>
       </div>
-      <div className="form-heading-container">
+      <div className="form-heading-container"
+        ref={targetRef}
+      >
         <div className="form-movie-add">
           <div>
             <p>Tên phim:</p>
