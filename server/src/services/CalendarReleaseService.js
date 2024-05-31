@@ -92,17 +92,18 @@ let addNew = async (data) => {
       let ArrDateWatch = data.dateWatch.split("/");
       let check = 0;
 
-      if (parseInt(ArrReleaseDate[2]) > new Date().getFullYear()) {
+      if (parseInt(ArrDateWatch[2]) > new Date().getFullYear()) {
         check = 1;
-      } else if (parseInt(ArrReleaseDate[2]) == new Date().getFullYear()) {
-        if (parseInt(ArrReleaseDate[1]) > new Date().getMonth() + 1) {
+      } else if (parseInt(ArrDateWatch[2]) == new Date().getFullYear()) {
+        if (parseInt(ArrDateWatch[1]) > new Date().getMonth() + 1) {
           check = 1;
-        } else if (parseInt(ArrReleaseDate[1]) == new Date().getMonth() + 1) {
-          if (parseInt(ArrReleaseDate[0]) >= new Date().getDate()) {
+        } else if (parseInt(ArrDateWatch[1]) == new Date().getMonth() + 1) {
+          if (parseInt(ArrDateWatch[0]) >= new Date().getDate()) {
             check = 1;
           }
         }
       }
+
       if (check == 0) {
         resolve({
           status: "ERR",
