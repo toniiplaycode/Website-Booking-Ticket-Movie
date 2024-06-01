@@ -29,6 +29,9 @@ export const postBookUserTicket = createAsyncThunk(
 export const fetchListTicketUser = createAsyncThunk(
   "fetchListTicketUser/apiUserTicket",
   async (id, thunkAPI) => {
+    if(id == undefined && JSON.parse(localStorage.getItem('inforUser'))) {
+      id = JSON.parse(localStorage.getItem('inforUser')).id;
+    }
     const token = thunkAPI.getState().apiLoginLogout.token; //lấy token bên apiLoginLogout
     const res = await axios.get(
       `http://localhost:8000/api/ticket/getDetailWithUser?userId=${id}`,
