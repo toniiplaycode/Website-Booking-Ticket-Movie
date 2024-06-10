@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
   Visit: https://website-booking-ticket-movie.vercel.app
   <br />
   Some highlights of the interface
