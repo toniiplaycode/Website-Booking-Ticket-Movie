@@ -6,7 +6,7 @@ Some highlights of the interface
   HOMEPAGE
 </h3>
 <br />
-![screencapture-website-booking-ticket-movie-vercel-app-2024-06-11-06_24_04](https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/5786512e-0e23-4b57-8e5c-1f2a53a0410f)
+<img src="![screencapture-website-booking-ticket-movie-vercel-app-2024-06-11-06_24_04](https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/5786512e-0e23-4b57-8e5c-1f2a53a0410f)" />
 <br />
 <h3 align="center">
   PURCHARE
