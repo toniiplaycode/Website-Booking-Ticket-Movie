@@ -12,7 +12,7 @@ Some highlights of the interface
   PURCHARE
 </h3>
 <br />
-![screencapture-website-booking-ticket-movie-vercel-app-purchase-2024-06-11-06_33_12](https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/3982639e-936a-41f6-8fb3-bec00e63d0f5)
+<img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/3982639e-936a-41f6-8fb3-bec00e63d0f5" />
 <br />
 <h3 align="center">
   AND MOREOVER, YOU CAN ACCESS THE LINK TO EXPLORE MORE...
@@ -22,5 +22,5 @@ Some highlights of the interface
 DATABASE - MYSQL
 </h3>
 <br />
-![image](https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/50dad5aa-141b-4baa-9a5f-09492b6d5a33)
+<img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/50dad5aa-141b-4baa-9a5f-09492b6d5a33" />
 <br />
