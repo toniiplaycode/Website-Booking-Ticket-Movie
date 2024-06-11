@@ -167,7 +167,7 @@ let updateFilm = async (data) => {
       await film.save();
       resolve({
         status: "OK",
-        message: "Update a successful Film",
+        message: "Update a successful films",
       });
     } catch (e) {
       reject(e);

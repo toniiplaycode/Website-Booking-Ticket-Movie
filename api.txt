@@ -1,0 +1,354 @@
+USER
+	GetAll (http://localhost:8000/api/user/getAllUser)
+	//Chỉ có role R1 R2 (lấy trong token)
+
+	Detail (http://localhost:8000/api/user/getDetailUser?id=4)
+	//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
+
+	Create (http://localhost:8000/api/user/createNewUser)
+	//Các trường bắt buộc phải có
+		{
+   			 "email": "test7@gmail.com",
+   			 "password": "12345",
+    			 "firstName": "Huỳnh",
+   			 "lastName": "Khánh Trân",
+			"phoneNumber":"08123123",
+			"address":"Kien Giang"
+		}
+
+	Update/:id (http://localhost:8000/api/user/updateUser)
+	//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params; Các trường có thể sữa 
+		{
+			"id": 36
+    			"firstName": "Huỳnh",
+   			"lastName": "Khánh Trân",
+    			"password": "12345",
+			"phoneNumber":"08123123",
+			"address":"Kien Giang",
+    			"image":"link Image"
+		}
+
+	Update/:id (http://localhost:8000/api/user/updateRole)
+	//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params; Các trường có thể sữa 
+		{
+			"UserId": 12,
+    			"roleId": "R2"
+		}
+
+	Delete/:id (http://localhost:8000/api/user/deleteUser)
+	//Chỉ có role R1 R2 và User login (lấy trong token) và idUser trên params
+		{
+			"id":36
+		}
+
+	loginUser (http://localhost:8000/api/user/loginUser)
+		{
+  			"email":"admin@gmail.com",
+  			"password": "123456"
+		}
+
+	logoutUser (http://localhost:8000/api/user/logoutUser)
+
+	refreshToken (http://localhost:8000/api/user/refreshToken)
+	
+
+
+
+
+FILM
+
+	GetAll (http://localhost:8000/api/film/getAll)
+
+	Detail (http://localhost:8000/api/film/getDetail?id=3)
+
+	Create (http://localhost:8000/api/film/addNew)
+		{
+			"nameFilm": "KUNG FU PANDA 4",
+			"description": "Mô tả của phim",
+			"nameTypeFilm": "Hài, Hoạt Hình",
+			"time": 94 ,
+			"author": "Mike Mitchell",
+			"actor": "Jack Black, Dustin Hoffman, James Hong, Awkwafina, ...",
+			"image": "link Image", - 
+			"trailer": "link trailer",
+			"price": 55000,
+			"language": "English with Vietnamese subtitle, dubbing",
+			"releaseDate": "22/5/2024"
+		}
+
+	Update (http://localhost:8000/api/film/update)
+		{
+			"id": 13,
+			"nameFilm": "KUNG FU PANDA 4",
+			"description": "Mô tả của phim",
+			"nameTypeFilm": "Hài, Hoạt Hình",
+			"time": 94 ,
+			"author": "Mike Mitchell",
+			"actor": "Jack Black, Dustin Hoffman, James Hong, Awkwafina, ...",
+			"image": "link Image",
+			"trailer": "link trailer",
+			"price": 55000,
+			"language": "English with Vietnamese subtitle, dubbing"
+		}
+
+	Delete (http://localhost:8000/api/film/deleteOBJ)
+		{
+  			"id":17
+		}
+
+
+CALENDARRELEASE
+
+	GetAll (http://localhost:8000/api/calendarRelease/getAll)
+
+	Detail (http://localhost:8000/api/calendarRelease/getDetail?id=24)
+
+	getAllWithFilmId (http://localhost:8000/api/calendarRelease/getAllWithFilmId?filmId=3)
+
+	//Chỉ có role R1 R2(token), data được chuyển qua body
+	Create (http://localhost:8000/api/calendarRelease/addNew)
+		{
+			"nameCalendarRelease": "...",
+        		"cinemaRoomId": "CT1",
+       			"filmId": 15,
+        		"showTimeStart": "16:00",
+        		"dateWatch": "25/4/2024"
+		}
+
+	//Chỉ có role R1 R2(token), data được chuyển qua body
+	Update : (http://localhost:8000/api/calendarRelease/update)
+		{
+			"id":23 //id lịch cần sữa
+			"nameCalendarRelease":"..."
+		}
+
+	//Chỉ có role R1 R2(token), data được chuyển qua body
+	Delete (http://localhost:8000/api/calendarRelease/deleteOBJ)
+		{
+  			"id":23 //id lịch cần xóa
+		}
+
+
+TICKET
+
+	//Chỉ R1, R2
+	GetAll (http://localhost:8000/api/ticket/getAll)
+
+	//Nếu role là R1 R2 hoặc có userId chuyền từ body lên chùng với tài khoản đang nhập mới xem được
+	Detail (http://localhost:8000/api/ticket/getDetail?id=15)
+
+	//Nếu role là R1 R2 hoặc có userId chuyền từ query lên chùng với tài khoản đang nhập mới xem được
+	GetDetailWithUser (http://localhost:8000/api/ticket/getDetailWithUser?userId=1)
+
+	notEmptySeat (http://localhost:8000/api/ticket/notEmptySeat?calendarReleaseId=25)
+	
+
+	//Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới thêm được
+	Create (http://localhost:8000/api/ticket/addNew)
+		{ 
+       			"calendarReleaseId": 25,
+        		"arraySeat": [41,23,44],
+        		"namePaymentMethod": "MOMO"
+		}
+
+
+	//Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới thêm được
+	Update : (http://localhost:8000/api/ticket/update)
+		{
+			"userId":4, //authmiddleware
+			"id": 22,
+			"seat":44,
+			"namePaymentMethod":"MOMO"
+		}
+
+	updateStatus : (http://localhost:8000/api/ticket/updateStatus)
+		{
+  			"id":34,
+			"nameStatus": "Watched"
+		}
+
+	//Nếu role là R1 R2 hoặc có userId, userId chuyền từ body lên chùng với tài khoản đang nhập mới thêm được
+	Delete (http://localhost:8000/api/ticket/deleteOBJ)
+		{
+			"userId": 5, //authmiddleware
+  			"id":23
+		}
+
+TypeFilm
+
+	GetAll (http://localhost:8000/api/typeFilm/getAll)
+
+	//Chỉ R1, R2
+	getAllTicketWithFilm (http://localhost:8000/api/film/getAllTicketWithFilm?filmId=3)
+
+	Detail (http://localhost:8000/api/typeFilm/getDetail?id=3)
+
+	//Chỉ có role R1 R2,	
+	Create (http://localhost:8000/api/typeFilm/addNew)
+		{	
+			"nameTypeFilm": "Trinh Thám", 
+       			"descriptionType": "..."
+		}
+	//Chỉ có role R1 R2,	
+	Update : (http://localhost:8000/api/typeFilm/update)
+		{
+			"nameTypeFilm": "Trinh Thám", //khóa chính
+       			"descriptionType": "..."
+		}
+
+	//Chỉ có role R1 R2,	
+	Delete (http://localhost:8000/api/typeFilm/deleteOBJ)
+		{
+			"nameTypeFilm": "Trinh Thám" //khóa chính
+		}
+
+
+ROLE
+	//Chỉ có role R1 R2,
+	GetAll (http://localhost:8000/api/role/getAll)
+
+
+	//Chỉ có role R1 R2,	
+	Create (http://localhost:8000/api/role/addNew)
+		{	
+			"id": "R4", //Primary key
+       			"nameRole": "test"
+		}
+	//Chỉ có role R1 R2,	
+	Update : (http://localhost:8000/api/role/update)
+		{	
+			"id": "R4", //Primary key
+       			"nameRole": "test 2"
+		}
+
+	//Chỉ có role R1 R2,	
+	Delete (http://localhost:8000/api/role/deleteOBJ)
+		{
+			"id": "R4" //Primary key
+		}
+
+
+
+CINEMAROOM
+	GetAll (http://localhost:8000/api/cinemaRoom/getAll)
+	Detail (http://localhost:8000/api/cinemaRoom/getDetail?id=CT2)
+
+	getAllWithCanema (http://localhost:8000/api/cinemaRoom/getAllWithCanema?CinemaId=CT1);
+
+
+	//Chỉ có id: R1 mới có quyền, input: id(String) nameCinemaRoom(String) từ body
+	Create (http://localhost:8000/api/cinemaRoom/addNew)
+		{	
+			"id": "CT9", //PK
+      			"CinemaId": "CT1",
+     			"nameCinemaRoom": "A1-01",
+      			"numberOfSeats": 50
+		}
+	//Chỉ có id: R1 mới có quyền, input: id(String) nameCinemaRoom(String) từ body
+	Update : (http://localhost:8000/api/cinemaRoom/update)
+		{	
+			"id": "CT9", //PK
+      			"CinemaId": "CT1",
+     			"nameCinemaRoom": "A1-01",
+      			"numberOfSeats": 60
+		}
+
+	//Chỉ có id: R1 mới có quyền, input: id(String) từ body
+	Delete (http://localhost:8000/api/cinemaRoom/deleteOBJ)
+		{
+			"id": "CT9" //Primary key
+		}
+
+
+
+CINEMA
+	GetAll (http://localhost:8000/api/cinema/getAll)
+	Detail (http://localhost:8000/api/cinema/getDetail?id=CT2)
+
+
+	//Chỉ có role R1, Input "id""nameCinema" "address" (String hết) trong body
+	Create (http://localhost:8000/api/cinema/addNew)
+		{	
+			"id": "CT1",
+    		"nameCinema": "Rạp Cần Thơ 1",
+    		"address": "Nguyễn văn cừ",
+		}
+	//Chỉ có role R1, Input "id""nameCinema" "address" (String hết) trong body
+	Update : (http://localhost:8000/api/cinema/update)
+		{	
+			"id": "CT9", //PK
+      			"nameCinema": "Rạp Phim T chi nhánh Cần Thơ 1",
+      			"address": "Nguyễn Văn Linh Mới"
+		}
+
+	//Chỉ có role R1, Input "id"(String) trong body
+	Delete (http://localhost:8000/api/cinema/deleteOBJ)
+		{
+			"id": "CT9" //Primary key
+		}
+
+
+CONMENT
+	GetAll (http://localhost:8000/api/conment/getAll)
+
+	//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+	Create (http://localhost:8000/api/conment/addNew)
+		{	
+			"userId": 3,
+      			"filmId": 3,
+      			"content": "Hay ..."
+		}
+
+	//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+	Update : (http://localhost:8000/api/conment/update)
+		{	
+			"id": "1",
+      			"content": "Hay Hay Hay"
+		}
+
+	//Chỉ có R1,R2 và user login (userId từ body), data chuyền từ body
+	Delete (http://localhost:8000/api/conment/deleteOBJ)
+		{
+			"id": "2"
+		}
+
+
+Payment
+	GetAll (http://localhost:8000/api/paymentMethod/getAll)
+
+	http://localhost:8000/api/conment/getAllWithFilm?filmId=2
+
+	//Chỉ có R1,R2  data chuyền từ body
+	Create (http://localhost:8000/api/paymentMethod/addNew)
+		{	
+			"namePaymentMethod": "TheSieuRe123"
+		}
+
+	//Chỉ có R1,R2  data chuyền từ body
+	Update : (http://localhost:8000/api/paymentMethod/update)
+		{	
+			"id": "8",
+      			"namePaymentMethod": "TheSieuRe"
+		}
+
+	//Chỉ có R1,R2  data chuyền từ body
+	Delete (http://localhost:8000/api/paymentMethod/deleteOBJ)
+		{
+			"id": 9
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

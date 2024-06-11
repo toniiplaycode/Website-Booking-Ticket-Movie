@@ -65,7 +65,7 @@ export const putFilms = createAsyncThunk('films/putFilms', async (obj, thunkAPI)
       },
     });
     thunkAPI.dispatch(fetchFilms()); // post xong tự động fetch lại
-    if(response.data.message == "Update a successful Film") {
+    if(response.data.message == "Update a successful films") {
         toast.success("Sửa phim thành công !");
     }
     return response.data;
@@ -115,7 +115,7 @@ const apiFilms = createSlice({
             state.statusPut = 'loading';
         })
         .addCase(putFilms.fulfilled, (state, action) => {
-            if(action.payload.message == "Update a successful Film") {
+            if(action.payload.message == "Update a successful films") {
                 state.statusPut = 'succeeded';
             }
         })
