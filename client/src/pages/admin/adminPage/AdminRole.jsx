@@ -21,7 +21,7 @@ const AdminRole = () => {
   const confirm = useSelector((state) => state.dialogAlert.confirm);
   const [userDelete, setUserDelete] = useState();
 
-  const listAllRoles = useSelector((state) => state.apiAminRole.listAllRoles);
+  const listAllRoles = useSelector((state) => state.apiAdminRole.listAllRoles);
 
   useEffect(() => {
     if (confirm.payload == true) {

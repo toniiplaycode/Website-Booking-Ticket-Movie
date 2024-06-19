@@ -9,7 +9,7 @@ import {
   faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { showDrawer } from "../reducers/mobileNavSlice";
+import { showDrawer } from "../reducers/mobileNavSlide";
 import { toggleSignin, toggleSignup } from "../reducers/modalSigninSignup";
 import { useEffect } from "react";
 import { fetchInforUser, handleLogout } from "../reducers/apiLoginLogout";

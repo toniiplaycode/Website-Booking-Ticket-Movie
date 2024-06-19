@@ -19,8 +19,8 @@ import axios from "axios";
 
 const MoviesDetailInfor = () => {
   const dispatch = useDispatch();
-  const filmDetail = useSelector((state) => state.filmDetail.films);
-  const statusFilmDetail = useSelector((state) => state.filmDetail.status);
+  const apiFilmDetail = useSelector((state) => state.apiFilmDetail.films);
+  const statusFilmDetail = useSelector((state) => state.apiFilmDetail.status);
   const [grouped, setGrouped] = useState({});
 
   useEffect(() => {
@@ -31,8 +31,8 @@ const MoviesDetailInfor = () => {
   const statusCrWithFilm = useSelector((state) => state.apiCrWithFilm.status);
 
   useEffect(() => {
-    dispatch(fetchCrWithFilm(filmDetail.id));
-  }, [filmDetail]);
+    dispatch(fetchCrWithFilm(apiFilmDetail.id));
+  }, [apiFilmDetail]);
 
   // gôm nhóm các giờ chiếu cho các phòng chiếu
   const getNameCinemaRoom = async (idCinemaRoom) => {
@@ -76,11 +76,11 @@ const MoviesDetailInfor = () => {
       <Row>
         {statusFilmDetail == "succeeded" && (
           <Col className="infor-img-general">
-            <img className="infor-img" src={filmDetail.image} />
+            <img className="infor-img" src={apiFilmDetail.image} />
             <div className="infor-general">
               <div className="general-title-rating">
                 <p className="general-title">
-                  {filmDetail.nameFilm.toUpperCase()}
+                  {apiFilmDetail.nameFilm.toUpperCase()}
                 </p>
                 {/* <p className="general-rating">
                                     <FontAwesomeIcon className="card-icon" icon={faStar} /> 
@@ -93,28 +93,28 @@ const MoviesDetailInfor = () => {
                     className="card-icon"
                     icon={faCalendarDays}
                   />
-                  {filmDetail.releaseDate} -&nbsp;
+                  {apiFilmDetail.releaseDate} -&nbsp;
                   <FontAwesomeIcon className="card-icon" icon={faClock} />
-                  {convertMinutesToHoursAndMinutes(filmDetail.time)}
+                  {convertMinutesToHoursAndMinutes(apiFilmDetail.time)}
                 </p>
               </div>
               <p className="general-content">
                 <span>Thể loại: &nbsp;</span>
-                {filmDetail.nameTypeFilm}
+                {apiFilmDetail.nameTypeFilm}
               </p>
               <p className="general-content">
                 <span>Tác giả: &nbsp;</span>
-                {filmDetail.author}
+                {apiFilmDetail.author}
               </p>
               <p className="general-content">
                 <span>Diễn viên chính: &nbsp;</span>
-                {filmDetail.actor}
+                {apiFilmDetail.actor}
               </p>
               <button
                 className="general-trailer-btn"
                 onClick={() => {
                   dispatch(toggleTrailer());
-                  dispatch(saveFilm(filmDetail));
+                  dispatch(saveFilm(apiFilmDetail));
                 }}
               >
                 Trailer
@@ -131,11 +131,11 @@ const MoviesDetailInfor = () => {
           </div>
         )}
         {statusFilmDetail == "succeeded" && (
-          <p className="infor-descri">{filmDetail.description}</p>
+          <p className="infor-descri">{apiFilmDetail.description}</p>
         )}
       </Row>
       <CollectionTime
-        filmDetail={filmDetail}
+        filmDetail={apiFilmDetail}
         grouped={grouped}
         statusCrWithFilm={statusCrWithFilm}
       />

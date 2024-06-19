@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mobileNavSlice from "./reducers/mobileNavSlice";
+import mobileNavSlide from "./reducers/mobileNavSlide";
 import modalSigninSignup from "./reducers/modalSigninSignup";
 import modalTrailer from "./reducers/modalTrailer";
 import apiFilms, { fetchFilms } from './reducers/apiFilms';
@@ -28,11 +28,11 @@ import apiAdminRole from "./reducers/apiAdminRole";
 
 const reduxStore = configureStore({
     reducer: {
-        mobileNavSlide: mobileNavSlice,
+        films: apiFilms,
+        mobileNavSlide: mobileNavSlide,
         modalSigninSignup: modalSigninSignup,
         modalTrailer: modalTrailer,
-        films: apiFilms,
-        filmDetail: apiFilmDetail,
+        apiFilmDetail: apiFilmDetail,
         selectedTypeFilm: selectedTypeFilm,
         searchFilm: searchFilm,
         apiCrWithFilm: apiCrWithFilm,
@@ -53,7 +53,7 @@ const reduxStore = configureStore({
         apiCheckExpiredTicket: apiCheckExpiredTicket,
         apiAdminPayment: apiAdminPayment,
         apiComment: apiComment,
-        apiAminRole: apiAdminRole,
+        apiAdminRole: apiAdminRole,
     }
 });
 

@@ -21,19 +21,19 @@ const CardMovieCollection = ({ titleCardCollection }) => {
     return window.location.pathname.endsWith("/moviesDetail");
   };
 
-  // nếu ở trang moviesDetail thì mới dùng state của filmDetail
+  // nếu ở trang moviesDetail thì mới dùng state của apiFilmDetail
   const selectFilmDetail = (state) => {
     if (isMoviesDetail()) {
-      return state.filmDetail.films;
+      return state.apiFilmDetail.films;
     }
     return null;
   };
 
-  const filmDetail = useSelector(selectFilmDetail);
+  const apiFilmDetail = useSelector(selectFilmDetail);
 
   //lọc phim đang xem chi tiết
-  if (filmDetail && Array.isArray(films)) {
-    films = films.filter((item) => item.id != filmDetail.id);
+  if (apiFilmDetail && Array.isArray(films)) {
+    films = films.filter((item) => item.id != apiFilmDetail.id);
   }
 
   return (

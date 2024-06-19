@@ -8,7 +8,7 @@ const initialState = {
     error: null,
 };
 
-export const fetchAllRole = createAsyncThunk('fetchAllRole/apiAminRole', async (_, thunkAPI) => {
+export const fetchAllRole = createAsyncThunk('fetchAllRole/apiAdminRole', async (_, thunkAPI) => {
     const token = thunkAPI.getState().apiLoginLogout.token; //lấy token bên apiLoginLogout
     const res = await axios.get(`http://localhost:8000/api/role/getAll`, 
     {
@@ -19,7 +19,7 @@ export const fetchAllRole = createAsyncThunk('fetchAllRole/apiAminRole', async (
     return res.data.all;
 });
 
-export const putRole = createAsyncThunk('putRole/apiAminRole', async (obj, thunkAPI) => {
+export const putRole = createAsyncThunk('putRole/apiAdminRole', async (obj, thunkAPI) => {
     const token = thunkAPI.getState().apiLoginLogout.token; //lấy token bên apiLoginLogout
     const res = await axios.put(`http://localhost:8000/api/user/updateRole`, obj,
     {
@@ -33,8 +33,8 @@ export const putRole = createAsyncThunk('putRole/apiAminRole', async (obj, thunk
     }
 });
   
-const apiAminRole = createSlice({
-    name: 'apiAminRole',
+const apiAdminRole = createSlice({
+    name: 'apiAdminRole',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -53,4 +53,4 @@ const apiAminRole = createSlice({
 },
 });
   
-  export default apiAminRole.reducer;
+  export default apiAdminRole.reducer;

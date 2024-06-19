@@ -14,13 +14,13 @@ const getParamValue = () => {
     return id;
 }
 
-export const fetchFilmDetail = createAsyncThunk('filmDetail/fetchFilmDetail', async () => {
+export const fetchFilmDetail = createAsyncThunk('apiFilmDetail/fetchFilmDetail', async () => {
     const res = await axios.get(`http://localhost:8000/api/film/getDetail?id=${getParamValue()}`);
     return res.data.data[0];
 });
   
 const apiFilmDetail = createSlice({
-    name: 'filmDetail',
+    name: 'apiFilmDetail',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
