@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const MobileNav = () => {
   const dispatch = useDispatch();
-  const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
+  const showDrawer = useSelector((state) => state.mobileNavSlide.showDrawer);
 
   let drawerClasses = showDrawer ? "side-drawer open" : "side-drawer";
 

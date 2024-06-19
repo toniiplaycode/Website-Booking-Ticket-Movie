@@ -28,7 +28,7 @@ import apiAdminRole from "./reducers/apiAdminRole";
 
 const reduxStore = configureStore({
     reducer: {
-        mobileNav: mobileNavSlice,
+        mobileNavSlide: mobileNavSlice,
         modalSigninSignup: modalSigninSignup,
         modalTrailer: modalTrailer,
         films: apiFilms,

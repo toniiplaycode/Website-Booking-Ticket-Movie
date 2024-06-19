@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const mobileNavSlide = createSlice({
-    name: "mobileNav",
+    name: "mobileNavSlide",
     initialState,
     reducers: {
         showDrawer(state) {

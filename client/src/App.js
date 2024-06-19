@@ -25,7 +25,7 @@ import { fetchListTicketUser } from "./reducers/apiUserTicket.js";
 
 function App() {
   const dispatch = useDispatch();
-  const showDrawer = useSelector((state) => state.mobileNav.showDrawer);
+  const showDrawer = useSelector((state) => state.mobileNavSlide.showDrawer);
   const showSignin = useSelector((state) => state.modalSigninSignup.showSignin);
   const showSignup = useSelector((state) => state.modalSigninSignup.showSignup);
   const showTrailer = useSelector((state) => state.modalTrailer.showTrailer);
