@@ -1,7 +1,7 @@
 <div align="center">
   Visit: https://website-booking-ticket-movie.vercel.app
   <br />
-  Some highlights of the interface
+  When you visit the first time it will fetch data about 10-30s
   <br />
   <h3 align="center">
     HOMEPAGE
