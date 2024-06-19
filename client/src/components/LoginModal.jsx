@@ -11,14 +11,14 @@ const LoginModal = () => {
   const [CheckEmail, setCheckEmail] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
 
-  const idRoleUser = useSelector((state) => state.apiLoginLogout.idRoleUser);
+  const roleUserJWT = useSelector((state) => state.apiLoginLogout.roleUserJWT);
   const token = useSelector((state) => state.apiLoginLogout.token);
 
   useEffect(() => {
-    if (token && idRoleUser) {
-      dispatch(fetchInforUser(idRoleUser.id));
+    if (token && roleUserJWT) {
+      dispatch(fetchInforUser(roleUserJWT.id));
     }
-  }, [idRoleUser]);
+  }, [roleUserJWT]);
 
   const handleCheck = () => {
     let check = true;

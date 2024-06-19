@@ -18,11 +18,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const idRoleUser = useSelector((state) => state.apiLoginLogout.idRoleUser);
+  const roleUserJWT = useSelector((state) => state.apiLoginLogout.roleUserJWT);
 
   useEffect(() => {
-    dispatch(fetchInforUser(idRoleUser.id));
-  }, [idRoleUser]);
+    dispatch(fetchInforUser(roleUserJWT.id));
+  }, [roleUserJWT]);
 
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 

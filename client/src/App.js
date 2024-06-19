@@ -37,14 +37,14 @@ function App() {
   }
 
   // check tài khoản admin
-  const idRoleUser = useSelector((state) => state.apiLoginLogout.idRoleUser);
+  const roleUserJWT = useSelector((state) => state.apiLoginLogout.roleUserJWT);
   const token = useSelector((state) => state.apiLoginLogout.token);
 
   useEffect(() => {
-    if (token && idRoleUser) {
-      dispatch(fetchInforUser(idRoleUser.id));
+    if (token && roleUserJWT) {
+      dispatch(fetchInforUser(roleUserJWT.id));
     }
-  }, [idRoleUser]);
+  }, [roleUserJWT]);
 
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
@@ -69,7 +69,7 @@ function App() {
   useEffect(() => {
     if (statusPostLogin == "login failed") toast.error("Đăng nhập thất bại !");
     if (statusPostLogin == "succeeded") {
-      dispatch(fetchListTicketUser(idRoleUser.id));
+      dispatch(fetchListTicketUser(roleUserJWT.id));
       toast.success("Đăng nhập thành công !")
     };
   }, [statusPostLogin]);
