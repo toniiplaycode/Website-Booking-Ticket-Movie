@@ -11,7 +11,6 @@ const CardMovieCollection = ({ titleCardCollection }) => {
   const dispatch = useDispatch();
   let films = useSelector((state) => state.films.films.all);
   const status = useSelector((state) => state.films.status);
-  const error = useSelector((state) => state.films.error);
 
   useEffect(() => {
     dispatch(fetchFilms());

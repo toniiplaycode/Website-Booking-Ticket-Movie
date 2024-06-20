@@ -19,9 +19,7 @@ const TrailerModal = () => {
     }
   };
 
-  const src = `https://www.youtube.com/embed/${youtubeVideoID(
-    film.trailer
-  )}?autoplay=1`;
+  const src = `https://www.youtube.com/embed/${youtubeVideoID(film.trailer)}?autoplay=1`;
 
   return (
     <div className="trailer-container">

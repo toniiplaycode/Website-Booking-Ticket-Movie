@@ -25,7 +25,6 @@ const TimeItem = ({ name, item }) => {
         return !window.location.pathname.endsWith("/purchase");
     }
     
-
     return(
         <div className='time-movie-container'>
             <p className='each-date'>{name}</p>

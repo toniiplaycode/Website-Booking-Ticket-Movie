@@ -23,9 +23,7 @@ const SignupModal = () => {
   const isValidEmail = (e) => {
     return emailRegex.test(e);
   }
-
-  console.log(isValidEmail());
-
+  
   const handleCheck = () => {
     let check = true;
     if(email.trim().length == 0){

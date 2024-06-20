@@ -2,8 +2,7 @@ import CollectionTimeItem from "./CollectionTimeItem";
 import { formatMoney } from "../utils/functionCommon";
 
 const CollectionTime = ({ filmDetail, grouped, statusCrWithFilm }) => {
-  const price =
-    (filmDetail && filmDetail.price && formatMoney(filmDetail.price)) || "...";
+  const price = (filmDetail && filmDetail.price && formatMoney(filmDetail.price)) || "...";
 
   return (
     <div className="collection-item-time">

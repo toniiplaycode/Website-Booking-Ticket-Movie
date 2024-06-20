@@ -19,21 +19,22 @@ import axios from "axios";
 
 const MoviesDetailInfor = () => {
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(fetchFilmDetail());
+  }, [dispatch]);
+
   const apiFilmDetail = useSelector((state) => state.apiFilmDetail.films);
   const statusFilmDetail = useSelector((state) => state.apiFilmDetail.status);
   const [grouped, setGrouped] = useState({});
 
   useEffect(() => {
-    dispatch(fetchFilmDetail());
-  }, [dispatch]);
-
-  const crWithFilm = useSelector((state) => state.apiCrWithFilm.CrWithFilm);
-  const statusCrWithFilm = useSelector((state) => state.apiCrWithFilm.status);
-
-  useEffect(() => {
     dispatch(fetchCrWithFilm(apiFilmDetail.id));
   }, [apiFilmDetail]);
 
+  const crWithFilm = useSelector((state) => state.apiCrWithFilm.CrWithFilm);
+  const statusCrWithFilm = useSelector((state) => state.apiCrWithFilm.status);
+  
   // gôm nhóm các giờ chiếu cho các phòng chiếu
   const getNameCinemaRoom = async (idCinemaRoom) => {
     const res = await axios.get(
@@ -41,7 +42,7 @@ const MoviesDetailInfor = () => {
     );
     return res.data.data.nameCinemaRoom;
   };
-
+  
   useEffect(() => {
     if (crWithFilm.length > 0) {
       const groupByCinemaRoomId = async (array) => {
@@ -82,10 +83,6 @@ const MoviesDetailInfor = () => {
                 <p className="general-title">
                   {apiFilmDetail.nameFilm.toUpperCase()}
                 </p>
-                {/* <p className="general-rating">
-                                    <FontAwesomeIcon className="card-icon" icon={faStar} /> 
-                                    9.5
-                                </p> */}
               </div>
               <div className="general-showtime-time">
                 <p>

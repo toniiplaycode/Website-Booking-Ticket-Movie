@@ -15,14 +15,9 @@ const MoviesCollection = () => {
   // Lọc danh sách phim dựa trên search
   useEffect(() => {
     if (films) {
-      const filtered = films.filter((item) => {
-        if (search === "") {
-          return true;
-        }
-        return (
-          !search || item.nameFilm.toLowerCase().includes(search.toLowerCase())
-        );
-      });
+      const filtered = films.filter((item) => 
+        !search || item.nameFilm.toLowerCase().includes(search.toLowerCase())
+      )
       setFilteredFilms(filtered);
     }
   }, [films, search]);

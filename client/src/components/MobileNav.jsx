@@ -27,15 +27,6 @@ const MobileNav = () => {
 
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
-  const isStatistical = () => {
-    return window.location.pathname.endsWith("/admin");
-  };
-
-  useEffect(() => {
-    // Gọi hàm isStatistical khi location (URL) thay đổi
-    isStatistical();
-  }, [location]);
-
   return (
     <div className={drawerClasses}>
       <div className="drawer-container">
@@ -279,7 +270,7 @@ const MobileNav = () => {
                       toast.warning("Chỉ có quản lý mới truy cập !");
                     }}
                   >
-                    Chứ vụ
+                    Chức vụ
                     <div className="adminpage-navbar-item-block">
                       <FontAwesomeIcon
                         className="card-icon"
