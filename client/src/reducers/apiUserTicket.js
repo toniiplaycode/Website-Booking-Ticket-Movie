@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const initialState = {
-  statusBookUserTicket: "idle",
   message: "",
   listTicketEachUser: [],
   statusListTicketEachUser: "idle", 
@@ -22,6 +22,9 @@ export const postBookUserTicket = createAsyncThunk(
         },
       }
     );
+    if(res.data.status == "OK") {
+      toast.success("Đặt vé thành công !");
+    }
     return res.data;
   }
 );
@@ -51,20 +54,6 @@ const apiUserTicket = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(postBookUserTicket.pending, (state) => {
-        state.statusBookUserTicket = "loading";
-      })
-      .addCase(postBookUserTicket.fulfilled, (state, action) => {
-        if (action.payload.status == "OK") {
-          state.statusBookUserTicket = "succeeded";
-        }
-        if (action.payload.status == "ERR") {
-          state.statusBookUserTicket = "book ticket failed";
-        }
-      })
-      .addCase(postBookUserTicket.rejected, (state, action) => {
-        state.statusBookUserTicket = "failed";
-      })
       .addCase(fetchListTicketUser.pending, (state) => {
         state.statusListTicketEachUser = "loading";
       })

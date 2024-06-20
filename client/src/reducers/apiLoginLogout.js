@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
+
 
 const initialState = {
     token: localStorage.getItem('token') != undefined ? localStorage.getItem('token') : "",
@@ -8,12 +10,17 @@ const initialState = {
     inforUser: localStorage.getItem('inforUser') != undefined ? localStorage.getItem('token') : {},
     statusPostLogin: 'idle',
     statusFetchLogin: 'idle',
-    statusLogout: "idle",
     error: null,
 };
 
 export const postLogin = createAsyncThunk('roleUserJWT/apiLoginLogout', async (obj) => {
     const res = await axios.post(`http://localhost:8000/api/user/loginUser`, obj);
+    if(res.data.status == "OK") {
+        toast.success("Đăng nhập thành công !");
+    }
+    if(res.data.status == "ERR") {
+        toast.error("Đăng nhập thất bại !");
+    }
     return res.data;
 });
 
@@ -32,12 +39,12 @@ const apiLoginLogout = createSlice({
     initialState,
     reducers: {
         handleLogout(state, action) {
-            state.statusLogout = "logout";
             state.roleUserJWT = {}; 
             state.inforUser = {};
             state.token = "";
             localStorage.removeItem('token'); 
             localStorage.removeItem('inforUser'); 
+            toast.success("Đăng xuất tài khoản !");
         }
     },
     extraReducers: (builder) => {
@@ -47,14 +54,10 @@ const apiLoginLogout = createSlice({
         })
         .addCase(postLogin.fulfilled, (state, action) => {
             if(action.payload.status == "OK") {
-                state.statusPostLogin = 'succeeded';
+                state.statusPostLogin = "succeeded"
                 state.roleUserJWT = jwtDecode(action.payload.access_token);
                 state.token = action.payload.access_token;
                 localStorage.setItem('token', action.payload.access_token); 
-                state.statusLogout = "logged";
-            }
-            if(action.payload.status == "ERR") {
-                state.statusPostLogin = 'login failed';
             }
         })
         .addCase(postLogin.rejected, (state, action) => {

@@ -1,13 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { toggleSignin } from './modalSigninSignup';
 
 const initialState = {
     statusPostSignUp: "idle",
     message: "",
 };
 
-export const postSignup = createAsyncThunk('message/apiSignup', async (obj) => {
+export const postSignup = createAsyncThunk('message/apiSignup', async (obj, ThunkAPI) => {
     const res = await axios.post(`http://localhost:8000/api/user/createNewUser`, obj);
+    if(res.data.status == "OK") {
+        toast.success("Đăng ký thành công !");
+        ThunkAPI.dispatch(toggleSignin());
+    } else if (res.data.status == "ERR") {
+        toast.error("Đăng ký thất bại !");
+    }
     return res.data;
 });
   
