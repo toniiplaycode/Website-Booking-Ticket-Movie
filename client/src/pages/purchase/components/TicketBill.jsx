@@ -234,24 +234,14 @@ const TicketBill = ({ selectedPayment }) => {
             if (checkBill() == true) {
               if (Object.keys(inforUser).length == 0) dispatch(toggleSignin());
               if (Object.keys(inforUser).length > 0) {
-                let userId = inforUser.id;
                 let calendarReleaseId = selectedCrWithFilm.id;
                 let namePaymentMethod = selectedPayment.namePaymentMethod;
                 let arraySeat = selectedSeats;
-                // console.log({
-                //   userId,
-                //   calendarReleaseId,
-                //   arraySeat,
-                //   namePaymentMethod,
-                //   nameStatus: "...",
-                // });
                 dispatch(
                   postBookUserTicket({
-                    // userId,
                     calendarReleaseId,
                     arraySeat,
                     namePaymentMethod,
-                    // nameStatus: "...",
                   })
                 );
                 dispatch(handleClearSelectedCrWithFilm());

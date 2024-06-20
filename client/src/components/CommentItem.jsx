@@ -13,7 +13,6 @@ const CommentItem = ({ item, inforUser }) => {
   const [editContent, setEditContent] = useState(item.content);
 
   const handleEditSubmit = (id) => {
-    console.log(id);
     if (editContent.length == 0) {
       toast.warning("Chưa điền nội dung bình luận !");
       return;

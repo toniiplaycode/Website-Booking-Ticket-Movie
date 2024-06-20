@@ -66,11 +66,9 @@ const Comments = () => {
 
   useEffect(() => {
     if (listAllCommentEachFilm) {
-      const sortedList = (listAllCommentEachFilm = [
-        ...listAllCommentEachFilm,
-      ].sort((a, b) => {
+      const sortedList = [...listAllCommentEachFilm].sort((a, b) => {
         return b.id - a.id;
-      }));
+      });
       setSortedListComment(sortedList);
     } else {
       setSortedListComment([]);
@@ -91,7 +89,6 @@ const Comments = () => {
                 <CommentItem
                   item={item}
                   inforUser={inforUser}
-                  filmId={id}
                   key={index}
                 />
               ))

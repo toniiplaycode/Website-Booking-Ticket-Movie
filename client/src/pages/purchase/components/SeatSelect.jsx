@@ -46,7 +46,7 @@ const SeatSelect = () => {
         setListSeats(arraySeats);
       }
     }, [seats])
-
+    
     return(
         <>
           <div className="seat-cinemaroom">

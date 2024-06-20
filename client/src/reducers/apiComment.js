@@ -55,7 +55,6 @@ export const putComment = createAsyncThunk('putComment/apiComment', async (obj, 
           'token': `${token}`
       }
   });
-  thunkAPI.dispatch(fetchAllCommentEachFilm(obj.id)); // post xong tự động fetch lại
   if(res.data == "Update successful") {
       toast.success("Bạn đã sửa bình luận !")
   }

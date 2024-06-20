@@ -32,14 +32,9 @@ const PurchasePage = () => {
   // Lọc danh sách phim dựa trên search
   useEffect(() => {
     if (films) {
-      const filtered = films.filter((item) => {
-        if (search === "") {
-          return true;
-        }
-        return (
+      const filtered = films.filter((item) => 
           !search || item.nameFilm.toLowerCase().includes(search.toLowerCase())
-        );
-      });
+      );
       setFilteredFilms(filtered);
     }
   }, [films, search]);
@@ -99,10 +94,6 @@ const PurchasePage = () => {
     };
     getPayments();
   }, []);
-
-  const selectedCrWithFilm = useSelector(
-    (state) => state.selectedCrWithFilm.selectedCrWithFilm
-  );
 
   useEffect(() => {
     dispatch(fetchAllCinema());
