@@ -29,11 +29,11 @@ const AdminRole = () => {
     }
   }, [confirm]);
 
-  const sortedUsers = listAllUser.slice().sort((a, b) => {
-    const order = { R2: 1, R3: 2, R1: 3 };
+  const sortedUsers = [...listAllUser].sort((a, b) => {
+    const order = { R1: 1, R2: 2, R3: 3 };
     return order[a.roleId] - order[b.roleId];
   });
-
+  
   const handleUpdate = (obj) => {
     dispatch(putRole(obj));
   };
@@ -60,8 +60,8 @@ const AdminRole = () => {
                     <select
                       onChange={(e) => {
                         const selectedValue = e.target.value;
-                        const [selectedRoleId, userId] =
-                          selectedValue.split("-");
+                        console.log(selectedValue);
+                        const [selectedRoleId, userId] = selectedValue.split("-");
                         handleUpdate({ id: userId, roleId: selectedRoleId });
                       }}
                     >

@@ -43,14 +43,16 @@ const AdminPage = () => {
           path="/adminCalenderReleases"
           element={<AdminCalenderReleases />}
         />
-        <Route path="/adminCinemas" element={<AdminCinemas />} />
-        <Route path="/adminCinemaRooms" element={<AdminCinemaRooms />} />
         <Route path="/AdminPayments" element={<AdminPayments />} />
         <Route path="/adminTickets" element={<AdminTickets />} />
         <Route path="/adminTicketDetail" element={<AdminTicketDetail />} />
-        <Route path="/adminUsers" element={<AdminUsers />} />
         {inforUser && inforUser.roleId == "R1" && (
-          <Route path="/adminRole" element={<AdminRole />} />
+          <>
+            <Route path="/adminCinemas" element={<AdminCinemas />} />
+            <Route path="/adminCinemaRooms" element={<AdminCinemaRooms />} />
+            <Route path="/adminUsers" element={<AdminUsers />} />
+            <Route path="/adminRole" element={<AdminRole />} />
+          </>
         )}
       </Routes>
     </Container>

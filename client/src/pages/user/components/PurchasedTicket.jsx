@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { formatMoney } from "../../../utils/functionCommon";
+import { formatDate, formatMoney } from "../../../utils/functionCommon";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import { approveTicket } from "../../../reducers/apiAdminTicket";
 const PurchasedTicket = ({ item }) => {
   const dispatch = useDispatch();
   const [filmDetail, setFilmDetail] = useState();
-
+  
   useEffect(() => {
     const getFilmDetail = async () => {
       const res = await axios.get(
@@ -18,17 +18,6 @@ const PurchasedTicket = ({ item }) => {
     };
     getFilmDetail();
   }, [item]);
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDay = day < 10 ? "0" + day : day;
-    const formattedMonth = month < 10 ? "0" + month : month;
-    const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
-    return formattedDate;
-  };
 
   const isCurrentURLAdminTicketDetail = () => {
     const currentURL = window.location.href;

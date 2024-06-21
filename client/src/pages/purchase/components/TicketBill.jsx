@@ -237,8 +237,10 @@ const TicketBill = ({ selectedPayment }) => {
                 let calendarReleaseId = selectedCrWithFilm.id;
                 let namePaymentMethod = selectedPayment.namePaymentMethod;
                 let arraySeat = selectedSeats;
+                const userId = inforUser.id;
                 dispatch(
                   postBookUserTicket({
+                    userId,
                     calendarReleaseId,
                     arraySeat,
                     namePaymentMethod,

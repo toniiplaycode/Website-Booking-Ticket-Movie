@@ -13,11 +13,12 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const inforUser = useSelector((state) => state.apiLoginLogout.inforUser);
 
+  useEffect(() => {
+    dispatch(fetchListTicketUser(inforUser.id));
+  }, []);
+
   const statusUpdateUser = useSelector(
     (state) => state.apiUpdateUser.statusUpdateUser
-  );
-  const statusBookUserTicket = useSelector(
-    (state) => state.apiUserTicket.statusBookUserTicket
   );
 
   useEffect(() => {
@@ -69,10 +70,6 @@ const UserPage = () => {
   let listTicketEachUser = useSelector(
     (state) => state.apiUserTicket.listTicketEachUser
   );
-
-  useEffect(() => {
-    dispatch(fetchListTicketUser(inforUser.id));
-  }, [statusBookUserTicket]);
 
   useEffect(() => {
     if (inforUser.id != undefined) {
@@ -252,13 +249,9 @@ const UserPage = () => {
             <Col className="infor-container">
               <p className="userpage-info-title">Vé đã mua</p>
               {sortedListTicketEachUser.length > 0 &&
-                sortedListTicketEachUser.map((item, index) => {
-                  return (
-                    <>
-                      <PurchasedTicket item={item} key={index} />
-                    </>
-                  );
-                })}
+                sortedListTicketEachUser.map((item, index) => 
+                  <PurchasedTicket item={item} key={index} />
+                )}
               {sortedListTicketEachUser.length == 0 && (
                 <div className="warning-search">Chưa mua vé nào !</div>
               )}
