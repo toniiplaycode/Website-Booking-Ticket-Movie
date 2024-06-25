@@ -1,14 +1,14 @@
 <div align="center">
   Visit: https://website-booking-ticket-movie.vercel.app
   <br />
-  When you visit the first time it will fetch data about 10-30s
+  When you visit the first time it will fetch data about 30-40s
   <br />
   <h3 align="center">
     HOMEPAGE
   </h3>
   <br />
   <img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/5786512e-0e23-4b57-8e5c-1f2a53a0410f" />
-  <br />
+  <br /30
   <h3 align="center">
     PURCHARE
   </h3>
