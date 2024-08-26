@@ -16,7 +16,8 @@
   <img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/3982639e-936a-41f6-8fb3-bec00e63d0f5" />
   <br />
   <h3 align="center">
-    AND MOREOVER, YOU CAN ACCESS THE LINK TO EXPLORE MORE...
+    Use can become to admintrator with email: admin@gmail.com and password: 11111111, visit link: https://website-booking-ticket-movie.vercel.app/admin
+    and moreover, you can access the link to explore more...
   </h3>
   <br />
   <hr>
