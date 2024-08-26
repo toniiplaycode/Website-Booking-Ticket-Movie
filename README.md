@@ -3,6 +3,9 @@
   <br />
    When you first access it, it will fetch data for about 1 minute and depends on your network speed.
   <br />
+  - account normal:  
+  <br />
+  - account administrator: email: admin@gmail.com and password: 11111111 (Visit link: https://website-booking-ticket-movie.vercel.app/admin)
   <h3 align="center">
     HOMEPAGE
   </h3>
@@ -16,8 +19,7 @@
   <img src="https://github.com/user-attachments/assets/f94c2180-0959-4fa0-9ccb-c71f72ffde77" />
   <br />
   <h3 align="center">
-    You can become an administrator with email: admin@gmail.com and password: 11111111, Visit link: https://website-booking-ticket-movie.vercel.app/admin
-    And moreover, you can access the link above to explore more.
+    you can access the link above to explore more.
   </h3>
   <br />
   <hr>
