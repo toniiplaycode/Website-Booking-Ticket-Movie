@@ -7,13 +7,13 @@
     HOMEPAGE
   </h3>
   <br />
-  <img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/5786512e-0e23-4b57-8e5c-1f2a53a0410f" />
+  <img src="https://github.com/user-attachments/assets/d9e63301-632a-48e9-a206-4ac23c32f5de" />
   <br /30
   <h3 align="center">
     PURCHARE
   </h3>
   <br />
-  <img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/3982639e-936a-41f6-8fb3-bec00e63d0f5" />
+  <img src="https://github.com/user-attachments/assets/f94c2180-0959-4fa0-9ccb-c71f72ffde77" />
   <br />
   <h3 align="center">
     You can become an administrator with email: admin@gmail.com and password: 11111111, Visit link: https://website-booking-ticket-movie.vercel.app/admin
@@ -28,3 +28,4 @@
   <img src="https://github.com/toniiplaycode/Website-Booking-Ticket-Movie/assets/109264891/50dad5aa-141b-4baa-9a5f-09492b6d5a33" />
   <br />
 </div>
+
