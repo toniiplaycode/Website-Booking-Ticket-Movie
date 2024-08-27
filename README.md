@@ -7,6 +7,7 @@
   - Account normal: email: user@gmail.com and password: 22222222
   <br />
   - Account administrator: email: admin@gmail.com and password: 11111111 (Visit link: https://website-booking-ticket-movie.vercel.app/admin)
+  <hr>
   <h3 align="center">
     HOMEPAGE
   </h3>
