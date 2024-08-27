@@ -2,6 +2,7 @@
   Visit: https://website-booking-ticket-movie.vercel.app
   <br />
    When you first access it, it will fetch data for about 1 minute and depends on your network speed.
+  <hr>
   <br />
   - Account normal: email: user@gmail.com and password: 22222222
   <br />
