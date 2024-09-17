@@ -25,7 +25,7 @@
 -  View purchased tickets and status's it
 -  Change your information, change your password
 
-### Staff account: 
+#### staff account: 
 - You can some role manage
 - View ticket sales and revenue statistics
 - Statistics of tickets purchased by each customer, and approval it
@@ -70,7 +70,7 @@
 #### Purchase page:
 <img src="https://github.com/user-attachments/assets/2933863a-2895-4af1-a9fa-2a354d55acd8" alt="Chat App" border="0">
 
-## manage page
+## Manage pages
 
 #### Statistics page:
 <img src="https://github.com/user-attachments/assets/91695573-5146-4e37-976f-b8dccaeacda7" alt="Chat App" border="0">
