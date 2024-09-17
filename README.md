@@ -8,6 +8,7 @@
 ### You can use account test or sign up:
 
 -  Account user: email: user@gmail.com, password: 22222222
+-  Account staff: email: staff1@gmail.com, password: 33333333 (Visit link: https://website-booking-ticket-movie.vercel.app/admin)
 -  Account administrator: email: admin@gmail.com, password: 11111111 (Visit link: https://website-booking-ticket-movie.vercel.app/admin)
 
 ### About this prjoect:
