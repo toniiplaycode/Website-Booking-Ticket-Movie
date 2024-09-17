@@ -1,5 +1,5 @@
 <h2>
-  <img src="https://github.com/user-attachments/assets/f60ddb8e-4711-4e14-bfb0-3f9a4270da69" alt="Chat App" style="width: 30px; height: 30px;">
+  <img src="https://github.com/user-attachments/assets/f60ddb8e-4711-4e14-bfb0-3f9a4270da69" alt="Chat App" style="width: 20px; height: 20px;">
   Website Booking Ticket Movie
 </h2>
 
