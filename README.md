@@ -30,20 +30,42 @@
 - View ticket sales and revenue statistics
 - Statistics of tickets purchased by each customer, and approval it
 - Account managers can change the role of other accounts
-- CRUD: films, genre films, movie showtimes, payment methods, Cinemas, Cinema rooms, Customer
+- CRUD: movie, genre movie, movie showtimes, payment methods, Cinemas, Cinema rooms, Customer
  
 ### Languages & Tools:
 
 #### Backend:
--  ExpressJS, Socket.IO, JWT, MongoDB(using Mongoose)
+-  ExpressJS, JWT, MySQL
 #### Frontend:
--  ReactJS, Socket.IO Client, Axios, Chakra UI, React Icon, Emoji Mart
-#### Database, Clound:
--  MongoDB Atlas, Cloundinary 
+-  ReactJS, Redux, Axios, React-Bootstrap, Material UI, FontAwesomeIcon
+#### Database online, Clound:
+- Clever Clound, Cloundinary
 #### Deploy:
 -  Render(backend), Vercel(Frontend) 
 
 ### Project Screenshot:
 
 #### Sign in, Sign up:
-<img src="https://github.com/user-attachments/assets/c38da060-e522-407f-9ce2-b162bb802d94" alt="Chat App" border="0">
+<img src="https://github.com/user-attachments/assets/20f67bf2-0555-4aca-8f65-a9647c02fdaa" alt="Chat App" border="0">
+<img src="https://github.com/user-attachments/assets/a79f8574-cbbf-403f-864c-619ae51a59fd" alt="Chat App" border="0">
+
+#### Home page:
+<img src="https://github.com/user-attachments/assets/9ffcfce2-69ea-4fcd-a7d4-ffd6ea505332" alt="Chat App" border="0">
+
+#### Detail movie:
+<img src="https://github.com/user-attachments/assets/8b1dd653-b054-452e-a95a-d933943126aa" alt="Chat App" border="0">
+
+#### Trailer movie:
+<img src="https://github.com/user-attachments/assets/aabfb37e-673c-45d1-8b75-7bb63410dbb0" alt="Chat App" border="0">
+
+#### Movies page:
+<img src="https://github.com/user-attachments/assets/68b2685a-cada-4ed2-ba9c-05f35efea5f1" alt="Chat App" border="0">
+
+#### Purchase page:
+<img src="https://github.com/user-attachments/assets/2933863a-2895-4af1-a9fa-2a354d55acd8" alt="Chat App" border="0">
+
+
+
+
+
+
