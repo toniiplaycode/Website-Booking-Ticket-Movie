@@ -79,9 +79,6 @@
 #### Statistics page:
 <img src="https://github.com/user-attachments/assets/91695573-5146-4e37-976f-b8dccaeacda7" alt="Chat App" border="0">
 
-#### Statistics page:
-<img src="https://github.com/user-attachments/assets/91695573-5146-4e37-976f-b8dccaeacda7" alt="Chat App" border="0">
-
 #### Movies manage page:
 <img src="https://github.com/user-attachments/assets/ce1dfb0f-3160-4d14-82f0-851632e14969" alt="Chat App" border="0">
 
